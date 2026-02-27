@@ -229,17 +229,44 @@ Frontend:
 
 ## 🎯 Fejlesztési Mérföldkövek
 
-### 1. UI (Angular)
+### 1️⃣ Mérföldkő: UI és Megjelenés
+**Beadási határidő: 2026.03.29. 23:59**
 
-Mock adatokkal működő frontend.
+Feladatok:
+- Angular komponensek fejlesztése
+- Angular Material UI implementálása
+- Responsive design (mobile, tablet, desktop)
+- Mock adatok integrálása
+- Routing és navigation
+- Kosár UI
+- Bejelentkezés UI (még mocking szinten)
+- Admin felület alapok
 
-### 2. Backend Integráció
+### 2️⃣ Mérföldkő: Backend és Adatok
+**Beadási határidő: 2026.04.26. 23:59**
 
-Spring Boot API + PostgreSQL + JWT.
+Feladatok:
+- Spring Boot REST API kidolgozása
+- PostgreSQL adatbázis implementálása
+- JPA/Hibernate entity mappinrek
+- Service layer és business logic
+- JWT autentikáció
+- Role-based access control (RBAC)
+- API dokumentáció (Swagger/OpenAPI)
+- Frontend-Backend integráció
 
-### 3. Security & Deploy
+### 3️⃣ Mérföldkő: Biztonság és Tesztelés
+**Beadási határidő: 2026.05.10. 23:59**
 
-Role-based access + Docker + AWS deploy + CI/CD.
+Feladatok:
+- Unit tesztek (backend + frontend)
+- Integráció tesztek
+- Security tesztelés
+- Dockerizáció (backend + PostgreSQL)
+- CI/CD pipeline (GitHub Actions)
+- AWS Cloud deployment
+- S3 integrácó (képfeltöltés)
+- Production-ready konfigurációk
 
 ---
 
@@ -260,5 +287,35 @@ Ez a projekt bemutatja:
 
 ## 👨‍🎓 Készítette
 
-Varga Bence Tamás
+Varga Bence Tamás  
 Mobil Alkalmazásfejlesztés – 2026
+
+---
+
+## 📚 Dokumentáció
+
+- 📖 [Teljes Dokumentáció Index](./docs/INDEX.md)
+- 🎯 [1. Mérföldkő Ütemterv](./docs/MILESTONE_1_PLAN.md)
+- 🔧 [Fejlesztői Setup Útmutató](./docs/DEVELOPMENT_GUIDE.md)
+- 📋 [1. Mérföldkő Feladatkövetés](./docs/MILESTONE_1_TRACKER.md)
+
+---
+
+## 🚀 Gyors Start
+
+```bash
+# Frontend (Angular) - 1. mérföldkő
+cd frontend
+npm install
+npm start
+# http://localhost:4200
+
+# Backend (Spring Boot) - 2. mérföldkőtől
+cd ../backend
+mvn clean install
+mvn spring-boot:run
+# http://localhost:8080/api/swagger-ui.html
+
+# Database (Docker) - opcionális
+docker-compose up postgres
+```
