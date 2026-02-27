@@ -230,9 +230,11 @@ Frontend:
 ## 🎯 Fejlesztési Mérföldkövek
 
 ### 1️⃣ Mérföldkő: UI és Megjelenés
+
 **Beadási határidő: 2026.03.29. 23:59**
 
 Feladatok:
+
 - Angular komponensek fejlesztése
 - Angular Material UI implementálása
 - Responsive design (mobile, tablet, desktop)
@@ -243,9 +245,11 @@ Feladatok:
 - Admin felület alapok
 
 ### 2️⃣ Mérföldkő: Backend és Adatok
+
 **Beadási határidő: 2026.04.26. 23:59**
 
 Feladatok:
+
 - Spring Boot REST API kidolgozása
 - PostgreSQL adatbázis implementálása
 - JPA/Hibernate entity mappinrek
@@ -256,9 +260,11 @@ Feladatok:
 - Frontend-Backend integráció
 
 ### 3️⃣ Mérföldkő: Biztonság és Tesztelés
+
 **Beadási határidő: 2026.05.10. 23:59**
 
 Feladatok:
+
 - Unit tesztek (backend + frontend)
 - Integráció tesztek
 - Security tesztelés
