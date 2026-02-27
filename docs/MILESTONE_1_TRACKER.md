@@ -7,14 +7,14 @@
 
 ---
 
-## 📊 Projekt Áttekintés
+## 📊 Progress Dashboard
 
-| Status | Feladat | Hozzárendelés | Progress |
-|--------|---------|---------------|----|
-| 🟢 | Projekt alapstruktúra | Csapat | 100% |
-| 🟢 | Angular + Material setup | `[NAME]` | 0% |
-| 🔄 | Komponensek fejlesztése | `[NAME]` | 0% |
-| ⏳ | Tesztelés & Polishing | `[NAME]` | 0% |
+| Status | Feladat | Progress |
+|--------|---------|----------|
+| ✅ | Projekt alapstruktúra | 100% |
+| ⏳ | Angular + Material setup | 0% |
+| ⏳ | Komponensek fejlesztése | 0% |
+| ⏳ | Tesztelés & Polishing | 0% |
 
 ---
 
@@ -22,113 +22,86 @@
 
 ### Feladatok
 
-- [ ] **Angular projekt inicializálása**
+- [ ] **Angular projekt inicializálása** (~2-3 óra)
   - [ ] npm install a frontend könyvtárban
   - [ ] Angular Material telepítésés
   - [ ] Theme konfiguráció (style.scss)
-  - **Előzetes**: 2-3 óra
-  - **Hozzárendelés**: `[NAME]`
 
-- [ ] **Alapvető komponensek létrehozása**
-  - [ ] HeaderComponent
-    - [ ] Navigation/menu
-    - [ ] User info dropdown
-    - [ ] Logout gomb
-  - [ ] FooterComponent
-    - [ ] Link section-ök
-    - [ ] Copyright info
-  - [ ] LoadingSpinnerComponent
-  - [ ] ProductCardComponent (reusable)
-  - **Előzetes**: 4-5 óra
-  - **Hozzárendelés**: `[NAME]`
+- [ ] **Alapvető komponensek létrehozása** (~4-5 óra)
+  - [ ] HeaderComponent (navigáció, user info, logout)
+  - [ ] FooterComponent (link section-ök, copyright)
+  - [ ] LoadingSpinnerComponent (általános spinner)
+  - [ ] ProductCardComponent (reusable termék kártya)
 
-- [ ] **App routing setup**
+- [ ] **App routing setup** (~2-3 óra)
   - [ ] Routes konfiguráció
   - [ ] Modul-szintű lazy loading
   - [ ] Navigate tesztelése
-  - **Előzetes**: 2-3 óra
-  - **Hozzárendelés**: `[NAME]`
 
-- [ ] **Mock data service**
-  - [ ] ProductService (mock)
+- [ ] **Mock data service** (~2-3 óra)
+  - [ ] ProductService (mock adatokkal)
   - [ ] AuthService (mock, localStorage alapú)
   - [ ] Sample termék és felhasználó adatok
-  - **Előzetes**: 2-3 óra
-  - **Hozzárendelés**: `[NAME]`
 
 ---
 
-## 📝 Heti Napló
+## 📝 Napi Progress
 
-### Első Nap (február 27)
+### Február 27 (nap 1)
 **Terv**: Angular project setup + Material
 
-- [ ] Task 1
-- [ ] Task 2
+- [ ] npm install és Angular Material telepítés
+- [ ] Material theme Setup
 
-**Megjegyzések**: 
-- Hogyan alakult a nap?
-- Mi volt jó, mi volt nehéz?
+**Notes**:
 
 ---
 
-### Második Nap (február 28)
+### Február 28 (nap 2)
 **Terv**: Header & Footer komponensek
 
-- [ ] Task 1
-- [ ] Task 2
+- [ ] HeaderComponent
+- [ ] FooterComponent
 
-**Megjegyzések**: 
-
----
-
-### Harmadik Nap (március 1)
-**Terv**: Routing setup
-
-- [ ] Task 1
-- [ ] Task 2
-
-**Megjegyzések**: 
+**Notes**:
 
 ---
 
-### Negyedik Nap (március 2)
-**Terv**: Mock services + Polish
+### Március 1 (nap 3)
+**Terv**: Routing + LoadingSpinner
 
-- [ ] Task 1
-- [ ] Task 2
+- [ ] Routes konfiguráció
+- [ ] LoadingSpinnerComponent
 
-**Megjegyzések**: 
-
----
-
-## ❌ Blokkolók / Problémák
-
-| Probléma | Leírás | Status | Megoldás |
-|----------|--------|--------|----------|
-| TBD | | 🔴 | |
+**Notes**:
 
 ---
 
-## ✅ Teljesítés
+### Március 2 (nap 4)
+**Terv**: ProductCard + Mock Services
 
-### Heti célok
+- [ ] ProductCardComponent
+- [ ] Mock data services
+
+**Notes**:
+
+---
+
+## ❌ Blokkolók
+
+| Probléma | Megoldás | Status |
+|----------|----------|--------|
+| TBD | | |
+
+---
+
+## ✅ Heti Célok
+
 - [ ] Összes komponens skeleton létrehozva
 - [ ] Mock data service működik
 - [ ] Routing működik az összes oldalra
 - [ ] Basic styling (Material) alkalmazva
 - [ ] Git commits (naponta minimum 1)
-
----
-
-## 📈 Progress Notes
-
-**Február 27.**
-- [ ] Projekt alapstruktúra Created ✅
-- [ ] Angular setup indul
-
-**Comments**: 
-Jól halad az indulás, az alapok adottak.
 
 ---
 
@@ -146,21 +119,11 @@ Jól halad az indulás, az alapok adottak.
 
 ## 🔄 Következő Lépés
 
-**2. Hét Célja (március 3-9)**:
+**2. Hét Célja (március 3-9):**
 - [ ] Auth Module UI komplett (login, register)
 - [ ] Products lista és detail oldalak
 - [ ] Design responsive test
 - [ ] Bug fixes 1. hétről
-
----
-
-## 📞 Team Notes
-
-**Lead**: `[TEAM LEAD]`  
-**Frontend Lead**: `[NAME]`  
-**Backend Lead**: `[NAME]`  
-
-**Legközelebbi standupMeeting**: `[DÁ, ÓRA]`
 
 ---
 

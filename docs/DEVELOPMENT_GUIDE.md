@@ -331,7 +331,7 @@ docker-compose down -v  # -v törli az adatokat is
 Kérdések vagy problémák esetén:
 1. Ellenőrizd ezt a fájlt
 2. Küldetd meg az issue-t a GitHub-on
-3. Konzultálj a csapattagokkal
+3. Keress esetleg hasonló problémákat az interneten
 
 ---
 

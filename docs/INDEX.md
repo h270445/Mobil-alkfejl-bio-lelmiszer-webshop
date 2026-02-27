@@ -117,7 +117,6 @@ Mobil Alkalmazásfejlesztés kurzus – SZTE, 2026
 1. 📖 Olvasd át a [DEVELOPMENT_GUIDE.md](./DEVELOPMENT_GUIDE.md)-t
 2. 📋 Nézd meg az [MILESTONE_1_PLAN.md](./MILESTONE_1_PLAN.md)-et az aktuális feladatra
 3. 🔍 GitHub Issues-ben jelezd a problémát
-4. 💬 Konzultálj a csapattársaiddal
 
 ---
 

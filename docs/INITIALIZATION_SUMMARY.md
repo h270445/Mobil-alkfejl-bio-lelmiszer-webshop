@@ -111,12 +111,11 @@
 
 ## 📋 Dokumentáció Hivatkozások
 
-| Dokumentum | Célja | Kinek |
-|------------|-------|-------|
-
-| [MILESTONE_1_PLAN.md](./docs/MILESTONE_1_PLAN.md) | 1. mérföldkő részletei | Fejlesztőknek |
-| [DEVELOPMENT_GUIDE.md](./docs/DEVELOPMENT_GUIDE.md) | Setup és workflow | Új fejlesztőknek |
-| [MILESTONE_1_TRACKER.md](./docs/MILESTONE_1_TRACKER.md) | Progress tracking | Team lead-nek |
+| Dokumentum | Célja | Felhasználó |
+|------------|-------|------------|
+| [MILESTONE_1_PLAN.md](./docs/MILESTONE_1_PLAN.md) | 1. mérföldkő részletei | Fejlesztő |
+| [DEVELOPMENT_GUIDE.md](./docs/DEVELOPMENT_GUIDE.md) | Setup és workflow | Fejlesztő |
+| [MILESTONE_1_TRACKER.md](./docs/MILESTONE_1_TRACKER.md) | Progress tracking | Fejlesztő |
 
 ---
 
