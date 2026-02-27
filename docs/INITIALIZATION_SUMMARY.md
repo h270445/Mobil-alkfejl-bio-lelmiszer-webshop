@@ -8,16 +8,19 @@
 ## 🎯 Elvégzett Feladatok
 
 ### 1. ✅ README Bővítés
+
 - [x] Mérföldkövek konkrét dátumokkal feltöltve
 - [x] Dokumentáció linkek hozzáadva
 - [x] Gyors start útmutató
 
 ### 2. ✅ Projekt Alapstruktúra
+
 - [x] `frontend/` könyvtár (Angular)
 - [x] `backend/` könyvtár (Spring Boot)
 - [x] `docs/` könyvtár (dokumentáció)
 
 ### 3. ✅ Frontend Setup
+
 - [x] `package.json` (Angular 17 dependencies)
 - [x] `angular.json` (build configuration)
 - [x] `tsconfig.json` (TypeScript config)
@@ -28,6 +31,7 @@
 - [x] `.gitignore` (frontend exclusions)
 
 ### 4. ✅ Backend Setup
+
 - [x] `pom.xml` (Maven dependencies)
 - [x] `src/main/resources/application.properties` (config)
 - [x] `src/main/java/.../BiomarketApplication.java` (main class)
@@ -35,9 +39,11 @@
 - [x] `.gitignore` (backend exclusions)
 
 ### 5. ✅ DevOps
+
 - [x] `docker-compose.yml` (PostgreSQL + Backend)
 
 ### 6. ✅ Dokumentáció
+
 - [x] `docs/INDEX.md` - Dokumentáció index
 - [x] `docs/MILESTONE_1_PLAN.md` - 1. mérföldkő 5 hetes ütemterv
 - [x] `docs/DEVELOPMENT_GUIDE.md` - Fejlesztői útmutató
@@ -70,7 +76,9 @@
 ## 🚀 Következő Lépések
 
 ### AZONNALI (Mai nap):
+
 1. Git initialization és első commit
+
    ```bash
    git add .
    git commit -m "[INIT] Project structure and milestone plans"
@@ -78,18 +86,21 @@
    ```
 
 2. Frontend inicializálása
+
    ```bash
    cd frontend
    npm install
    ```
 
 3. Backend inicializálása
+
    ```bash
    cd backend
    mvn clean install
    ```
 
-### EGYETEMESEN (1. mérföldkő):
+### EGYETEMESEN (1. mérföldkő)
+
 1. **1. Hét**: Angular Material + Header/Footer/Mock Services
 2. **2. Hét**: Auth Module UI + Products lista/detail
 3. **3. Hét**: Cart + Orders modulok
@@ -102,6 +113,7 @@
 
 | Dokumentum | Célja | Kinek |
 |------------|-------|-------|
+
 | [MILESTONE_1_PLAN.md](./docs/MILESTONE_1_PLAN.md) | 1. mérföldkő részletei | Fejlesztőknek |
 | [DEVELOPMENT_GUIDE.md](./docs/DEVELOPMENT_GUIDE.md) | Setup és workflow | Új fejlesztőknek |
 | [MILESTONE_1_TRACKER.md](./docs/MILESTONE_1_TRACKER.md) | Progress tracking | Team lead-nek |

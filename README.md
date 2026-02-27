@@ -165,7 +165,7 @@ Backend és PostgreSQL docker-compose segítségével fut lokálisan.
 
 Indítás:
 
-``` cmd
+``` bash
 docker-compose up --build
 ```
 
