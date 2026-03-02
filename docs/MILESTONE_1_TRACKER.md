@@ -13,8 +13,8 @@
 |--------|---------|----------|
 | ✅ | Projekt alapstruktúra | 100% |
 | ✅ | Angular + Material setup | 100% |
-| ⏳ | Komponensek fejlesztése | 50% |
-| ⏳ | Tesztelés & Polishing | 0% |
+| ✅ | Komponensek fejlesztése | 100% |
+| ⏳ | Routing & Mock Services | 50% |
 
 ---
 
@@ -30,13 +30,13 @@
 - [ ] **Alapvető komponensek létrehozása** (~4-5 óra)
   - [x] HeaderComponent (navigáció, user info, logout)
   - [x] FooterComponent (link section-ök, copyright)
-  - [ ] LoadingSpinnerComponent (általános spinner)
-  - [ ] ProductCardComponent (reusable termék kártya)
+  - [x] LoadingSpinnerComponent (általános spinner)
+  - [x] ProductCardComponent (reusable termék kártya)
 
 - [ ] **App routing setup** (~2-3 óra)
-  - [ ] Routes konfiguráció
-  - [ ] Modul-szintű lazy loading
-  - [ ] Navigate tesztelése
+  - [x] Routes konfigáció
+  - [x] HomeComponent hero + kategóriaks + info szekciók
+  - [ ] Lazy loading placeholder route-ok
 
 - [ ] **Mock data service** (~2-3 óra)
   - [ ] ProductService (mock adatokkal)
@@ -68,12 +68,14 @@
 ---
 
 ### Március 1 (nap 3)
-**Terv**: Routing + LoadingSpinner
+**Terv**: Routing + LoadingSpinner + ProductCard
 
-- [ ] Routes konfiguráció
-- [ ] LoadingSpinnerComponent
+- [x] Routes konfigáció (Home, Auth, Products, Cart, Orders, Profile)
+- [x] LoadingSpinnerComponent (almás SVG spinner + pulse animació)
+- [x] ProductCardComponent (image, price, discount, favorite, rating)
+- [x] HomeComponent (hero, kategóriák grid, info szekciók)
 
-**Notes**:
+**Notes**: SVG-based alma spinner, Material Card alapú ProductCard, responsive design.
 
 ---
 
