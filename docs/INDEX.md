@@ -4,7 +4,44 @@ Ez a könyvtár tartalmazza az összes szükséges dokumentációt a BioMarket p
 
 ---
 
-## 📑 Fájlok
+## � Követelmények (Université Requirements)
+
+### 📜 [Mobil_Ertekeles_Szempontrendszer.md](./requirements/Mobil_Ertekeles_Szempontrendszer.md)
+**Hivatalos értékelési szempontok és pontozás**
+
+- 1. mérföldkő: Specifikáció, UI (15p)
+- 2. mérföldkő: Backend, adatok (25p)
+- 3. mérföldkő: Biztonság, tesztek (20p)
+- AI tudatosság (15p) + Peer-review (25p)
+- **Minimum: 50 pont az elfogadáshoz**
+
+### 📝 [Mobil_Projektmunka_feladatkiiras.md](./requirements/Mobil_Projektmunka_feladatkiiras.md)
+**Projekt feladatkiírás és minimális követelmények**
+
+- 5 entitás, CRUD műveletek
+- Adaptív UI, akadálymentesség
+- Autentikáció, tesztelés
+- Mérföldkő határidők
+
+👉 **Olvass el mindent** a munka megkezdése előtt!
+
+---
+
+## 📑 Projekt Dokumentumok
+
+### ✅ [SPECIFICATION.md](./SPECIFICATION.md) ⭐ **ÚJ!**
+**Teljes projekt specifikáció (1. mérföldkő követelmény - 2 pont)**
+
+- Projekt leírás (BioMarket bio webshop)
+- Funkcionális követelmények (8 fő kategória, 40+ követelmény)
+- Nem-funkcionális követelmények (tech stack, teljesítmény, biztonság)
+- 2 felhasználói szerepkör (User, Admin) részletes használati esetekkel
+- 15 képernyő részletes navigációs térképpel
+- UI/UX elvek, színséma, tipográfia
+
+👉 **Fontos**: Ez a dokumentum 2 pontot ér a Milestone 1-en!
+
+---
 
 ### 🎯 [MILESTONE_1_PLAN.md](./MILESTONE_1_PLAN.md)
 **Az 1. mérföldkőhöz szükséges részletes ütemterv**
@@ -81,15 +118,20 @@ docker-compose up postgres
 
 ## 🎯 Aktuális Fázis: 1. Mérföldkő
 
-**Állapot**: 🟢 Aktív fejlesztés alatt
+**Állapot**: 🟢 Aktív fejlesztés alatt (Week 1 Complete - 100%)
 
-**Mi szükséges:**
-- ✅ Projekt alapstruktúra
-- ✅ Angular setup
-- ✅ Ütemterv
-- 🔄 Komponensek fejlesztése
-- 🔄 Mock adatok
-- 🔄 Responsive design
+**Dokumentáció szükséges (5 pont!):**
+- [x] **SPECIFICATION.md** (2p) ✅ - projekt leírás, szerepkörök, 15 képernyő
+- [ ] **DATAMODEL.md** (2p) - 5 entitás, kapcsolatok (holnap)
+- [ ] **COMPONENTS.md** (1p) - komponens hierarchia (holnap)
+
+**Implementáció állapot:**
+- ✅ Projekt alapstruktúra (Angular 17 + Material)
+- ✅ Mock services (Auth, Product, Cart, Order)
+- ✅ Komponensek (Header, Footer, Spinner, ProductCard)
+- ✅ Routing + navigáció
+- 🔄 Auth/Products UI oldalak (Week 2)
+- 🔄 Accessibility + responsive polish
 
 **Beadási határidő**: 2026.03.29. 23:59 CET
 

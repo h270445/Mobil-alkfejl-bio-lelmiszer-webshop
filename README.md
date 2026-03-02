@@ -1,23 +1,27 @@
 # 🌿 BioMarket – Full-Stack Bio Élelmiszer Webshop
 
+**Projekt státusz**: 🟢 1. Mérföldkő fejlesztés alatt  
+**Határidő**: 2026.03.29. 23:59 CET  
+**Framework**: Angular 17 + Spring Boot 3.2.0
+
+---
+
 ## 📌 Projekt cél
 
-Production-közeli full-stack webalkalmazás fejlesztése Angular frontenddel és Spring Boot backenddel.
+Modern mobil-barát webalkalmazás fejlesztése Angular frontenddel és Spring Boot backenddel, amely bio élelmiszerek online vásárlását teszi lehetővé.
 
-A projekt célja:
+### Fő célkitűzések:
+- ✅ **Mérföldkő 1** (03.29): UI és megjelenés, dokumentáció, responsive design
+- 🔄 **Mérföldkő 2** (04.26): Backend integráció, CRUD műveletek, állapotkezelés
+- 📅 **Mérföldkő 3** (05.10): Autentikáció, tesztelés, deploy
 
-- Modern enterprise architektúra bemutatása
-- JWT alapú autentikáció implementálása
-- Role-based hozzáférés kezelés
-- Dockerizált backend
-- AWS deploy
-- CI/CD pipeline használata
+**📄 Részletes specifikáció**: [SPECIFICATION.md](./docs/SPECIFICATION.md)
 
 ---
 
 ## 🏗 Architektúra Áttekintés
 
-### Frontend Repository
+### Frontend (Angular 17)
 
 Tech stack:
 
