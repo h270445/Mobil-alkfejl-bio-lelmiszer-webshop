@@ -1,0 +1,153 @@
+// Angular Material Theme Configuration
+@use '@angular/material' as mat;
+
+// Include core Material styles
+@include mat.core();
+
+// Define custom color palettes (DM-inspired bio theme)
+$biomarket-primary: mat.define-palette((
+  50: #e8f5e9,
+  100: #c8e6c9,
+  200: #a5d6a7,
+  300: #81c784,
+  400: #66bb6a,
+  500: #4caf50,  // Main primary color (bio green)
+  600: #43a047,
+  700: #388e3c,
+  800: #2e7d32,
+  900: #1b5e20,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+));
+
+$biomarket-accent: mat.define-palette((
+  50: #fff3e0,
+  100: #ffe0b2,
+  200: #ffcc80,
+  300: #ffb74d,
+  400: #ffa726,
+  500: #ff9800,  // Main accent color (orange)
+  600: #fb8c00,
+  700: #f57c00,
+  800: #ef6c00,
+  900: #e65100,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+));
+
+$biomarket-warn: mat.define-palette((
+  50: #ffebee,
+  100: #ffcdd2,
+  200: #ef9a9a,
+  300: #e57373,
+  400: #ef5350,
+  500: #f44336,  // Main error color (red)
+  600: #e53935,
+  700: #d32f2f,
+  800: #c62828,
+  900: #b71c1c,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+));
+
+// Create the theme
+$biomarket-theme: mat.define-light-theme((
+  color: (
+    primary: $biomarket-primary,
+    accent: $biomarket-accent,
+    warn: $biomarket-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Include theme styles for all Material components
+@include mat.all-component-themes($biomarket-theme);
+
+// Custom CSS Variables (DM-inspired design)
+:root {
+  --color-background: #ffffff;           // White background
+  --color-surface: #F6F6F7;              // Light gray box/card background
+  --color-surface-bio: #C1EDCE;          // Light green bio box background
+  --color-primary: #4caf50;              // Bio green
+  --color-accent: #ff9800;               // Orange
+  --color-error: #f44336;                // Red
+  --color-text-primary: rgba(0, 0, 0, 0.87);
+  --color-text-secondary: rgba(0, 0, 0, 0.6);
+  --color-border-hover: #ff9800;         // Orange border on hover
+}
+
+// Global styles
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Card/Box styling (DM-inspired)
+.bio-card, .product-card {
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+
+  &:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &.bio-highlight {
+    background-color: var(--color-surface-bio);
+  }
+}
+
+// Helper classes
+.bg-white {
+  background-color: var(--color-background);
+}
+
+.bg-surface {
+  background-color: var(--color-surface);
+}
+
+.bg-bio {
+  background-color: var(--color-surface-bio);
+}

@@ -1,0 +1,92 @@
+<header>
+  <!-- Top Toolbar: Logo, Search, User Menu -->
+  <mat-toolbar class="header-toolbar">
+    <!-- Logo -->
+    <div class="logo-section">
+      <a routerLink="/" class="logo-link">
+        <mat-icon class="logo-icon">eco</mat-icon>
+        <span class="logo-text">BioMarket</span>
+      </a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          type="text"
+          placeholder="Termék keresése..."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"
+        />
+      </mat-form-field>
+    </div>
+
+    <!-- User Menu -->
+    <div class="user-menu-section">
+      <!-- Not logged in -->
+      <ng-container *ngIf="!isLoggedIn">
+        <button mat-button (click)="onLogin()">
+          <mat-icon>login</mat-icon>
+          Bejelentkezés
+        </button>
+        <button mat-raised-button color="primary" (click)="onRegister()">
+          Regisztráció
+        </button>
+      </ng-container>
+
+      <!-- Logged in -->
+      <ng-container *ngIf="isLoggedIn">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <div class="user-menu-header">
+            <mat-icon>person</mat-icon>
+            <span>{{ userName }}</span>
+          </div>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="onProfile()">
+            <mat-icon>settings</mat-icon>
+            <span>Profil</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>receipt</mat-icon>
+            <span>Rendeléseim</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            <span>Kijelentkezés</span>
+          </button>
+        </mat-menu>
+      </ng-container>
+
+      <!-- Shopping Cart -->
+      <button
+        mat-icon-button
+        [matBadge]="cartItemCount"
+        [matBadgeHidden]="cartItemCount === 0"
+        matBadgeColor="accent"
+        (click)="onCart()"
+        class="cart-button"
+      >
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <!-- Category Navigation -->
+  <nav class="category-nav">
+    <button
+      mat-button
+      *ngFor="let category of categories"
+      [routerLink]="category.route"
+      routerLinkActive="active-category"
+      class="category-button"
+    >
+      {{ category.name }}
+    </button>
+  </nav>
+</header>

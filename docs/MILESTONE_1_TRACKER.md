@@ -12,8 +12,8 @@
 | Status | Feladat | Progress |
 |--------|---------|----------|
 | ✅ | Projekt alapstruktúra | 100% |
-| ⏳ | Angular + Material setup | 0% |
-| ⏳ | Komponensek fejlesztése | 0% |
+| ✅ | Angular + Material setup | 100% |
+| ⏳ | Komponensek fejlesztése | 50% |
 | ⏳ | Tesztelés & Polishing | 0% |
 
 ---
@@ -23,13 +23,13 @@
 ### Feladatok
 
 - [ ] **Angular projekt inicializálása** (~2-3 óra)
-  - [ ] npm install a frontend könyvtárban
-  - [ ] Angular Material telepítésés
-  - [ ] Theme konfiguráció (style.scss)
+  - [x] npm install a frontend könyvtárban
+  - [x] Angular Material telepítésés
+  - [x] Theme konfiguráció (style.scss)
 
 - [ ] **Alapvető komponensek létrehozása** (~4-5 óra)
-  - [ ] HeaderComponent (navigáció, user info, logout)
-  - [ ] FooterComponent (link section-ök, copyright)
+  - [x] HeaderComponent (navigáció, user info, logout)
+  - [x] FooterComponent (link section-ök, copyright)
   - [ ] LoadingSpinnerComponent (általános spinner)
   - [ ] ProductCardComponent (reusable termék kártya)
 
@@ -50,20 +50,20 @@
 ### Február 27 (nap 1)
 **Terv**: Angular project setup + Material
 
-- [ ] npm install és Angular Material telepítés
-- [ ] Material theme Setup
+- [x] npm install és Angular Material telepítés
+- [x] Material theme Setup
 
-**Notes**:
+**Notes**: DM oldal színvilág alapján: fehér háttér, #F6F6F7 vagy #C1EDCE box háttér, narancs accent/hover, piros error.
 
 ---
 
 ### Február 28 (nap 2)
 **Terv**: Header & Footer komponensek
 
-- [ ] HeaderComponent
-- [ ] FooterComponent
+- [x] HeaderComponent
+- [x] FooterComponent
 
-**Notes**:
+**Notes**: Logo + Keresősáv + user menü. Kategóriák: Tejtermékek, Pékáruk, Zöldség-gyümölcs, Húskészítmények, Italok, Snackek. Footer: Kapcsolat info + social media + back-to-top gomb.
 
 ---
 
@@ -127,4 +127,4 @@
 
 ---
 
-**Utolsó frissítés**: 2026.02.27
+**Utolsó frissítés**: 2026.03.02

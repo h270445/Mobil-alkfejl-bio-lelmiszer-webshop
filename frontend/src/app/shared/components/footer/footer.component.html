@@ -1,0 +1,70 @@
+<footer class="footer">
+  <div class="footer-content">
+    <!-- About / Contact Section -->
+    <div class="footer-section">
+      <h3 class="footer-title">
+        <mat-icon>eco</mat-icon>
+        BioMarket
+      </h3>
+      <p class="footer-description">
+        Bio élelmiszerek és természetes termékek a legjobb minőségben.
+        Válogatott termékek az ökológiai gazdálkodásból.
+      </p>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="footer-section">
+      <h4 class="section-title">Kapcsolat</h4>
+      <div class="contact-info">
+        <div class="contact-item">
+          <mat-icon>email</mat-icon>
+          <a [href]="'mailto:' + contactInfo.email">{{ contactInfo.email }}</a>
+        </div>
+        <div class="contact-item">
+          <mat-icon>phone</mat-icon>
+          <a [href]="'tel:' + contactInfo.phone">{{ contactInfo.phone }}</a>
+        </div>
+        <div class="contact-item">
+          <mat-icon>location_on</mat-icon>
+          <span>{{ contactInfo.address }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-section">
+      <h4 class="section-title">Kövess minket</h4>
+      <div class="social-links">
+        <button
+          mat-icon-button
+          *ngFor="let social of socialLinks"
+          [attr.aria-label]="social.name"
+          (click)="onSocialClick(social.name)"
+          class="social-button"
+        >
+          <mat-icon>{{ social.icon }}</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="copyright">
+      <span>&copy; {{ currentYear }} BioMarket. Minden jog fenntartva.</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button
+      mat-mini-fab
+      color="primary"
+      (click)="scrollToTop()"
+      class="back-to-top"
+      aria-label="Vissza a tetejére"
+    >
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+  </div>
+</footer>
