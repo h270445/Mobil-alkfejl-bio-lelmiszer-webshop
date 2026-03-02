@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { AuthService } from '../../../core/services/auth.service';
+import { CartService } from '../../../core/services/cart.service';
+import { User } from '../../models';
 
 @Component({
   selector: 'app-header',
@@ -31,10 +37,10 @@ import { MatDividerModule } from '@angular/material/divider';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
-  // Mock authentication state (later will come from AuthService)
-  isLoggedIn = false;
-  userName = 'Felhasználó';
+export class HeaderComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  
+  currentUser: User | null = null;
   cartItemCount = 0;
 
   // Product categories
@@ -49,36 +55,70 @@ export class HeaderComponent {
 
   searchQuery = '';
 
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // Subscribe to auth state
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.currentUser = user;
+      });
+
+    // Subscribe to cart state
+    this.cartService.cartItems$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(items => {
+        this.cartItemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  get isLoggedIn(): boolean {
+    return this.currentUser !== null;
+  }
+
+  get userName(): string {
+    return this.currentUser
+      ? `${this.currentUser.firstName} ${this.currentUser.lastName}`
+      : 'Felhasználó';
+  }
+
   onSearch(): void {
     if (this.searchQuery.trim()) {
-      console.log('Search for:', this.searchQuery);
-      // TODO: Navigate to search results page
+      // Navigate to products page with search query
+      this.router.navigate(['/products'], { 
+        queryParams: { search: this.searchQuery } 
+      });
     }
   }
 
   onLogin(): void {
-    console.log('Navigate to login page');
-    // TODO: Navigate to /auth/login
+    this.router.navigate(['/auth/login']);
   }
 
   onRegister(): void {
-    console.log('Navigate to register page');
-    // TODO: Navigate to /auth/register
+    this.router.navigate(['/auth/register']);
   }
 
   onLogout(): void {
-    console.log('Logout user');
-    this.isLoggedIn = false;
-    // TODO: Call AuthService.logout()
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 
   onProfile(): void {
-    console.log('Navigate to profile page');
-    // TODO: Navigate to /profile
+    this.router.navigate(['/profile']);
   }
 
   onCart(): void {
-    console.log('Navigate to cart page');
-    // TODO: Navigate to /cart
+    this.router.navigate(['/cart']);
   }
 }

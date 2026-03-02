@@ -14,7 +14,7 @@
 | ✅ | Projekt alapstruktúra | 100% |
 | ✅ | Angular + Material setup | 100% |
 | ✅ | Komponensek fejlesztése | 100% |
-| ⏳ | Routing & Mock Services | 50% |
+| ✅ | Routing & Mock Services | 100% |
 
 ---
 
@@ -39,9 +39,11 @@
   - [ ] Lazy loading placeholder route-ok
 
 - [ ] **Mock data service** (~2-3 óra)
-  - [ ] ProductService (mock adatokkal)
-  - [ ] AuthService (mock, localStorage alapú)
-  - [ ] Sample termék és felhasználó adatok
+  - [x] ProductService (mock adatokkal)
+  - [x] AuthService (mock, localStorage alapú)
+  - [x] CartService (localStorage cart management)
+  - [x] OrderService (order creation & history)
+  - [x] Sample termék és felhasználó adatok
 
 ---
 
@@ -82,10 +84,15 @@
 ### Március 2 (nap 4)
 **Terv**: ProductCard + Mock Services
 
-- [ ] ProductCardComponent
-- [ ] Mock data services
+- [x] ProductCardComponent (már Day 3-on elkészült)
+- [x] Mock data files (18 products, 3 users)
+- [x] AuthService (login, register, logout, localStorage)
+- [x] ProductService (filter, sort, search, featured/sale)
+- [x] CartService (localStorage cart, add/remove/update)
+- [x] OrderService (order creation, history)
+- [x] HeaderComponent integráció (AuthService + CartService)
 
-**Notes**:
+**Notes**: BehaviorSubject alapú state management, RxJS Observable pattern, localStorage persistence, 300-500ms késleltetés network szimulációra. Header most reactive: auth state + cart badge dynamic. 18 magyar bio élelmiszer termék 6 kategóriában.
 
 ---
 
@@ -99,10 +106,10 @@
 
 ## ✅ Heti Célok
 
-- [ ] Összes komponens skeleton létrehozva
-- [ ] Mock data service működik
-- [ ] Routing működik az összes oldalra
-- [ ] Basic styling (Material) alkalmazva
+- [x] Összes komponens skeleton létrehozva
+- [x] Mock data service működik
+- [x] Routing működik az összes oldalra
+- [x] Basic styling (Material) alkalmazva
 - [ ] Git commits (naponta minimum 1)
 
 ---
@@ -121,11 +128,19 @@
 
 ## 🔄 Következő Lépés
 
+**Március 3 (Nap 5) Célja:**
+- [ ] Design responsive test (mobil, tablet, desktop)
+- [ ] Bug fixes és polish
+- [ ] HeaderComponent search funkció tesztelés
+- [ ] Cart badge és user menu tesztelés
+- [ ] Git commit & push
+
 **2. Hét Célja (március 3-9):**
 - [ ] Auth Module UI komplett (login, register)
 - [ ] Products lista és detail oldalak
+- [ ] Cart page (checkout flow kezdet)
 - [ ] Design responsive test
-- [ ] Bug fixes 1. hétről
+- [ ] ProductCard addToCart integráció demo
 
 ---
 

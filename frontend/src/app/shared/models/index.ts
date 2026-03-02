@@ -1,39 +1,55 @@
 // User model
 export interface User {
   id: number;
-  name: string;
   email: string;
-  role: 'USER' | 'ADMIN';
+  password?: string; // Only for mock data, not exposed to frontend
+  firstName: string;
+  lastName: string;
+  role: 'user' | 'admin';
+  phone?: string;
+  address?: Address;
   createdAt: Date;
+}
+
+// Address model
+export interface Address {
+  street: string;
+  city: string;
+  zipCode: string;
+  country: string;
 }
 
 // Product model
 export interface Product {
   id: number;
   name: string;
-  description: string;
-  price: number;
-  stock: number;
-  imageUrl: string;
-  isBioCertified: boolean;
   category: string;
-  createdAt: Date;
+  price: number;
+  originalPrice?: number; // For discounts
+  description: string;
+  imageUrl: string;
+  rating: number; // 0-5 stars
+  reviews: number; // Number of reviews
+  inStock: boolean;
 }
 
 // Order model
 export interface Order {
   id: number;
-  user: User;
-  totalPrice: number;
-  status: 'PENDING' | 'PAID' | 'SHIPPED' | 'DELIVERED';
-  createdAt: Date;
+  userId: number;
   items: OrderItem[];
+  totalPrice: number;
+  status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
+  shippingAddress: Address;
+  createdAt: Date;
+  updatedAt?: Date;
 }
 
 // OrderItem model
 export interface OrderItem {
   id: number;
-  product: Product;
+  productId: number;
+  productName: string;
   quantity: number;
   priceAtPurchase: number;
 }
@@ -52,15 +68,17 @@ export interface LoginRequest {
 
 // Register request
 export interface RegisterRequest {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   passwordConfirm: string;
+  phone?: string;
 }
 
 // Auth response
 export interface AuthResponse {
-  token: string;
-  refreshToken?: string;
+  success: boolean;
   user: User;
+  message?: string;
 }
