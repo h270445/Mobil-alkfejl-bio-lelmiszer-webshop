@@ -29,7 +29,7 @@
     </button>
 
     <!-- User Menu -->
-    <div class="user-menu-section">
+    <div class="user-menu-section" [class.auth-mode]="isMinimalMode">
       <!-- Not logged in -->
       <ng-container *ngIf="!isLoggedIn">
         <button mat-button (click)="onLogin()" *ngIf="!isOnLoginPage">

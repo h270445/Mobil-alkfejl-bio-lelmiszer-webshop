@@ -183,6 +183,11 @@ header {
       display: none;
     }
 
+    // Show auth labels when in auth mode (only one button visible)
+    &.auth-mode .auth-label {
+      display: inline;
+    }
+
     .cart-button {
       margin-left: 0;
     }
