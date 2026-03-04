@@ -118,7 +118,7 @@ docker-compose up postgres
 
 ## 🎯 Aktuális Fázis: 1. Mérföldkő
 
-**Állapot**: 🟢 Aktív fejlesztés alatt (Week 1 Complete - 100%)
+**Állapot**: 🟢 Aktív fejlesztés alatt (Week 2 in progress)
 
 **Dokumentáció szükséges (5 pont!):**
 - [x] **SPECIFICATION.md** (2p) ✅ - projekt leírás, szerepkörök, 15 képernyő
@@ -132,7 +132,10 @@ docker-compose up postgres
 - ✅ Routing + navigáció
 - ✅ HomeComponent kivonatolva `features/home` alá
 - ✅ Responsive + accessibility javítások (header overflow fix, cart gomb mobilon, product image title)
-- 🔄 Auth/Products UI oldalak (Week 2)
+- ✅ Auth UI oldalak (`/auth/login`, `/auth/register`) + remember me + return URL flow
+- ✅ Products lista oldal (`/products`) keresés/szűrés/rendezés + kosárba
+- ✅ Product detail oldal (`/products/:id`) (MVP: not-found, ID validáció, kosárba)
+- 🔄 Cart page (következő lépés)
 
 **Beadási határidő**: 2026.03.29. 23:59 CET
 
@@ -163,4 +166,4 @@ Mobil Alkalmazásfejlesztés kurzus – SZTE, 2026
 
 ---
 
-**Utolsó frissítés**: 2026.03.04
+**Utolsó frissítés**: 2026.03.04 (nap 6, késő esti frissítés)

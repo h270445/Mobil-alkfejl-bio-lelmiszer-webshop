@@ -62,16 +62,18 @@ frontend/
 
 ### **1. Hét (Február 27 – Március 2)**
 
-#### Feladatok:
+#### Feladatok
+
 - [x] Projekt alapstruktúra létrehozása
-- [ ] Angular projekt inicializálása
-- [ ] Angular Material telepítése és konfigurálása
+- [x] Angular projekt inicializálása
+- [x] Angular Material telepítése és konfigurálása
 - [ ] Alapvető komponensek szkeletonjának létrehozása
 - [ ] App routing konfiguráció
 
-#### Specifikus lépések:
+#### Specifikus lépések
 
 1. **Project Setup** (1-2 óra)
+
    ```bash
    cd frontend
    npm install
@@ -99,13 +101,14 @@ frontend/
 
 ### **2. Hét (Március 3 – Március 9)**
 
-#### Feladatok:
-- [ ] Auth modul UI (login, register)
-- [ ] Product list és detail oldalak
-- [ ] Shared models alapjainak kidolgozása
-- [ ] Mock data service
+#### Feladatok
 
-#### Specifikus lépések:
+- [x] Auth modul UI (login, register)
+- [ ] Product list és detail oldalak
+- [x] Shared models alapjainak kidolgozása
+- [x] Mock data service
+
+#### Specifikus lépések
 
 1. **Auth Module** (6-8 óra)
    - `LoginComponent` (form, validálás)
@@ -129,17 +132,49 @@ frontend/
    - `AuthService` mock (localStorage alapú)
    - Mock termék és felhasználó adatok
 
+#### Részletes napi bontás (2. hét)
+
+**Nap 5 (03.03) - Auth UI alapok**
+- Login/Register oldalak létrehozása
+- Form validációk és hibakezelés v1
+- Routing bekötés (`/auth/login`, `/auth/register`)
+
+**Nap 6 (03.04) - Auth UX + Product list**
+- Return URL visszanavigálás auth után
+- Error message manuális zárás
+- Remember me (`sessionStorage`/`localStorage` logika)
+- Header minimal mód auth route-okon
+- `/products` listaoldal: keresés + kategória + rendezés + kosárba rakás
+- `/products/:id` MVP előrehozva: numerikus ID check + not-found + fix vissza `/products`
+
+**Nap 7 (03.05) - Product detail**
+- `/products/:id` oldal (kép, ár, készlet, leírás)
+- Részletek gomb és route param kezelés
+- "Kosárba" gomb bekötés + not-found állapot
+   - Megjegyzés: előrehozva elkészült 03.04-én, a nap pufferként használható cart kezdésre.
+
+**Nap 8 (03.06) - Cart integráció**
+- `CartPageComponent` létrehozása
+- Mennyiség módosítás, törlés, összegzés
+- Empty state + alap responsive
+
+**Nap 9 (03.07-03.09 puffer)**
+- Cross-route smoke tesztek (/, /products, /products/:id, /cart, /auth/*)
+- UI konzisztencia javítások
+- Heti zárás és tracker frissítés
+
 ---
 
 ### **3. Hét (Március 10 – Március 16)**
 
-#### Feladatok:
+#### Feladatok
+
 - [ ] Cart modul
 - [ ] Checkout/Order form
 - [ ] Responsive design finomítása
 - [ ] User Orders lista
 
-#### Specifikus lépések:
+#### Specifikus lépések
 
 1. **Cart Module** (6-8 óra)
    - `CartPageComponent`
@@ -165,17 +200,33 @@ frontend/
    - Layout finomítások
    - Touch-friendly felületek
 
+#### Részletes napi bontás (3. hét)
+
+**Nap 10-11 - Cart + Checkout alapok**
+- Kosár oldal finomítása, validációs edge case-ek
+- Checkout form (szállítási adatok, mock fizetés)
+
+**Nap 12-13 - Orders**
+- `OrderListComponent` + `OrderDetailComponent`
+- OrderService integráció és státusz megjelenítés
+
+**Nap 14-16 - Responsive és stabilizálás**
+- Mobile/tablet breakpoint javítások
+- Hibakezelések, loading state-ek egységesítése
+- Heti regressziós ellenőrzés
+
 ---
 
 ### **4. Hét (Március 17 – Március 23)**
 
-#### Feladatok:
+#### Feladatok
+
 - [ ] Admin modul UI
 - [ ] Product management (CRUD UI)
 - [ ] Authentication UI integrálása
 - [ ] Route Guards előkészítése
 
-#### Specifikus lépések:
+#### Specifikus lépések
 
 1. **Admin Module** (8-10 óra)
    - `AdminDashboardComponent` (overview)
@@ -197,18 +248,38 @@ frontend/
    - Success notifications
    - Loading states a gombokba
 
+#### Részletes napi bontás (4. hét)
+
+**Nap 17-18 - Admin dashboard és lista nézetek**
+- Admin dashboard skeleton + KPI kártyák
+- Admin terméklista (mat-table) alap funkciók
+
+**Nap 19-20 - Product management UI**
+- Új termék felvétel/szerkesztés form
+- Törlés megerősítés és kliens oldali validáció
+
+**Nap 21 - Auth/Role-alapú UI**
+- Admin menüpontok role szerint megjelenítve
+- Guard UX: redirect + visszajelzés
+
+**Nap 22-23 - Hardening + puffer**
+- Betöltési állapotok és toastok egységesítése
+- Admin és user útvonalak smoke tesztje
+- Heti dokumentáció frissítés
+
 ---
 
 ### **5. Hét (Március 24 – Március 29)**
 
-#### Feladatok:
+#### Feladatok
+
 - [ ] Teljes UI tesztelés
 - [ ] Responsive testing különböző eszközökön
 - [ ] Accessibility (a11y) alapok
 - [ ] Bug fixes és UI polishing
 - [ ] Dokumentáció
 
-#### Specifikus lépések:
+#### Specifikus lépések
 
 1. **Testing** (6-8 óra)
    - Desktop böngészők (Chrome, Firefox, Edge)
@@ -360,7 +431,7 @@ xl:  1920px+
 
 ---
 
-## 📞 Segítségre? 
+## 📞 Segítségre?
 
 Gyakran ismétlődő problémák:
 

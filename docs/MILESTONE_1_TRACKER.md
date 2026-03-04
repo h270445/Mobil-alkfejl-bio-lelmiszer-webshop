@@ -15,6 +15,8 @@
 | ✅ | Angular + Material setup | 100% |
 | ✅ | Komponensek fejlesztése | 100% |
 | ✅ | Routing & Mock Services | 100% |
+| ✅ | Auth UI (login/register) | 100% |
+| ✅ | Products oldalak (`/products`, `/products/:id`) | 100% |
 
 ---
 
@@ -111,6 +113,23 @@
 
 ---
 
+### Március 4 (nap 6)
+**Terv**: Auth flow lezárása + products lista elindítása
+
+- [x] Login/Register oldalak teljes bekötése
+- [x] Return URL visszanavigálás auth után
+- [x] Remember me opció (`sessionStorage`/`localStorage`)
+- [x] ErrorMessage manuális bezárás auth flow-ban
+- [x] Header minimal mode auth route-okon
+- [x] Header auth gomb UX javítás (ikon + mobil label logika)
+- [x] `/products` oldal implementálása (lista, kategória, keresés, rendezés)
+- [x] Header kategória navigáció query param alapra állítva
+- [x] `/products/:id` oldal implementálása (MVP: numerikus ID check, not-found state, fix vissza `/products`, kosárba)
+
+**Notes**: A 2. hét auth + products detail céljai teljesítve. Következő fókusz: Cart oldal és route-szintű smoke test.
+
+---
+
 ## ❌ Blokkolók
 
 | Probléma | Megoldás | Status |
@@ -144,19 +163,19 @@
 ## 🔄 Következő Lépés
 
 **Következő lépés (most):**
-- [ ] LoginComponent és RegisterComponent oldalak implementálása (`/auth/login`, `/auth/register`)
-- [ ] Products list oldal implementálása (`/products`) ProductCard listával
-- [ ] Product detail oldal implementálása (`/products/:id`)
+- [x] LoginComponent és RegisterComponent oldalak implementálása (`/auth/login`, `/auth/register`)
+- [x] Products list oldal implementálása (`/products`) ProductCard listával
+- [x] Product detail oldal implementálása (`/products/:id`)
 - [ ] Cart page implementálása valós CartService integrációval
 - [ ] Responsive smoke teszt az összes route-on (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
 
 **2. Hét Célja (március 3-9):**
-- [ ] Auth Module UI komplett (login, register)
-- [ ] Products lista és detail oldalak
+- [x] Auth Module UI komplett (login, register)
+- [x] Products lista és detail oldalak
 - [ ] Cart page (checkout flow kezdet)
-- [ ] ProductCard addToCart integráció (Home + Products oldalak)
+- [x] ProductCard addToCart integráció (Home + Products oldalak)
 - [ ] ErrorMessage komponens bekötése az auth/cart/product flow-kba
 
 ---
 
-**Utolsó frissítés**: 2026.03.04
+**Utolsó frissítés**: 2026.03.04 (nap 6, késő esti frissítés)
