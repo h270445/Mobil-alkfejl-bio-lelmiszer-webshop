@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { RegisterComponent } from './features/auth/register/register.component';
 
 export const routes: Routes = [
   {
@@ -14,8 +16,8 @@ export const routes: Routes = [
   {
     path: 'auth',
     children: [
-      { path: 'login', component: HomeComponent },
-      { path: 'register', component: HomeComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent }
     ]
     // TODO: Replace with lazy-loaded auth module routes
   },

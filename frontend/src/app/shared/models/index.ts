@@ -64,6 +64,7 @@ export interface CartItem {
 export interface LoginRequest {
   email: string;
   password: string;
+  rememberMe?: boolean;
 }
 
 // Register request

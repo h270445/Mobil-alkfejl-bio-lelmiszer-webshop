@@ -14,6 +14,8 @@ header {
   background-color: var(--color-background);
   color: var(--color-text-primary);
   min-height: 64px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 // Logo Section
@@ -79,10 +81,13 @@ header {
   align-items: center;
   gap: 8px;
   min-width: 200px;
+  flex: 0 1 auto;
+  min-width: 0;
   justify-content: flex-end;
 
   .cart-button {
     margin-left: 8px;
+    flex: 0 0 auto;
   }
 }
 
@@ -134,6 +139,7 @@ header {
   .header-toolbar {
     padding: 8px 12px;
     gap: 8px;
+    overflow-x: hidden;
   }
 
   .logo-section {
@@ -171,10 +177,14 @@ header {
     button:not(.cart-button) {
       min-width: 40px;
       padding: 0 8px;
+    }
 
-      span {
-        display: none; // Hide button text on mobile
-      }
+    .auth-label {
+      display: none;
+    }
+
+    .cart-button {
+      margin-left: 0;
     }
   }
 

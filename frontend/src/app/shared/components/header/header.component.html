@@ -34,10 +34,10 @@
       <ng-container *ngIf="!isLoggedIn">
         <button mat-button (click)="onLogin()">
           <mat-icon>login</mat-icon>
-          Bejelentkezés
+          <span class="auth-label">Bejelentkezés</span>
         </button>
         <button mat-raised-button color="primary" (click)="onRegister()">
-          Regisztráció
+          <span class="auth-label">Regisztráció</span>
         </button>
       </ng-container>
 

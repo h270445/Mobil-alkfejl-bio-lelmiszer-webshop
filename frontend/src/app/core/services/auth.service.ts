@@ -12,7 +12,7 @@ export class AuthService {
   public currentUser$: Observable<User | null>;
 
   constructor() {
-    // Initialize from localStorage
+    // Initialize from sessionStorage first, then localStorage
     const storedUser = this.getUserFromStorage();
     this.currentUserSubject = new BehaviorSubject<User | null>(storedUser);
     this.currentUser$ = this.currentUserSubject.asObservable();
@@ -36,13 +36,13 @@ export class AuthService {
     return new Observable(observer => {
       setTimeout(() => {
         const user = validateCredentials(credentials.email, credentials.password);
-        
+
         if (user) {
           // Remove password from user object
           const { password, ...userWithoutPassword } = user;
           const safeUser = userWithoutPassword as User;
-          
-          this.setCurrentUser(safeUser);
+
+          this.setCurrentUser(safeUser, credentials.rememberMe ?? false);
           
           observer.next({
             success: true,
@@ -104,7 +104,7 @@ export class AuthService {
         // Add to mock users (in real app, this would be a server call)
         MOCK_USERS.push({ ...newUser, password: request.password });
 
-        this.setCurrentUser(newUser);
+        this.setCurrentUser(newUser, true);
 
         observer.next({
           success: true,
@@ -120,30 +120,56 @@ export class AuthService {
   // Logout
   logout(): void {
     localStorage.removeItem(this.STORAGE_KEY);
+    sessionStorage.removeItem(this.STORAGE_KEY);
     this.currentUserSubject.next(null);
   }
 
   // Update user profile
   updateProfile(user: User): void {
-    this.setCurrentUser(user);
+    this.setCurrentUser(user, this.isUsingLocalStorage());
   }
 
   // Private helper methods
-  private setCurrentUser(user: User): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
+  private setCurrentUser(user: User, rememberMe: boolean): void {
+    const serialized = JSON.stringify(user);
+
+    localStorage.removeItem(this.STORAGE_KEY);
+    sessionStorage.removeItem(this.STORAGE_KEY);
+
+    if (rememberMe) {
+      localStorage.setItem(this.STORAGE_KEY, serialized);
+    } else {
+      sessionStorage.setItem(this.STORAGE_KEY, serialized);
+    }
+
     this.currentUserSubject.next(user);
   }
 
   private getUserFromStorage(): User | null {
-    const storedUser = localStorage.getItem(this.STORAGE_KEY);
-    if (storedUser) {
+    const sessionUser = sessionStorage.getItem(this.STORAGE_KEY);
+    if (sessionUser) {
       try {
-        return JSON.parse(storedUser);
+        return JSON.parse(sessionUser);
       } catch (error) {
-        console.error('Error parsing stored user:', error);
+        console.error('Error parsing session user:', error);
+        sessionStorage.removeItem(this.STORAGE_KEY);
+      }
+    }
+
+    const localUser = localStorage.getItem(this.STORAGE_KEY);
+    if (localUser) {
+      try {
+        return JSON.parse(localUser);
+      } catch (error) {
+        console.error('Error parsing local user:', error);
         localStorage.removeItem(this.STORAGE_KEY);
       }
     }
+
     return null;
+  }
+
+  private isUsingLocalStorage(): boolean {
+    return localStorage.getItem(this.STORAGE_KEY) !== null;
   }
 }

@@ -3,7 +3,7 @@
 **Projekt**: BioMarket - Bio Élelmiszer Webshop  
 **Mérföldkő**: 1 (UI és Megjelenés)  
 **Beadási határidő**: 2026.03.29. 23:59 CET  
-**Jelenlegi hét**: 1/5  
+**Jelenlegi hét**: 2/5  
 
 ---
 
@@ -96,6 +96,21 @@
 
 ---
 
+### Március 4 (nap 5)
+**Terv**: Dokumentáció lezárás + responsive bugfix
+
+- [x] SPECIFICATION.md elkészítve (2p)
+- [x] DATAMODEL.md elkészítve (2p)
+- [x] COMPONENTS.md elkészítve (1p)
+- [x] HomeComponent kivonatolása `features/home` alá és `app.routes.ts` frissítése
+- [x] Accessibility javítás: product image `title` attribútum
+- [x] Responsive javítás: header cart gomb kilógás megszüntetve mobil nézetben
+- [x] Breakpoint ellenőrzés (/cart: 375, 390, 768, 820, 1024) - PASS
+
+**Notes**: Milestone 1 dokumentációs rész (5 pont) kész. Header mobil layout stabilizálva, vízszintes overflow megszüntetve.
+
+---
+
 ## ❌ Blokkolók
 
 | Probléma | Megoldás | Status |
@@ -110,7 +125,7 @@
 - [x] Mock data service működik
 - [x] Routing működik az összes oldalra
 - [x] Basic styling (Material) alkalmazva
-- [ ] Git commits (naponta minimum 1)
+- [x] Git commits (naponta minimum 1)
 
 ---
 
@@ -128,20 +143,20 @@
 
 ## 🔄 Következő Lépés
 
-**Március 3 (Nap 5) Célja:**
-- [ ] Design responsive test (mobil, tablet, desktop)
-- [ ] Bug fixes és polish
-- [ ] HeaderComponent search funkció tesztelés
-- [ ] Cart badge és user menu tesztelés
-- [ ] Git commit & push
+**Következő lépés (most):**
+- [ ] LoginComponent és RegisterComponent oldalak implementálása (`/auth/login`, `/auth/register`)
+- [ ] Products list oldal implementálása (`/products`) ProductCard listával
+- [ ] Product detail oldal implementálása (`/products/:id`)
+- [ ] Cart page implementálása valós CartService integrációval
+- [ ] Responsive smoke teszt az összes route-on (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
 
 **2. Hét Célja (március 3-9):**
 - [ ] Auth Module UI komplett (login, register)
 - [ ] Products lista és detail oldalak
 - [ ] Cart page (checkout flow kezdet)
-- [ ] Design responsive test
-- [ ] ProductCard addToCart integráció demo
+- [ ] ProductCard addToCart integráció (Home + Products oldalak)
+- [ ] ErrorMessage komponens bekötése az auth/cart/product flow-kba
 
 ---
 
-**Utolsó frissítés**: 2026.03.02
+**Utolsó frissítés**: 2026.03.04

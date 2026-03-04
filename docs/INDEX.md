@@ -123,15 +123,16 @@ docker-compose up postgres
 **Dokumentáció szükséges (5 pont!):**
 - [x] **SPECIFICATION.md** (2p) ✅ - projekt leírás, szerepkörök, 15 képernyő
 - [x] **DATAMODEL.md** (2p) ✅ - 9 entitás (8 persistens + CartItem transziens), komplett kapcsolatok, E-R diagram
-- [ ] **COMPONENTS.md** (1p) - komponens hierarchia (holnap)
+- [x] **COMPONENTS.md** (1p) ✅ - 7 komponens, hierarchia, feature struktúra
 
 **Implementáció állapot:**
 - ✅ Projekt alapstruktúra (Angular 17 + Material)
 - ✅ Mock services (Auth, Product, Cart, Order)
-- ✅ Komponensek (Header, Footer, Spinner, ProductCard)
+- ✅ Komponensek (Header, Footer, Spinner, ProductCard, Home, ErrorMessage)
 - ✅ Routing + navigáció
+- ✅ HomeComponent kivonatolva `features/home` alá
+- ✅ Responsive + accessibility javítások (header overflow fix, cart gomb mobilon, product image title)
 - 🔄 Auth/Products UI oldalak (Week 2)
-- 🔄 Accessibility + responsive polish
 
 **Beadási határidő**: 2026.03.29. 23:59 CET
 
@@ -162,4 +163,4 @@ Mobil Alkalmazásfejlesztés kurzus – SZTE, 2026
 
 ---
 
-**Utolsó frissítés**: 2026.02.27
+**Utolsó frissítés**: 2026.03.04
