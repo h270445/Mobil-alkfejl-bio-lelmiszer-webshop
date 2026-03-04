@@ -9,7 +9,7 @@
       </a>
     </div>
 
-    <!-- Search Bar -->
+    <!-- Search Bar (hidden on mobile, replaced by icon) -->
     <div class="search-section">
       <mat-form-field appearance="outline" class="search-field">
         <mat-icon matPrefix>search</mat-icon>
@@ -22,6 +22,11 @@
         />
       </mat-form-field>
     </div>
+
+    <!-- Mobile Search Icon -->
+    <button mat-icon-button class="mobile-search-button" (click)="onSearch()">
+      <mat-icon>search</mat-icon>
+    </button>
 
     <!-- User Menu -->
     <div class="user-menu-section">

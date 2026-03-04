@@ -122,7 +122,7 @@ docker-compose up postgres
 
 **Dokumentáció szükséges (5 pont!):**
 - [x] **SPECIFICATION.md** (2p) ✅ - projekt leírás, szerepkörök, 15 képernyő
-- [ ] **DATAMODEL.md** (2p) - 5 entitás, kapcsolatok (holnap)
+- [x] **DATAMODEL.md** (2p) ✅ - 9 entitás (8 persistens + CartItem transziens), komplett kapcsolatok, E-R diagram
 - [ ] **COMPONENTS.md** (1p) - komponens hierarchia (holnap)
 
 **Implementáció állapot:**
