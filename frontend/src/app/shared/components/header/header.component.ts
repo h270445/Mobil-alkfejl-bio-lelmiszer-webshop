@@ -48,12 +48,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Product categories
   categories = [
-    { name: 'Tejtermékek', route: '/products/tejtermekek' },
-    { name: 'Pékáruk', route: '/products/pekaruk' },
-    { name: 'Zöldség-gyümölcs', route: '/products/zoldseg-gyumolcs' },
-    { name: 'Húskészítmények', route: '/products/huskeszitmenyek' },
-    { name: 'Italok', route: '/products/italok' },
-    { name: 'Snackek', route: '/products/snackek' }
+    { name: 'Tejtermékek', slug: 'tejtermekek' },
+    { name: 'Pékáruk', slug: 'pekaruk' },
+    { name: 'Zöldség-gyümölcs', slug: 'zoldseg-gyumolcs' },
+    { name: 'Húskészítmények', slug: 'huskeszitmenyek' },
+    { name: 'Italok', slug: 'italok' },
+    { name: 'Snackek', slug: 'snackek' }
   ];
 
   searchQuery = '';

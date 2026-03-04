@@ -89,7 +89,8 @@
     <button
       mat-button
       *ngFor="let category of categories"
-      [routerLink]="category.route"
+      [routerLink]="'/products'"
+      [queryParams]="{ category: category.slug }"
       routerLinkActive="active-category"
       class="category-button"
     >
