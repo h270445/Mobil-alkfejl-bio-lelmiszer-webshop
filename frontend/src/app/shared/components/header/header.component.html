@@ -10,7 +10,7 @@
     </div>
 
     <!-- Search Bar (hidden on mobile, replaced by icon) -->
-    <div class="search-section">
+    <div class="search-section" *ngIf="!isMinimalMode">
       <mat-form-field appearance="outline" class="search-field">
         <mat-icon matPrefix>search</mat-icon>
         <input
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Mobile Search Icon -->
-    <button mat-icon-button class="mobile-search-button" (click)="onSearch()">
+    <button mat-icon-button class="mobile-search-button" (click)="onSearch()" *ngIf="!isMinimalMode">
       <mat-icon>search</mat-icon>
     </button>
 
@@ -32,11 +32,11 @@
     <div class="user-menu-section">
       <!-- Not logged in -->
       <ng-container *ngIf="!isLoggedIn">
-        <button mat-button (click)="onLogin()">
+        <button mat-button (click)="onLogin()" *ngIf="!isOnLoginPage">
           <mat-icon>login</mat-icon>
           <span class="auth-label">Bejelentkezés</span>
         </button>
-        <button mat-raised-button color="primary" (click)="onRegister()">
+        <button mat-raised-button color="primary" (click)="onRegister()" *ngIf="!isOnRegisterPage">
           <span class="auth-label">Regisztráció</span>
         </button>
       </ng-container>
@@ -76,6 +76,7 @@
         matBadgeColor="accent"
         (click)="onCart()"
         class="cart-button"
+        *ngIf="!isMinimalMode"
       >
         <mat-icon>shopping_cart</mat-icon>
       </button>
@@ -83,7 +84,7 @@
   </mat-toolbar>
 
   <!-- Category Navigation -->
-  <nav class="category-nav">
+  <nav class="category-nav" *ngIf="!isMinimalMode">
     <button
       mat-button
       *ngFor="let category of categories"

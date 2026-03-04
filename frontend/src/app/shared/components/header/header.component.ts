@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
@@ -42,6 +42,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
   currentUser: User | null = null;
   cartItemCount = 0;
+  isMinimalMode = false;
+  isOnLoginPage = false;
+  isOnRegisterPage = false;
 
   // Product categories
   categories = [
@@ -75,6 +78,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(items => {
         this.cartItemCount = items.reduce((sum, item) => sum + item.quantity, 0);
       });
+
+    // Check initial route for minimal mode
+    this.checkMinimalMode(this.router.url);
+
+    // Subscribe to route changes
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(event => {
+        this.checkMinimalMode(event.urlAfterRedirects);
+      });
+  }
+
+  private checkMinimalMode(url: string): void {
+    this.isMinimalMode = url.startsWith('/auth');
+    this.isOnLoginPage = url.startsWith('/auth/login');
+    this.isOnRegisterPage = url.startsWith('/auth/register');
   }
 
   ngOnDestroy(): void {
