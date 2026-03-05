@@ -11,12 +11,10 @@
 
 | Status | Feladat | Progress |
 |--------|---------|----------|
-| ✅ | Projekt alapstruktúra | 100% |
-| ✅ | Angular + Material setup | 100% |
-| ✅ | Komponensek fejlesztése | 100% |
-| ✅ | Routing & Mock Services | 100% |
-| ✅ | Auth UI (login/register) | 100% |
-| ✅ | Products oldalak (`/products`, `/products/:id`) | 100% |
+| ✅ | Material Icon → Custom SVG Icon System | 100% |
+| ✅ | Floating Action Button (FAB) Pattern | 100% |
+| ✅ | FAB kategória keresés szűrőkkel | 100% |
+| 🟡 | **Responsive Smoke Testing (Day 9-10)** | 0% |
 
 ---
 
@@ -113,10 +111,10 @@
 
 ---
 
-### Március 5 (nap 6-7)
-**Terv**: Auth flow lezárása + products lista + Cart page
+### Március 5 (nap 6-7-8)
+**Terv**: Auth flow lezárása + products lista + Cart page + UI/UX refinement
 
-**Day 6 - Auth + Products Detail (módosított)**
+**Day 6-7 - Auth + Products Detail + Cart (kész)**
 - [x] Login/Register oldalak teljes bekötése
 - [x] Return URL visszanavigálás auth után
 - [x] Remember me opció (`sessionStorage`/`localStorage`)
@@ -126,11 +124,9 @@
 - [x] `/products` oldal implementálása (lista, kategória, keresés, rendezés)
 - [x] Header kategória navigáció query param alapra állítva
 - [x] `/products/:id` oldal implementálása (MVP: numerikus ID check, not-found state, fix vissza `/products`, kosárba)
-
-**Day 7 - Cart Page (előrehozva)**
 - [x] `/cart` oldal teljes implementációja CartService integrációval
-- [x] Szállítási költség kalkuláció (500 ft < 3500 ft, innych ingyenes)
-- [x] Quantidade kezelés (+/- gombok, limit: ≥1, ≤stock)
+- [x] Szállítási költség kalkuláció (500 ft < 3500 ft, nélküle ingyenes)
+- [x] Mennyiség kezelés (+/- gombok, limit: ≥1, ≤stock)
 - [x] Teljes kosár törlés (warning confirm dialog)
 - [x] Out-of-stock warning banner + checkout kikapcsolás
 - [x] Rich empty state (kosár ikon + ajánlott termékek grid)
@@ -141,7 +137,28 @@
 - [x] Auth check redirect /auth/login?returnUrl=/checkout
 - [x] /checkout route placeholder
 
-**Notes**: A 2. heti összes major feature teljesítve (auth + products + cart). Szállítási logika implementálva. Ajánlott termékek getFeaturedProducts()-ból. Angular.json budget emelt anyComponentStyle-hoz (6kb warning, 10kb error az összetett komponensekhez).
+**Day 8 - UI/UX Refinement & FAB Keresés (TODAY)**
+- [x] Header search bar szöveg- és magasság igazítása (középre, szintbe a gombokkal)
+- [x] Products oldal redundáns search field eltávolítása (filterek fenn maradtak)
+- [x] **Floating Action Button (FAB)** implementálása kereséshez
+  - [x] Material Design FAB pattern (56×56px, zöld, jobb alsó sarok)
+  - [x] Expandable search panel (bottom slide-up, max-height 80vh)
+  - [x] Close-icon.svg létrehozása (X szimbólum)
+  - [x] Overlay háttér (0.4 opacity) - kattintásra bezárás
+- [x] **Szöveges keresés integráció** FAB panel-ben
+- [x] **Kategória filterek hozzáadása** FAB panel-hez
+  - [x] Grid layout (2 oszlop, mobil-optimalizált)
+  - [x] "Összes" gomb + összes kategória gomok (Tejtermékek, Pékáruk, stb.)
+  - [x] Kategória kiválasztást követő szűrés + panel auto-close
+  - [x] Active állapot megjelölés (elsődleges szín)
+
+**Notes**: 
+- Material Icon font eliminálva az összes komponensből. 28 custom SVG ikon használatban (2 új: close-icon.svg + korábbi 27-ből).
+- Header search bar most optikai középre van (padding és flexbox igazítás).
+- FAB pattern UX: kompakt, nem foglal el helyet, mobil-first Design.
+- Products oldal FAB keresés kizárólag lokális (Products oldalra korlátozott), Header keresés globális marad.
+- Bundle size: 924.18 kB (minimal növekedés a FAB logikához).
+
 
 ---
 
@@ -171,23 +188,46 @@
 [FEAT] auth: Mock auth service localStorage integrálása
 [FEAT] app: Routing konfiguráció az összes modulhoz
 [FEAT] products: Mock product service adatokkal
+[FEAT] ui: Material Icon → custom SVG icon system (28 ikonok)
+[FEAT] products: Floating Action Button keresés kategória szűréssel
+[FIX] header: Search bar szöveg- és magasság igazítása
+[REFACTOR] products: Redundáns search field eltávolítása, FAB pattern implementálása
 ```
 
 ---
 
 ## 🔄 Következő Lépés
 
-**Elvégzett (Week 2 core):**
+**Elvégzett (Week 2 core + UI refinement):**
 - [x] LoginComponent és RegisterComponent oldalak implementálása (`/auth/login`, `/auth/register`)
 - [x] Products list oldal implementálása (`/products`) ProductCard listával
 - [x] Product detail oldal implementálása (`/products/:id`)
 - [x] Cart page implementálása valós CartService integrációval
+- [x] Material Icon → custom SVG icon migration (28 ikon)
+- [x] FAB pattern keresés kategória szűréssel Products oldalon
+- [x] Header UI/UX refinement (search bar szöveg- és magasság igazítása)
 
-**Követkseñő lépés (Week 2 végéig):**
-- [ ] Responsive smoke teszt az összes route-on (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
-- [ ] Error handling teljes flow-ban (network error, validation error, out-of-stock, unauthorized)
+**Hátralevő (Week 2 végéig - Day 9-10):**
+- [ ] **Responsive smoke teszt az összes route-on** (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
+  - [ ] Breakpoints: 375px, 390px, 768px, 820px, 1024px
+  - [ ] Ellenőrzés:
+    - [ ] Nincs vízszintes overflow egyetlen breakpoint-on sem
+    - [ ] Header search bar, auth gombok, cart badge helyesen rendezve
+    - [ ] Header kategória nav mobil rájátékra swipe-olható
+    - [ ] Products FAB gomb funkcionális, expand/collapse működik
+    - [ ] FAB kategória filterek működnek, kiválasztás szűr
+    - [ ] Product card rács nem tö rédik meg
+    - [ ] Cart mennyiség +/- gombok működnek
+    - [ ] Form validáció auth oldalon működik
+    - [ ] Nincs konzol JavaScript error
+  - [ ] Dokumentálás: PASS/FAIL státusz tracker frissítése route×breakpoint mátrixban
+- [ ] **Bundle size optimalizálás** (ha szükséges)
+- [ ] **MILESTONE_1_TRACKER.md Day 9-10 szekció** kitöltése smoke test eredményekkel
+- [ ] **Milestone 1 zárás** (ha összes teszt PASS)
 
-### ✅ Day 9 Smoke Checklist (03.07-03.09)
+**Megjegyzés**: Material Icon font teljes eltávolítása miatt SVG-alapú icon rendszer használatban. FAB pattern UX-centrikus, mobil-first Design. Week 2 core feladatok befejezve, smoke testing következik.
+
+### ✅ Day 9-10 Smoke Checklist (03.07-03.09)
 
 **Breakpoints (mindegyik route-on):**
 - [ ] 375x667
@@ -198,16 +238,18 @@
 
 **Route checklist:**
 - [ ] `/` Home: nincs vízszintes overflow, hero + category + footer render rendben
-- [ ] `/products`: keresés/szűrés/rendezés működik, ProductCard rács törésmentes
+- [ ] `/products`: FAB keresés/szűrés működik, ProductCard rács törésmentes
 - [ ] `/products/:id`: vissza gomb, kosárba rakás, not-found state működik
 - [ ] `/cart`: mennyiség +/- , törlés, összegzés, szállítási logika, disabled checkout out-of-stock esetben
 - [ ] `/auth/login`: form validáció, remember me, returnUrl flow
 - [ ] `/auth/register`: form validáció, password match, returnUrl flow
 
 **Általános UI/UX ellenőrzés:**
-- [ ] Header: auth gombok nem lógnak ki, category nav mobilon swipe-olható
+- [ ] Header: search bar középre van, auth gombok nem lógnak ki, category nav mobilon swipe-olható
 - [ ] Footer: tartalom tördelése rendben, social ikonok rendben, nincs page-level overflow
+- [ ] Products FAB: zöld gomb jelenik meg, expand/collapse működik, kategória filterek interaktívak
 - [ ] Toast/Error üzenetek olvashatók és bezárhatók
+- [ ] Nincs konzol JavaScript error
 - [ ] Konzol: nincs új JavaScript error (network fallback log elfogadható)
 
 **Dokumentáció zárás:**
@@ -223,4 +265,4 @@
 
 ---
 
-**Utolsó frissítés**: 2026.03.05 (nap 7-nap végéhez közeledve, cart page complete)
+**Utolsó frissítés**: 2026.03.05 (nap 8, UI/UX refinement + FAB kategória szűrőkkel kész)

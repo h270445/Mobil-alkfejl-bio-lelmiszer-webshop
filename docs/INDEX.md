@@ -136,8 +136,11 @@ docker-compose up postgres
 - ✅ Products lista oldal (`/products`) keresés/szűrés/rendezés + kosárba
 - ✅ Product detail oldal (`/products/:id`) (MVP: not-found, ID validáció, kosárba)
 - ✅ Cart page (`/cart`) szállítási költség + ajánlott termékek + snackbar feedback
+- ✅ Material Icon → SVG Icon System (28 custom ikonok, Font eltávolítva) **[Day 8]**
+- ✅ Floating Action Button (FAB) keresés kategória szűréssel **[Day 8]**
+- ✅ Header keresési sáv igazítása (szöveg, magasság, padding) **[Day 8]**
 
-**Következő lépés**: Responsive smoke test az összes route-on
+**Következő lépés**: Responsive smoke test az összes route-on (Day 9-10)
 
 **Beadási határidő**: 2026.03.29. 23:59 CET
 
@@ -168,4 +171,4 @@ Mobil Alkalmazásfejlesztés kurzus – SZTE, 2026
 
 ---
 
-**Utolsó frissítés**: 2026.03.05 (nap 7, cart page complete)
+**Utolsó frissítés**: 2026.03.05 (nap 8, UI/UX refinement + FAB pattern complete)
