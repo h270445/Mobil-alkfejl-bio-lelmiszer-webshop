@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Login/Sign in icon - Arrow entering door -->
+  <path d="M11 7 L11 3 C11 2.45 11.45 2 12 2 L20 2 C20.55 2 21 2.45 21 3 L21 21 C21 21.55 20.55 22 20 22 L12 22 C11.45 22 11 21.55 11 21 L11 17" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round"/>
+  <!-- Arrow -->
+  <path d="M3 12 L15 12 M12 9 L15 12 L12 15" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+</svg>

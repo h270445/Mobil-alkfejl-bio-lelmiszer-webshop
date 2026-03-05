@@ -23,7 +23,11 @@
       [class.favorited]="isFavorite"
       matRipple
     >
-      <mat-icon>{{ isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+      <img 
+        [src]="isFavorite ? 'assets/images/favorite-icon.svg' : 'assets/images/favorite-border-icon.svg'" 
+        [alt]="isFavorite ? 'Kedvenc' : 'Hozzáadás a kedvencekhez'" 
+        class="favorite-icon" 
+      />
     </button>
 
     <!-- Stock Status -->
@@ -50,9 +54,12 @@
     <!-- Rating -->
     <div class="product-rating" *ngIf="product.rating > 0">
       <div class="stars">
-        <mat-icon *ngFor="let i of [1,2,3,4,5]" class="star" [class.filled]="i <= product.rating">
-          star
-        </mat-icon>
+        <img 
+          *ngFor="let i of [1,2,3,4,5]" 
+          [src]="i <= product.rating ? 'assets/images/star-filled.svg' : 'assets/images/star-empty.svg'"
+          [alt]="i <= product.rating ? 'Telt csillag' : 'Üres csillag'"
+          class="star"
+        />
       </div>
       <span class="rating-value">({{ product.reviews }})</span>
     </div>
@@ -76,7 +83,7 @@
       (click)="onViewDetails()"
       [routerLink]="['/products', product.id]"
     >
-      <mat-icon>info</mat-icon>
+      <img src="assets/images/info-icon.svg" alt="Részletek" class="info-icon" />
       Részletek
     </button>
 
@@ -87,7 +94,7 @@
       class="add-to-cart-button"
       (click)="onAddToCart()"
     >
-      <mat-icon>shopping_cart</mat-icon>
+      <img src="assets/images/cart-icon.svg" alt="Kosár" class="cart-button-icon" />
       Kosárba
     </button>
 

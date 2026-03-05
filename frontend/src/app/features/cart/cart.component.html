@@ -3,7 +3,7 @@
   <header class="cart-header">
     <div class="header-content">
       <button mat-button class="back-button" (click)="continueShopping()">
-        <mat-icon>arrow_back</mat-icon>
+        <img src="assets/images/arrow-back-icon.svg" alt="Vissza" class="back-icon" />
       </button>
       <h1>Bevásárlóköz</h1>
     </div>
@@ -12,7 +12,7 @@
 
   <!-- Out-of-Stock Warning -->
   <div class="out-of-stock-warning" *ngIf="isCheckoutDisabled">
-    <mat-icon>warning</mat-icon>
+    <img src="assets/images/warning-icon.svg" alt="Figyelmeztetés" class="warning-icon" />
     <p>Néhány termék elfogyott. Kérlek távolítsd el őket a vásárlás előtt.</p>
   </div>
 
@@ -40,14 +40,14 @@
             (click)="decreaseQuantity(item.product.id)"
             [disabled]="item.quantity <= 1"
             aria-label="Mennyiség csökkentése">
-            <mat-icon>remove</mat-icon>
+            <img src="assets/images/remove-icon.svg" alt="Csökkentés" class="quantity-icon" />
           </button>
           <span class="quantity">{{ item.quantity }}</span>
           <button 
             mat-icon-button 
             (click)="increaseQuantity(item.product.id)"
             aria-label="Mennyiség növelése">
-            <mat-icon>add</mat-icon>
+            <img src="assets/images/add-icon.svg" alt="Növelés" class="quantity-icon" />
           </button>
         </div>
 
@@ -63,7 +63,7 @@
           class="remove-button"
           (click)="removeFromCart(item.product.id, item.product.name)"
           aria-label="Termék eltávolítása">
-          <mat-icon>delete</mat-icon>
+          <img src="assets/images/delete-icon.svg" alt="Törlés" class="delete-icon" />
         </button>
       </div>
     </div>
@@ -126,7 +126,7 @@
     <div class="empty-state">
       <!-- Cart Icon Illustration -->
       <div class="empty-icon">
-        <mat-icon class="large-icon">shopping_cart</mat-icon>
+        <img src="assets/images/cart-icon.svg" alt="Üres kosár" class="large-cart-icon" />
       </div>
 
       <h2>A bevásárlóköz üres</h2>

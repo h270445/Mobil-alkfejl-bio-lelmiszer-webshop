@@ -28,9 +28,9 @@ export class FooterComponent {
   };
 
   socialLinks = [
-    { name: 'Facebook', icon: 'thumb_up', url: 'https://facebook.com' },
-    { name: 'Instagram', icon: 'photo_camera', url: 'https://instagram.com' },
-    { name: 'Twitter', icon: 'chat', url: 'https://twitter.com' }
+    { name: 'Facebook', icon: 'assets/images/facebook-icon.svg', url: 'https://facebook.com' },
+    { name: 'Instagram', icon: 'assets/images/instagram-icon.svg', url: 'https://instagram.com' },
+    { name: 'Twitter', icon: 'assets/images/twitter-icon.svg', url: 'https://twitter.com' }
   ];
 
   scrollToTop(): void {

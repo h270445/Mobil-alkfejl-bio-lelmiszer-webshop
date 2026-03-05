@@ -4,7 +4,7 @@
     <!-- Logo -->
     <div class="logo-section">
       <a routerLink="/" class="logo-link">
-        <mat-icon class="logo-icon">eco</mat-icon>
+        <img src="assets/images/tree-logo.svg" alt="BioMarket Logo" class="logo-icon" />
         <span class="logo-text">BioMarket</span>
       </a>
     </div>
@@ -12,7 +12,7 @@
     <!-- Search Bar (hidden on mobile, replaced by icon) -->
     <div class="search-section" *ngIf="!isMinimalMode">
       <mat-form-field appearance="outline" class="search-field">
-        <mat-icon matPrefix>search</mat-icon>
+        <img src="assets/images/search-icon.svg" alt="Keresés" matPrefix class="search-prefix-icon" />
         <input
           matInput
           type="text"
@@ -25,7 +25,7 @@
 
     <!-- Mobile Search Icon -->
     <button mat-icon-button class="mobile-search-button" (click)="onSearch()" *ngIf="!isMinimalMode">
-      <mat-icon>search</mat-icon>
+      <img src="assets/images/search-icon.svg" alt="Keresés" class="button-icon" />
     </button>
 
     <!-- User Menu -->
@@ -33,11 +33,11 @@
       <!-- Not logged in -->
       <ng-container *ngIf="!isLoggedIn">
         <button mat-button (click)="onLogin()" *ngIf="!isOnLoginPage" aria-label="Bejelentkezés">
-          <mat-icon>login</mat-icon>
+          <img src="assets/images/login-icon.svg" alt="Bejelentkezés" class="auth-icon" />
           <span class="auth-label">Bejelentkezés</span>
         </button>
         <button mat-raised-button color="primary" (click)="onRegister()" *ngIf="!isOnRegisterPage" aria-label="Regisztráció">
-          <mat-icon>person_add</mat-icon>
+          <img src="assets/images/person-add-icon.svg" alt="Regisztráció" class="auth-icon-white" />
           <span class="auth-label">Regisztráció</span>
         </button>
       </ng-container>
@@ -45,25 +45,25 @@
       <!-- Logged in -->
       <ng-container *ngIf="isLoggedIn">
         <button mat-icon-button [matMenuTriggerFor]="userMenu">
-          <mat-icon>account_circle</mat-icon>
+          <img src="assets/images/account-circle-icon.svg" alt="Profil" class="button-icon" />
         </button>
         <mat-menu #userMenu="matMenu">
           <div class="user-menu-header">
-            <mat-icon>person</mat-icon>
+            <img src="assets/images/user-icon.svg" alt="Felhasználó" class="menu-icon" />
             <span>{{ userName }}</span>
           </div>
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="onProfile()">
-            <mat-icon>settings</mat-icon>
+            <img src="assets/images/settings-icon.svg" alt="Profil" class="menu-icon" />
             <span>Profil</span>
           </button>
           <button mat-menu-item>
-            <mat-icon>receipt</mat-icon>
+            <img src="assets/images/receipt-icon.svg" alt="Rendelések" class="menu-icon" />
             <span>Rendeléseim</span>
           </button>
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="onLogout()">
-            <mat-icon>logout</mat-icon>
+            <img src="assets/images/logout-icon.svg" alt="Kijelentkezés" class="menu-icon" />
             <span>Kijelentkezés</span>
           </button>
         </mat-menu>
@@ -79,7 +79,7 @@
         class="cart-button"
         *ngIf="!isMinimalMode"
       >
-        <mat-icon>shopping_cart</mat-icon>
+        <img src="assets/images/cart-icon.svg" alt="Kosár" class="button-icon" />
       </button>
     </div>
   </mat-toolbar>

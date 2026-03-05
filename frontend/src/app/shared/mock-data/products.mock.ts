@@ -8,7 +8,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Tejtermékek',
     price: 890,
     description: 'Friss bio tehéntej hazai gazdaságból, tartósítószer-mentes.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-dairy.svg',
     rating: 5,
     reviews: 42,
     inStock: true
@@ -20,7 +20,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 1290,
     originalPrice: 1490,
     description: 'Krémes bio joghurt élőflórával, magas fehérjetartalommal.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-dairy.svg',
     rating: 5,
     reviews: 38,
     inStock: true
@@ -31,7 +31,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Tejtermékek',
     price: 1890,
     description: 'Hagyományosan érlelt bio trappista sajt.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-dairy.svg',
     rating: 4,
     reviews: 27,
     inStock: true
@@ -44,7 +44,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Pékáruk',
     price: 790,
     description: 'Kézműves bio kenyér teljes kiőrlésű lisztből.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-bakery.svg',
     rating: 5,
     reviews: 65,
     inStock: true
@@ -56,7 +56,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 1190,
     originalPrice: 1390,
     description: 'Vajas bio croissant, frissen sütve.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-bakery.svg',
     rating: 4,
     reviews: 31,
     inStock: true
@@ -67,7 +67,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Pékáruk',
     price: 890,
     description: 'Ropogós bio keksz zabpehellyel és mézzel.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-bakery.svg',
     rating: 4,
     reviews: 19,
     inStock: false
@@ -80,7 +80,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Zöldség-gyümölcs',
     price: 690,
     description: 'Ropogós bio alma magyar kertből.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-produce.svg',
     rating: 5,
     reviews: 87,
     inStock: true
@@ -91,7 +91,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Zöldség-gyümölcs',
     price: 490,
     description: 'Édes bio sárgarépa, kiváló levesbe vagy rágcsálásra.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-produce.svg',
     rating: 5,
     reviews: 56,
     inStock: true
@@ -103,7 +103,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 1190,
     originalPrice: 1290,
     description: 'Fairtrade bio banán Ecuadorból.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-produce.svg',
     rating: 4,
     reviews: 73,
     inStock: true
@@ -114,7 +114,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Zöldség-gyümölcs',
     price: 1490,
     description: 'Krémes bio avokádó, azonnal fogyasztható.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-produce.svg',
     rating: 5,
     reviews: 44,
     inStock: true
@@ -127,7 +127,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Húskészítmények',
     price: 2490,
     description: 'Friss bio csirkemell szabadtartásból.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-meat.svg',
     rating: 5,
     reviews: 52,
     inStock: true
@@ -139,7 +139,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 1890,
     originalPrice: 2190,
     description: 'Házi bio kolbász természetes füstöléssel.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-meat.svg',
     rating: 4,
     reviews: 29,
     inStock: true
@@ -152,7 +152,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Italok',
     price: 1290,
     description: '100% bio narancslé hozzáadott cukor nélkül.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-drinks.svg',
     rating: 5,
     reviews: 91,
     inStock: true
@@ -163,7 +163,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Italok',
     price: 890,
     description: 'Prémium bio zöld tea filteres kiszerelésben.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-drinks.svg',
     rating: 4,
     reviews: 67,
     inStock: true
@@ -175,7 +175,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 1590,
     originalPrice: 1790,
     description: 'Természetes bio kókuszvíz elektrolitokkal.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-drinks.svg',
     rating: 5,
     reviews: 38,
     inStock: false
@@ -188,7 +188,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Snackek',
     price: 1990,
     description: 'Natúr bio mandula, pirítás nélkül.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-snacks.svg',
     rating: 5,
     reviews: 45,
     inStock: true
@@ -200,7 +200,7 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 1390,
     originalPrice: 1590,
     description: 'Bio étcsokoládé 70% kakaótartalommal.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-snacks.svg',
     rating: 5,
     reviews: 102,
     inStock: true
@@ -211,7 +211,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Snackek',
     price: 1190,
     description: 'Energiadús bio müzliszelet gyümölcsökkel.',
-    imageUrl: 'assets/images/product-placeholder.svg',
+    imageUrl: 'assets/images/placeholder-snacks.svg',
     rating: 4,
     reviews: 54,
     inStock: true

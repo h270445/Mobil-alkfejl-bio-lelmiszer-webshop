@@ -1,6 +1,6 @@
 <section class="product-detail-page">
   <button mat-stroked-button class="back-button" (click)="onBackToProducts()">
-    <mat-icon>arrow_back</mat-icon>
+    <img src="assets/images/arrow-back-icon.svg" alt="Vissza" class="back-icon" />
     Vissza a termékekhez
   </button>
 
@@ -9,7 +9,7 @@
   </div>
 
   <div *ngIf="!loading && notFound" class="not-found-state">
-    <mat-icon>inventory_2</mat-icon>
+    <img src="assets/images/inventory-icon.svg" alt="Nem található" class="not-found-icon" />
     <h2>A termék nem található</h2>
     <p>Lehet, hogy a termék már nem elérhető vagy hibás az azonosító.</p>
     <button mat-raised-button color="primary" (click)="onBackToProducts()">
@@ -47,7 +47,7 @@
           (click)="onAddToCart()"
           [disabled]="!product.inStock"
         >
-          <mat-icon>shopping_cart</mat-icon>
+          <img src="assets/images/cart-icon.svg" alt="Kosár" class="button-icon" />
           Kosárba
         </button>
       </div>

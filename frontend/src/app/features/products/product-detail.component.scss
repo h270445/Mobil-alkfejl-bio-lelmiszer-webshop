@@ -8,6 +8,12 @@
   align-self: flex-start;
 }
 
+.back-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
 .loading-container {
   display: flex;
   justify-content: center;
@@ -30,6 +36,11 @@
   width: 42px;
   height: 42px;
   color: var(--color-text-secondary);
+}
+
+.not-found-icon {
+  width: 42px;
+  height: 42px;
 }
 
 .product-layout {
@@ -105,6 +116,13 @@
 
 .actions {
   margin-top: 8px;
+}
+
+.button-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  filter: brightness(0) invert(1); // Makes it white
 }
 
 @media (max-width: 900px) {

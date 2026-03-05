@@ -50,6 +50,7 @@ header {
     width: 32px;
     height: 32px;
     margin-right: 8px;
+    display: block;
   }
 
   .logo-text {
@@ -59,22 +60,86 @@ header {
   }
 }
 
+// Icon styling for SVG images
+.button-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.auth-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.auth-icon-white {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  display: inline-block;
+  vertical-align: middle;
+  filter: brightness(0) invert(1);
+}
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.search-prefix-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
 // Search Section
 .search-section {
   flex: 1;
   max-width: 600px;
   margin: 0 32px;
+  display: flex;
+  align-items: center;
+  height: 100%;
 
   .search-field {
     width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+
+    ::ng-deep .mat-mdc-form-field {
+      width: 100%;
+      height: 48px;
+      display: flex;
+      align-items: center;
+    }
 
     ::ng-deep .mat-mdc-form-field-infix {
-      padding-top: 8px;
-      padding-bottom: 8px;
+      padding-top: 0;
+      padding-bottom: 0;
+      display: flex;
+      align-items: center;
+      padding-y: 0;
+    }
+
+    ::ng-deep input.mat-mdc-input-element {
+      vertical-align: middle;
+      height: 24px;
+      padding: 8px 0 !important;
+      line-height: 24px;
     }
 
     ::ng-deep .mat-mdc-text-field-wrapper {
       background-color: var(--color-surface);
+      height: 48px;
+      display: flex;
+      align-items: center;
     }
   }
 }
@@ -178,6 +243,11 @@ header {
 
   .mobile-search-button {
     display: inline-flex; // Show mobile search icon
+    
+    .button-icon {
+      width: 22px;
+      height: 22px;
+    }
   }
 
   .user-menu-section {
@@ -247,7 +317,12 @@ header {
     }
 
     .logo-icon {
-      font-size: 24px;
+   
+
+  .mobile-search-button .button-icon {
+    width: 20px;
+    height: 20px;
+  }   font-size: 24px;
       width: 24px;
       height: 24px;
       margin-right: 4px;

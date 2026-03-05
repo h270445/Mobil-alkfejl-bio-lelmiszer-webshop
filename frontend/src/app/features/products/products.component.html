@@ -5,20 +5,6 @@
   </header>
 
   <div class="filters">
-    <mat-form-field appearance="outline" class="search-field">
-      <mat-label>Keresés</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Pl. bio tej"
-        [(ngModel)]="searchQuery"
-        (keyup.enter)="onSearch()"
-      />
-      <button mat-icon-button matSuffix (click)="onSearch()" aria-label="Keresés">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
-
     <div class="category-filter">
       <button
         mat-stroked-button
@@ -53,7 +39,7 @@
   </div>
 
   <div *ngIf="!loading && filteredProducts.length === 0" class="empty-state">
-    <mat-icon>inventory_2</mat-icon>
+    <img src="assets/images/inventory-icon.svg" alt="Nincs találat" class="empty-icon" />
     <h2>Nincs találat</h2>
     <p>Próbálj másik keresést vagy kategóriát.</p>
     <button mat-raised-button color="primary" (click)="onCategorySelect('')">Szűrők törlése</button>
@@ -65,5 +51,79 @@
       [product]="product"
       (addToCart)="onAddToCart($event)"
     ></app-product-card>
+  </div>
+
+  <!-- Floating Search Button (FAB) -->
+  <button
+    mat-fab
+    class="floating-search-btn"
+    (click)="toggleSearchPanel()"
+    [class.active]="showSearchPanel"
+    aria-label="Keresés"
+  >
+    <img src="assets/images/search-icon.svg" alt="Keresés" class="fab-icon" />
+  </button>
+
+  <!-- Expandable Search Panel -->
+  <div class="search-panel-overlay" *ngIf="showSearchPanel" (click)="closeSearchPanel()"></div>
+  <div class="search-panel" [class.active]="showSearchPanel">
+    <div class="search-panel-header">
+      <h2>Termék keresése</h2>
+      <button
+        mat-icon-button
+        (click)="closeSearchPanel()"
+        class="close-btn"
+        aria-label="Bezárás"
+      >
+        <img src="assets/images/close-icon.svg" alt="Bezárás" class="close-icon" />
+      </button>
+    </div>
+
+    <div class="search-panel-content">
+      <!-- Text Search -->
+      <mat-form-field appearance="outline" class="search-field-expanded">
+        <mat-label>Keresés</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Pl. bio tej, joghurt..."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch(); closeSearchPanel()"
+          autofocus
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="onSearch(); closeSearchPanel()"
+          aria-label="Keresés"
+        >
+          <img src="assets/images/search-icon.svg" alt="Keresés" class="search-button-icon" />
+        </button>
+      </mat-form-field>
+
+      <!-- Category Filters -->
+      <div class="panel-category-filter">
+        <h3>Kategóriák</h3>
+        <div class="category-buttons-grid">
+          <button
+            mat-stroked-button
+            [class.active]="!selectedCategory"
+            (click)="onCategorySelect(''); onSearch(); closeSearchPanel()"
+            class="category-filter-btn"
+          >
+            Összes
+          </button>
+          <button
+            mat-stroked-button
+            *ngFor="let category of categories"
+            [class.active]="normalizeCategory(category) === normalizeCategory(selectedCategory)"
+            (click)="onCategorySelect(normalizeCategory(category)); onSearch(); closeSearchPanel()"
+            class="category-filter-btn"
+          >
+            {{ category }}
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

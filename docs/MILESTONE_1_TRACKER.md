@@ -187,10 +187,37 @@
 - [ ] Responsive smoke teszt az összes route-on (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
 - [ ] Error handling teljes flow-ban (network error, validation error, out-of-stock, unauthorized)
 
+### ✅ Day 9 Smoke Checklist (03.07-03.09)
+
+**Breakpoints (mindegyik route-on):**
+- [ ] 375x667
+- [ ] 390x844
+- [ ] 768x1024
+- [ ] 820x1180
+- [ ] 1024x1366
+
+**Route checklist:**
+- [ ] `/` Home: nincs vízszintes overflow, hero + category + footer render rendben
+- [ ] `/products`: keresés/szűrés/rendezés működik, ProductCard rács törésmentes
+- [ ] `/products/:id`: vissza gomb, kosárba rakás, not-found state működik
+- [ ] `/cart`: mennyiség +/- , törlés, összegzés, szállítási logika, disabled checkout out-of-stock esetben
+- [ ] `/auth/login`: form validáció, remember me, returnUrl flow
+- [ ] `/auth/register`: form validáció, password match, returnUrl flow
+
+**Általános UI/UX ellenőrzés:**
+- [ ] Header: auth gombok nem lógnak ki, category nav mobilon swipe-olható
+- [ ] Footer: tartalom tördelése rendben, social ikonok rendben, nincs page-level overflow
+- [ ] Toast/Error üzenetek olvashatók és bezárhatók
+- [ ] Konzol: nincs új JavaScript error (network fallback log elfogadható)
+
+**Dokumentáció zárás:**
+- [ ] Tracker frissítve PASS/FAIL státusszal route-onként
+- [ ] INDEX státuszfrissítés (ha minden smoke teszt PASS)
+
 **2. Hét Célja (március 3-9):**
 - [x] Auth Module UI komplett (login, register)
 - [x] Products lista és detail oldalak
-- [ ] Cart page (checkout flow kezdet)
+- [x] Cart page (checkout flow kezdet)
 - [x] ProductCard addToCart integráció (Home + Products oldalak)
 - [ ] ErrorMessage komponens bekötése az auth/cart/product flow-kba
 

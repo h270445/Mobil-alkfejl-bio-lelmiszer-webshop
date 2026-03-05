@@ -44,6 +44,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   searchQuery = '';
   selectedCategory = '';
   sortBy: 'name' | 'price-asc' | 'price-desc' | 'rating' = 'name';
+  showSearchPanel = false;
 
   constructor(
     private productService: ProductService,
@@ -173,5 +174,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/\s+/g, '-');
+  }
+
+  toggleSearchPanel(): void {
+    this.showSearchPanel = !this.showSearchPanel;
+  }
+
+  closeSearchPanel(): void {
+    this.showSearchPanel = false;
   }
 }
