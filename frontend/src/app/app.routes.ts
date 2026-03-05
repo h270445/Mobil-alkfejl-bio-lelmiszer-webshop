@@ -4,6 +4,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { ProductsComponent } from './features/products/products.component';
 import { ProductDetailComponent } from './features/products/product-detail.component';
+import { CartComponent } from './features/cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -28,13 +29,12 @@ export const routes: Routes = [
   },
   {
     path: 'cart',
-    component: HomeComponent
-    // TODO: Create cart page
+    component: CartComponent
   },
   {
-    path: 'orders',
+    path: 'checkout',
     component: HomeComponent
-    // TODO: Create orders page
+    // TODO: Create checkout page
   },
   {
     path: 'profile',

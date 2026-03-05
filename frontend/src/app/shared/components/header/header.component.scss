@@ -8,21 +8,28 @@ header {
 
 .header-toolbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 0 24px;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   min-height: 64px;
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
+  overflow-x: clip;
+}
+
+.header-toolbar > * {
+  min-width: 0;
 }
 
 // Logo Section
 .logo-section {
   display: flex;
   align-items: center;
-  min-width: 200px;
+  min-width: 0;
+  max-width: 100%;
 
   .logo-link {
     display: flex;
@@ -30,6 +37,8 @@ header {
     text-decoration: none;
     color: var(--color-primary);
     transition: opacity 0.3s ease;
+    min-width: 0;
+    max-width: 100%;
 
     &:hover {
       opacity: 0.8;
@@ -80,10 +89,11 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 200px;
+  min-width: 0;
   flex: 0 1 auto;
   min-width: 0;
   justify-content: flex-end;
+  margin-left: auto;
 
   .cart-button {
     margin-left: 8px;
@@ -143,11 +153,15 @@ header {
   }
 
   .logo-section {
-    min-width: auto;
-    flex: 0 0 auto;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
 
     .logo-text {
       font-size: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .logo-icon {
@@ -169,14 +183,15 @@ header {
   .user-menu-section {
     min-width: auto;
     gap: 4px;
+    flex: 0 0 auto;
 
     button:not(.cart-button) mat-icon {
       margin-right: 0;
     }
 
     button:not(.cart-button) {
-      min-width: 40px;
-      padding: 0 8px;
+      min-width: 0;
+      padding: 0 6px;
     }
 
     .auth-label {
@@ -199,9 +214,11 @@ header {
     overflow-x: auto;
     justify-content: flex-start;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
     &::-webkit-scrollbar {
-      height: 2px;
+      display: none;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -221,6 +238,7 @@ header {
 @media (max-width: 480px) {
   .header-toolbar {
     padding: 8px;
+    gap: 6px;
   }
 
   .logo-section {
@@ -234,6 +252,18 @@ header {
       height: 24px;
       margin-right: 4px;
     }
+  }
+
+  .user-menu-section.auth-mode {
+    button:not(.cart-button) {
+      padding: 0 10px;
+      font-size: 14px;
+      line-height: 1;
+    }
+  }
+
+  .user-menu-section.auth-mode button:not(.cart-button) mat-icon {
+    display: none;
   }
 
   .category-nav {

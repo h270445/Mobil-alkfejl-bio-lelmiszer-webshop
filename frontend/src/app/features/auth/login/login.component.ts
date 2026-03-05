@@ -78,12 +78,17 @@ import { LoginRequest } from '../../../shared/models';
       display: flex;
       justify-content: center;
       padding: 16px;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
     }
 
     .auth-card {
       width: 100%;
       max-width: 460px;
       padding: 20px;
+      min-width: 0;
+      overflow-x: clip;
     }
 
     h1 {
@@ -96,6 +101,7 @@ import { LoginRequest } from '../../../shared/models';
     form {
       display: grid;
       gap: 12px;
+      min-width: 0;
     }
 
     .full-width {

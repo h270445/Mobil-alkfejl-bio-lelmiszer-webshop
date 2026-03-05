@@ -135,7 +135,9 @@ docker-compose up postgres
 - ✅ Auth UI oldalak (`/auth/login`, `/auth/register`) + remember me + return URL flow
 - ✅ Products lista oldal (`/products`) keresés/szűrés/rendezés + kosárba
 - ✅ Product detail oldal (`/products/:id`) (MVP: not-found, ID validáció, kosárba)
-- 🔄 Cart page (következő lépés)
+- ✅ Cart page (`/cart`) szállítási költség + ajánlott termékek + snackbar feedback
+
+**Következő lépés**: Responsive smoke test az összes route-on
 
 **Beadási határidő**: 2026.03.29. 23:59 CET
 
@@ -166,4 +168,4 @@ Mobil Alkalmazásfejlesztés kurzus – SZTE, 2026
 
 ---
 
-**Utolsó frissítés**: 2026.03.04 (nap 6, késő esti frissítés)
+**Utolsó frissítés**: 2026.03.05 (nap 7, cart page complete)

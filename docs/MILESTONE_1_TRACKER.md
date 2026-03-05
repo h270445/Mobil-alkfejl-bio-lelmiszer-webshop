@@ -113,9 +113,10 @@
 
 ---
 
-### Március 4 (nap 6)
-**Terv**: Auth flow lezárása + products lista elindítása
+### Március 5 (nap 6-7)
+**Terv**: Auth flow lezárása + products lista + Cart page
 
+**Day 6 - Auth + Products Detail (módosított)**
 - [x] Login/Register oldalak teljes bekötése
 - [x] Return URL visszanavigálás auth után
 - [x] Remember me opció (`sessionStorage`/`localStorage`)
@@ -126,7 +127,21 @@
 - [x] Header kategória navigáció query param alapra állítva
 - [x] `/products/:id` oldal implementálása (MVP: numerikus ID check, not-found state, fix vissza `/products`, kosárba)
 
-**Notes**: A 2. hét auth + products detail céljai teljesítve. Következő fókusz: Cart oldal és route-szintű smoke test.
+**Day 7 - Cart Page (előrehozva)**
+- [x] `/cart` oldal teljes implementációja CartService integrációval
+- [x] Szállítási költség kalkuláció (500 ft < 3500 ft, innych ingyenes)
+- [x] Quantidade kezelés (+/- gombok, limit: ≥1, ≤stock)
+- [x] Teljes kosár törlés (warning confirm dialog)
+- [x] Out-of-stock warning banner + checkout kikapcsolás
+- [x] Rich empty state (kosár ikon + ajánlott termékek grid)
+- [x] LoadingSpinner placeholders AWS deployment-hez
+- [x] MatSnackBar feedback (item add/remove/delete)
+- [x] Mobile-first responsive (card layout mobile, táblázat 768px+)
+- [x] Material components: MatButtonModule, MatIconModule, MatSnackBarModule
+- [x] Auth check redirect /auth/login?returnUrl=/checkout
+- [x] /checkout route placeholder
+
+**Notes**: A 2. heti összes major feature teljesítve (auth + products + cart). Szállítási logika implementálva. Ajánlott termékek getFeaturedProducts()-ból. Angular.json budget emelt anyComponentStyle-hoz (6kb warning, 10kb error az összetett komponensekhez).
 
 ---
 
@@ -162,12 +177,15 @@
 
 ## 🔄 Következő Lépés
 
-**Következő lépés (most):**
+**Elvégzett (Week 2 core):**
 - [x] LoginComponent és RegisterComponent oldalak implementálása (`/auth/login`, `/auth/register`)
 - [x] Products list oldal implementálása (`/products`) ProductCard listával
 - [x] Product detail oldal implementálása (`/products/:id`)
-- [ ] Cart page implementálása valós CartService integrációval
+- [x] Cart page implementálása valós CartService integrációval
+
+**Követkseñő lépés (Week 2 végéig):**
 - [ ] Responsive smoke teszt az összes route-on (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
+- [ ] Error handling teljes flow-ban (network error, validation error, out-of-stock, unauthorized)
 
 **2. Hét Célja (március 3-9):**
 - [x] Auth Module UI komplett (login, register)
@@ -178,4 +196,4 @@
 
 ---
 
-**Utolsó frissítés**: 2026.03.04 (nap 6, késő esti frissítés)
+**Utolsó frissítés**: 2026.03.05 (nap 7-nap végéhez közeledve, cart page complete)

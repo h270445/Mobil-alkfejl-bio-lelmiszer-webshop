@@ -5,6 +5,7 @@
       [src]="product.imageUrl"
       [alt]="product.name"
       [title]="product.name"
+      (error)="onImageError($event)"
       class="product-image"
       title="product-name"
     />

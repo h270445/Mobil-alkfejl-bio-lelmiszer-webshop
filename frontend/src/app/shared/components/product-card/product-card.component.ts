@@ -53,6 +53,13 @@ export class ProductCardComponent {
     this.viewDetails.emit(this.product);
   }
 
+  onImageError(event: Event): void {
+    const imageElement = event.target as HTMLImageElement;
+    if (imageElement && !imageElement.src.includes('assets/images/product-placeholder.svg')) {
+      imageElement.src = 'assets/images/product-placeholder.svg';
+    }
+  }
+
   get discount(): number | null {
     if (this.product.originalPrice && this.product.originalPrice > this.product.price) {
       const diff = this.product.originalPrice - this.product.price;
