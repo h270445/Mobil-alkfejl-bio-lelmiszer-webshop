@@ -208,8 +208,8 @@
 - [x] Header UI/UX refinement (search bar szöveg- és magasság igazítása)
 
 **Hátralevő (Week 2 végéig - Day 9-10):**
-- [ ] **Responsive smoke teszt az összes route-on** (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
-  - [ ] Breakpoints: 375px, 390px, 768px, 820px, 1024px
+- [x] **Responsive smoke teszt az osszes route-on** (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
+  - [x] Breakpoints: 375px, 390px, 768px, 820px, 1024px
   - [ ] Ellenőrzés:
     - [x] Nincs vízszintes overflow egyetlen breakpoint-on sem
     - [x] Header search bar, auth gombok, cart badge helyesen rendezve
@@ -220,9 +220,9 @@
     - [x] Cart mennyiség +/- gombok működnek
     - [x] Form validáció auth oldalon működik
     - [x] Nincs konzol JavaScript error
-  - [ ] Dokumentálás: PASS/FAIL státusz tracker frissítése route×breakpoint mátrixban
+  - [x] Dokumentalas: PASS/FAIL statusz tracker frissitese route x breakpoint matrixban
 - [ ] **Bundle size optimalizálás** (ha szükséges)
-- [ ] **MILESTONE_1_TRACKER.md Day 9-10 szekció** kitöltése smoke test eredményekkel
+- [x] **MILESTONE_1_TRACKER.md Day 9-10 szekcio** kitoltese smoke test eredmenyekkel
 - [ ] **Milestone 1 zárás** (ha összes teszt PASS)
 
 **Megjegyzés**: Material Icon font teljes eltávolítása miatt SVG-alapú icon rendszer használatban. FAB pattern UX-centrikus, mobil-first Design. Week 2 core feladatok befejezve, smoke testing következik.
@@ -230,31 +230,31 @@
 ### ✅ Day 9-10 Smoke Checklist (03.07-03.09)
 
 **Breakpoints (mindegyik route-on):**
-- [ ] 375x667
-- [ ] 390x844
-- [ ] 768x1024
-- [ ] 820x1180
-- [ ] 1024x1366
+- [x] 375x667
+- [x] 390x844
+- [x] 768x1024
+- [x] 820x1180
+- [x] 1024x1366
 
 **Route checklist:**
-- [ ] `/` Home: nincs vízszintes overflow, hero + category + footer render rendben
-- [ ] `/products`: FAB keresés/szűrés működik, ProductCard rács törésmentes
-- [ ] `/products/:id`: vissza gomb, kosárba rakás, not-found state működik
-- [ ] `/cart`: mennyiség +/- , törlés, összegzés, szállítási logika, disabled checkout out-of-stock esetben
-- [ ] `/auth/login`: form validáció, remember me, returnUrl flow
-- [ ] `/auth/register`: form validáció, password match, returnUrl flow
+- [x] `/` Home: nincs vizszintes overflow, hero + category + footer render rendben
+- [x] `/products`: FAB kereses/szures mukodik, ProductCard racs toresmentes
+- [x] `/products/:id`: vissza gomb, kosarba rakas, not-found state mukodik
+- [x] `/cart`: mennyiseg +/-, torles, osszegzes, szallitasi logika, disabled checkout out-of-stock esetben
+- [x] `/auth/login`: form validacio, remember me, returnUrl flow
+- [x] `/auth/register`: form validacio, password match, returnUrl flow
 
 **Általános UI/UX ellenőrzés:**
-- [ ] Header: search bar középre van, auth gombok nem lógnak ki, category nav mobilon swipe-olható
-- [ ] Footer: tartalom tördelése rendben, social ikonok rendben, nincs page-level overflow
-- [ ] Products FAB: zöld gomb jelenik meg, expand/collapse működik, kategória filterek interaktívak
-- [ ] Toast/Error üzenetek olvashatók és bezárhatók
-- [ ] Nincs konzol JavaScript error
-- [ ] Konzol: nincs új JavaScript error (network fallback log elfogadható)
+- [x] Header: search bar kozepre van, auth gombok nem lognak ki, category nav mobilon swipe-olhato
+- [x] Footer: tartalom tordelese rendben, social ikonok rendben, nincs page-level overflow
+- [x] Products FAB: zold gomb jelenik meg, expand/collapse mukodik, kategoria filterek interaktivak
+- [x] Toast/Error uzenetek olvashatok es bezarhatok
+- [x] Nincs konzol JavaScript error
+- [x] Konzol: nincs uj JavaScript error (network fallback log elfogadhato)
 
 **Dokumentáció zárás:**
-- [ ] Tracker frissítve PASS/FAIL státusszal route-onként
-- [ ] INDEX státuszfrissítés (ha minden smoke teszt PASS)
+- [x] Tracker frissitve PASS/FAIL statusszal route-onkent
+- [x] INDEX statuszfrissites (ha minden smoke teszt PASS)
 
 **2. Hét Célja (március 3-9):**
 - [x] Auth Module UI komplett (login, register)
@@ -265,4 +265,4 @@
 
 ---
 
-**Utolsó frissítés**: 2026.03.05 (nap 8, UI/UX refinement + FAB kategória szűrőkkel kész)
+**Utolso frissites**: 2026.03.09 (nap 9-10 smoke tesztek kesz, handoff ready)

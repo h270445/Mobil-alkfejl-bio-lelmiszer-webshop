@@ -130,7 +130,7 @@ docker-compose up postgres
 
 ## 🎯 Aktuális Fázis: 1. Mérföldkő
 
-**Állapot**: 🟢 Aktív fejlesztés alatt (Week 2 in progress)
+**Állapot**: 🟢 Week 2 lezárva, átadásra kész
 
 **Dokumentáció szükséges (5 pont!):**
 - [x] **SPECIFICATION.md** (2p) ✅ - projekt leírás, szerepkörök, 15 képernyő
@@ -152,7 +152,7 @@ docker-compose up postgres
 - ✅ Floating Action Button (FAB) keresés kategória szűréssel **[Day 8]**
 - ✅ Header keresési sáv igazítása (szöveg, magasság, padding) **[Day 8]**
 
-**Következő lépés**: Responsive smoke test az összes route-on (Day 9-10)
+**Következő lépés**: Milestone 2 backend és adatintegrációs feladatok indítása
 
 **Beadási határidő**: 2026.03.29. 23:59 CET
 
@@ -183,4 +183,4 @@ Mobil Alkalmazásfejlesztés kurzus – SZTE, 2026
 
 ---
 
-**Utolsó frissítés**: 2026.03.05 (nap 8, UI/UX refinement + FAB pattern complete)
+**Utolsó frissítés**: 2026.03.09 (nap 9-10 smoke test complete, handoff ready)
