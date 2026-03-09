@@ -67,8 +67,8 @@ frontend/
 - [x] Projekt alapstruktúra létrehozása
 - [x] Angular projekt inicializálása
 - [x] Angular Material telepítése és konfigurálása
-- [ ] Alapvető komponensek szkeletonjának létrehozása
-- [ ] App routing konfiguráció
+- [x] Alapvető komponensek szkeletonjának létrehozása
+- [x] App routing konfiguráció
 
 #### Specifikus lépések
 
@@ -104,7 +104,7 @@ frontend/
 #### Feladatok
 
 - [x] Auth modul UI (login, register)
-- [ ] Product list és detail oldalak
+- [x] Product list és detail oldalak
 - [x] Shared models alapjainak kidolgozása
 - [x] Mock data service
 
