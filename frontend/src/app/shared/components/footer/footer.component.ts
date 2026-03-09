@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -10,7 +10,6 @@ import { MatDividerModule } from '@angular/material/divider';
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
     MatIconModule,
     MatButtonModule,
     MatDividerModule
@@ -19,6 +18,8 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+  constructor(private router: Router) {}
+
   currentYear = new Date().getFullYear();
 
   contactInfo = {
@@ -32,6 +33,10 @@ export class FooterComponent {
     { name: 'Instagram', icon: 'assets/images/instagram-icon.svg', url: 'https://instagram.com' },
     { name: 'Twitter', icon: 'assets/images/twitter-icon.svg', url: 'https://twitter.com' }
   ];
+
+  get isProductsRoute(): boolean {
+    return this.router.url.startsWith('/products');
+  }
 
   scrollToTop(): void {
     window.scrollTo({

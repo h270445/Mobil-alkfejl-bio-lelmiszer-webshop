@@ -211,15 +211,15 @@
 - [ ] **Responsive smoke teszt az összes route-on** (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
   - [ ] Breakpoints: 375px, 390px, 768px, 820px, 1024px
   - [ ] Ellenőrzés:
-    - [ ] Nincs vízszintes overflow egyetlen breakpoint-on sem
-    - [ ] Header search bar, auth gombok, cart badge helyesen rendezve
-    - [ ] Header kategória nav mobil rájátékra swipe-olható
-    - [ ] Products FAB gomb funkcionális, expand/collapse működik
-    - [ ] FAB kategória filterek működnek, kiválasztás szűr
-    - [ ] Product card rács nem tö rédik meg
-    - [ ] Cart mennyiség +/- gombok működnek
-    - [ ] Form validáció auth oldalon működik
-    - [ ] Nincs konzol JavaScript error
+    - [x] Nincs vízszintes overflow egyetlen breakpoint-on sem
+    - [x] Header search bar, auth gombok, cart badge helyesen rendezve
+    - [x] Header kategória nav mobil rájátékra swipe-olható
+    - [x] Products FAB gomb funkcionális, expand/collapse működik
+    - [x] FAB kategória filterek működnek, kiválasztás szűr
+    - [x] Product card rács nem tö rédik meg
+    - [x] Cart mennyiség +/- gombok működnek
+    - [x] Form validáció auth oldalon működik
+    - [x] Nincs konzol JavaScript error
   - [ ] Dokumentálás: PASS/FAIL státusz tracker frissítése route×breakpoint mátrixban
 - [ ] **Bundle size optimalizálás** (ha szükséges)
 - [ ] **MILESTONE_1_TRACKER.md Day 9-10 szekció** kitöltése smoke test eredményekkel

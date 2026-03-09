@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isMinimalMode = false;
   isOnLoginPage = false;
   isOnRegisterPage = false;
+  showMobileSearch = false;
 
   // Product categories
   categories = [
@@ -97,6 +98,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isMinimalMode = url.startsWith('/auth');
     this.isOnLoginPage = url.startsWith('/auth/login');
     this.isOnRegisterPage = url.startsWith('/auth/register');
+
+    if (this.isMinimalMode) {
+      this.showMobileSearch = false;
+    }
   }
 
   ngOnDestroy(): void {
@@ -120,7 +125,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.router.navigate(['/products'], { 
         queryParams: { search: this.searchQuery } 
       });
+      this.showMobileSearch = false;
     }
+  }
+
+  toggleMobileSearch(): void {
+    this.showMobileSearch = !this.showMobileSearch;
+  }
+
+  closeMobileSearch(): void {
+    this.showMobileSearch = false;
   }
 
   onLogin(): void {

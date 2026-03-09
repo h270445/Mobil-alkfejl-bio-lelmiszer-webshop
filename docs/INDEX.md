@@ -74,6 +74,18 @@ Tartalom:
 
 ---
 
+### 🤖 [AI_PROMPT_LOG.md](./AI_PROMPT_LOG.md)
+**AI tudatossági napló (követelmény: 15 pont komponens része)**
+
+Tartalom:
+- Jelentős promptok naplója (datum + kontextus + eredmeny)
+- Dokumentalt fejlesztesi dontesek (elfogadas/modositas/elutasitas)
+- AI tevedesek es korrekciok (kritikai szemlelet)
+
+👉 **Frissitsd folyamatosan**, ne csak a beadás elott!
+
+---
+
 ## 🚀 Gyors Start
 
 ### 1. Klónozd a repository-t

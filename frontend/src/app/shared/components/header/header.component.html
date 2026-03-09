@@ -24,7 +24,14 @@
     </div>
 
     <!-- Mobile Search Icon -->
-    <button mat-icon-button class="mobile-search-button" (click)="onSearch()" *ngIf="!isMinimalMode">
+    <button
+      mat-icon-button
+      class="mobile-search-button"
+      (click)="toggleMobileSearch()"
+      *ngIf="!isMinimalMode"
+      [attr.aria-expanded]="showMobileSearch"
+      aria-label="Kereső megnyitása"
+    >
       <img src="assets/images/search-icon.svg" alt="Keresés" class="button-icon" />
     </button>
 
@@ -83,6 +90,29 @@
       </button>
     </div>
   </mat-toolbar>
+
+  <!-- Mobile Expandable Search -->
+  <div class="mobile-search-panel" *ngIf="!isMinimalMode" [class.open]="showMobileSearch">
+    <mat-form-field appearance="outline" class="mobile-search-field">
+      <img src="assets/images/search-icon.svg" alt="Keresés" matPrefix class="search-prefix-icon" />
+      <input
+        matInput
+        type="text"
+        placeholder="Termék keresése..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="closeMobileSearch()"
+        aria-label="Kereső bezárása"
+      >
+        <img src="assets/images/close-icon.svg" alt="Bezárás" class="button-icon" />
+      </button>
+    </mat-form-field>
+  </div>
 
   <!-- Category Navigation -->
   <nav class="category-nav" *ngIf="!isMinimalMode">

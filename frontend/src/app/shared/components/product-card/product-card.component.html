@@ -21,11 +21,13 @@
       class="favorite-button"
       (click)="toggleFavorite()"
       [class.favorited]="isFavorite"
+      title="Kedvencek kezelese"
       matRipple
     >
       <img 
         [src]="isFavorite ? 'assets/images/favorite-icon.svg' : 'assets/images/favorite-border-icon.svg'" 
         [alt]="isFavorite ? 'Kedvenc' : 'Hozzáadás a kedvencekhez'" 
+        title="Kedvenc ikon"
         class="favorite-icon" 
       />
     </button>
@@ -58,6 +60,7 @@
           *ngFor="let i of [1,2,3,4,5]" 
           [src]="i <= product.rating ? 'assets/images/star-filled.svg' : 'assets/images/star-empty.svg'"
           [alt]="i <= product.rating ? 'Telt csillag' : 'Üres csillag'"
+          title="Ertekeles csillag"
           class="star"
         />
       </div>

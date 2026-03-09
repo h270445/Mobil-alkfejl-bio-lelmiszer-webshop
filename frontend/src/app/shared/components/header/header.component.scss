@@ -98,6 +98,14 @@ header {
   margin-right: 8px;
 }
 
+.search-field,
+.mobile-search-field {
+  ::ng-deep .mat-mdc-form-field-icon-prefix {
+    padding-left: 10px;
+    padding-right: 2px;
+  }
+}
+
 // Search Section
 .search-section {
   flex: 1;
@@ -125,7 +133,6 @@ header {
       padding-bottom: 0;
       display: flex;
       align-items: center;
-      padding-y: 0;
     }
 
     ::ng-deep input.mat-mdc-input-element {
@@ -146,6 +153,10 @@ header {
 
 // Mobile Search Button (hidden on desktop)
 .mobile-search-button {
+  display: none;
+}
+
+.mobile-search-panel {
   display: none;
 }
 
@@ -250,6 +261,25 @@ header {
     }
   }
 
+  .mobile-search-panel {
+    display: block;
+    padding: 0 12px 8px;
+    background-color: var(--color-background);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.25s ease, opacity 0.2s ease;
+
+    &.open {
+      max-height: 88px;
+      opacity: 1;
+    }
+
+    .mobile-search-field {
+      width: 100%;
+    }
+  }
+
   .user-menu-section {
     min-width: auto;
     gap: 4px;
@@ -317,16 +347,20 @@ header {
     }
 
     .logo-icon {
-   
-
-  .mobile-search-button .button-icon {
-    width: 20px;
-    height: 20px;
-  }   font-size: 24px;
+      font-size: 24px;
       width: 24px;
       height: 24px;
       margin-right: 4px;
     }
+  }
+
+  .mobile-search-button .button-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-search-panel {
+    padding: 0 8px 8px;
   }
 
   .user-menu-section.auth-mode {

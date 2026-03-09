@@ -2,19 +2,18 @@ import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angu
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-error-message',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule],
   template: `
     <mat-card [class]="'alert alert-' + type" *ngIf="visible">
       <mat-card-content>
         <span class="alert-icon">{{ getIcon() }}</span>
         <span class="alert-message">{{ message }}</span>
-        <button mat-icon-button (click)="close()" class="close-btn">
-          <mat-icon>close</mat-icon>
+        <button mat-icon-button type="button" (click)="close()" class="close-btn" aria-label="Értesítés bezárása">
+          <img src="assets/images/close-icon.svg" alt="Bezárás" class="close-icon" />
         </button>
       </mat-card-content>
     </mat-card>
@@ -50,6 +49,12 @@ import { MatIconModule } from '@angular/material/icon';
     .close-btn {
       margin-left: auto;
       flex-shrink: 0;
+
+      .close-icon {
+        width: 20px;
+        height: 20px;
+        display: block;
+      }
     }
 
     /* Alert Type Styles */

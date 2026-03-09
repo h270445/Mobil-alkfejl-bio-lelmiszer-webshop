@@ -39,10 +39,11 @@
           mat-icon-button
           *ngFor="let social of socialLinks"
           [attr.aria-label]="social.name"
+          title="Kozossegi media link"
           (click)="onSocialClick(social.name)"
           class="social-button"
         >
-          <img [src]="social.icon" [alt]="social.name" class="social-icon" />
+          <img [src]="social.icon" [alt]="social.name" title="Kozossegi media ikon" class="social-icon" />
         </button>
       </div>
     </div>
@@ -62,6 +63,7 @@
       color="primary"
       (click)="scrollToTop()"
       class="back-to-top"
+      [class.with-products-fab]="isProductsRoute"
       aria-label="Vissza a tetejére"
     >
       <img src="assets/images/arrow-up-icon.svg" alt="Vissza" class="back-to-top-icon" />

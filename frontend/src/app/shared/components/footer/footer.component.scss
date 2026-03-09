@@ -177,6 +177,10 @@
       display: block;
       filter: brightness(0) invert(1);
     }
+
+    &.with-products-fab {
+      margin-right: 72px;
+    }
   }
 }
 
@@ -199,6 +203,10 @@
 
     .back-to-top {
       order: -1;
+
+      &.with-products-fab {
+        margin-right: 0;
+      }
     }
   }
 }
