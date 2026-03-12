@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
@@ -32,7 +33,8 @@ import { User } from '../../models';
     MatMenuModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTooltipModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -113,6 +115,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.currentUser !== null;
   }
 
+  get isAdmin(): boolean {
+    return this.currentUser?.role === 'admin';
+  }
+
   get userName(): string {
     return this.currentUser
       ? `${this.currentUser.firstName} ${this.currentUser.lastName}`
@@ -160,5 +166,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onCart(): void {
     this.router.navigate(['/cart']);
+  }
+
+  onAdminPanel(): void {
+    this.router.navigate(['/admin']);
   }
 }

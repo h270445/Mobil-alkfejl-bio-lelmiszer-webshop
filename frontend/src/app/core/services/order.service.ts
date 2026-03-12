@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { Order, OrderItem, CartItem, Address } from '../../shared/models';
 
@@ -10,8 +10,13 @@ export class OrderService {
   private readonly STORAGE_KEY = 'biomarket_orders';
   private orders: Order[] = [];
 
+  private ordersSubject!: BehaviorSubject<Order[]>;
+  public orders$!: Observable<Order[]>;
+
   constructor() {
     this.loadOrdersFromStorage();
+    this.ordersSubject = new BehaviorSubject<Order[]>(this.orders);
+    this.orders$ = this.ordersSubject.asObservable();
   }
 
   // Create new order from cart items
@@ -57,6 +62,7 @@ export class OrderService {
         // Add to orders array
         this.orders.push(newOrder);
         this.saveOrdersToStorage();
+        this.ordersSubject.next([...this.orders]);
 
         observer.next(newOrder);
         observer.complete();
@@ -95,6 +101,7 @@ export class OrderService {
           order.status = 'cancelled';
           order.updatedAt = new Date();
           this.saveOrdersToStorage();
+          this.ordersSubject.next([...this.orders]);
           observer.next(true);
         } else {
           observer.next(false);
@@ -115,6 +122,7 @@ export class OrderService {
           order.status = status;
           order.updatedAt = new Date();
           this.saveOrdersToStorage();
+          this.ordersSubject.next([...this.orders]);
           observer.next(true);
         } else {
           observer.next(false);
@@ -142,6 +150,13 @@ export class OrderService {
     }
     
     return of(filtered).pipe(delay(300));
+  }
+
+  // Reset orders and products mock data (admin function)
+  resetToMockData(): void {
+    this.orders = [];
+    localStorage.removeItem(this.STORAGE_KEY);
+    this.ordersSubject.next([]);
   }
 
   // Private helper methods

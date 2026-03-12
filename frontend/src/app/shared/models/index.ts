@@ -22,6 +22,7 @@ export interface Address {
 // Product model
 export interface Product {
   id: number;
+  sku: string;
   name: string;
   category: string;
   price: number;
@@ -31,6 +32,10 @@ export interface Product {
   rating: number; // 0-5 stars
   reviews: number; // Number of reviews
   inStock: boolean;
+  stockQuantity: number;
+  isActive: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // Order model

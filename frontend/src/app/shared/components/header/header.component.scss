@@ -186,6 +186,25 @@ header {
   color: var(--color-primary);
 }
 
+  .admin-role-badge {
+    background: var(--color-primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .admin-disabled-wrap {
+    display: block;
+  }
+
+  .admin-disabled-icon {
+    opacity: 0.4;
+  }
+
 // Category Navigation
 .category-nav {
   display: flex;

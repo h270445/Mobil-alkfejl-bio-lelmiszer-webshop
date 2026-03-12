@@ -4,6 +4,7 @@ export const MOCK_PRODUCTS: Product[] = [
   // Tejtermékek (3 db)
   {
     id: 1,
+    sku: 'TEJ-001',
     name: 'Bio Tehéntej 1L',
     category: 'Tejtermékek',
     price: 890,
@@ -11,10 +12,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-dairy.svg',
     rating: 5,
     reviews: 42,
-    inStock: true
+    inStock: true,
+    stockQuantity: 100,
+    isActive: true,
+    createdAt: new Date('2025-01-10')
   },
   {
     id: 2,
+    sku: 'TEJ-002',
     name: 'Bio Görög Joghurt 400g',
     category: 'Tejtermékek',
     price: 1290,
@@ -23,10 +28,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-dairy.svg',
     rating: 5,
     reviews: 38,
-    inStock: true
+    inStock: true,
+    stockQuantity: 50,
+    isActive: true,
+    createdAt: new Date('2025-01-10')
   },
   {
     id: 3,
+    sku: 'TEJ-003',
     name: 'Bio Trappista Sajt 200g',
     category: 'Tejtermékek',
     price: 1890,
@@ -34,12 +43,16 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-dairy.svg',
     rating: 4,
     reviews: 27,
-    inStock: true
+    inStock: true,
+    stockQuantity: 30,
+    isActive: true,
+    createdAt: new Date('2025-01-10')
   },
 
   // Pékáruk (3 db)
   {
     id: 4,
+    sku: 'PEK-001',
     name: 'Bio Teljes Kiőrlésű Kenyér 500g',
     category: 'Pékáruk',
     price: 790,
@@ -47,10 +60,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-bakery.svg',
     rating: 5,
     reviews: 65,
-    inStock: true
+    inStock: true,
+    stockQuantity: 80,
+    isActive: true,
+    createdAt: new Date('2025-01-15')
   },
   {
     id: 5,
+    sku: 'PEK-002',
     name: 'Bio Croissant 4db',
     category: 'Pékáruk',
     price: 1190,
@@ -59,10 +76,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-bakery.svg',
     rating: 4,
     reviews: 31,
-    inStock: true
+    inStock: true,
+    stockQuantity: 40,
+    isActive: true,
+    createdAt: new Date('2025-01-15')
   },
   {
     id: 6,
+    sku: 'PEK-003',
     name: 'Bio Zabpehely Keksz 200g',
     category: 'Pékáruk',
     price: 890,
@@ -70,12 +91,16 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-bakery.svg',
     rating: 4,
     reviews: 19,
-    inStock: false
+    inStock: false,
+    stockQuantity: 0,
+    isActive: true,
+    createdAt: new Date('2025-01-15')
   },
 
   // Zöldség-gyümölcs (4 db)
   {
     id: 7,
+    sku: 'ZGY-001',
     name: 'Bio Alma 1kg',
     category: 'Zöldség-gyümölcs',
     price: 690,
@@ -83,10 +108,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-produce.svg',
     rating: 5,
     reviews: 87,
-    inStock: true
+    inStock: true,
+    stockQuantity: 200,
+    isActive: true,
+    createdAt: new Date('2025-01-20')
   },
   {
     id: 8,
+    sku: 'ZGY-002',
     name: 'Bio Sárgarépa 1kg',
     category: 'Zöldség-gyümölcs',
     price: 490,
@@ -94,10 +123,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-produce.svg',
     rating: 5,
     reviews: 56,
-    inStock: true
+    inStock: true,
+    stockQuantity: 150,
+    isActive: true,
+    createdAt: new Date('2025-01-20')
   },
   {
     id: 9,
+    sku: 'ZGY-003',
     name: 'Bio Banán 1kg',
     category: 'Zöldség-gyümölcs',
     price: 1190,
@@ -106,10 +139,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-produce.svg',
     rating: 4,
     reviews: 73,
-    inStock: true
+    inStock: true,
+    stockQuantity: 120,
+    isActive: true,
+    createdAt: new Date('2025-01-20')
   },
   {
     id: 10,
+    sku: 'ZGY-004',
     name: 'Bio Avokádó 2db',
     category: 'Zöldség-gyümölcs',
     price: 1490,
@@ -117,12 +154,16 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-produce.svg',
     rating: 5,
     reviews: 44,
-    inStock: true
+    inStock: true,
+    stockQuantity: 45,
+    isActive: true,
+    createdAt: new Date('2025-01-20')
   },
 
   // Húskészítmények (2 db)
   {
     id: 11,
+    sku: 'HUS-001',
     name: 'Bio Csirkemell 500g',
     category: 'Húskészítmények',
     price: 2490,
@@ -130,10 +171,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-meat.svg',
     rating: 5,
     reviews: 52,
-    inStock: true
+    inStock: true,
+    stockQuantity: 25,
+    isActive: true,
+    createdAt: new Date('2025-02-01')
   },
   {
     id: 12,
+    sku: 'HUS-002',
     name: 'Bio Kolbász 300g',
     category: 'Húskészítmények',
     price: 1890,
@@ -142,12 +187,16 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-meat.svg',
     rating: 4,
     reviews: 29,
-    inStock: true
+    inStock: true,
+    stockQuantity: 35,
+    isActive: true,
+    createdAt: new Date('2025-02-01')
   },
 
   // Italok (3 db)
   {
     id: 13,
+    sku: 'ITA-001',
     name: 'Bio Narancslé 1L',
     category: 'Italok',
     price: 1290,
@@ -155,10 +204,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-drinks.svg',
     rating: 5,
     reviews: 91,
-    inStock: true
+    inStock: true,
+    stockQuantity: 90,
+    isActive: true,
+    createdAt: new Date('2025-02-05')
   },
   {
     id: 14,
+    sku: 'ITA-002',
     name: 'Bio Zöld Tea 20db',
     category: 'Italok',
     price: 890,
@@ -166,10 +219,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-drinks.svg',
     rating: 4,
     reviews: 67,
-    inStock: true
+    inStock: true,
+    stockQuantity: 75,
+    isActive: true,
+    createdAt: new Date('2025-02-05')
   },
   {
     id: 15,
+    sku: 'ITA-003',
     name: 'Bio Kókuszvíz 500ml',
     category: 'Italok',
     price: 1590,
@@ -178,12 +235,16 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-drinks.svg',
     rating: 5,
     reviews: 38,
-    inStock: false
+    inStock: false,
+    stockQuantity: 0,
+    isActive: true,
+    createdAt: new Date('2025-02-05')
   },
 
   // Snackek (3 db)
   {
     id: 16,
+    sku: 'SNA-001',
     name: 'Bio Mandula 200g',
     category: 'Snackek',
     price: 1990,
@@ -191,10 +252,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-snacks.svg',
     rating: 5,
     reviews: 45,
-    inStock: true
+    inStock: true,
+    stockQuantity: 60,
+    isActive: true,
+    createdAt: new Date('2025-02-10')
   },
   {
     id: 17,
+    sku: 'SNA-002',
     name: 'Bio Étcsokoládé 100g',
     category: 'Snackek',
     price: 1390,
@@ -203,10 +268,14 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-snacks.svg',
     rating: 5,
     reviews: 102,
-    inStock: true
+    inStock: true,
+    stockQuantity: 85,
+    isActive: true,
+    createdAt: new Date('2025-02-10')
   },
   {
     id: 18,
+    sku: 'SNA-003',
     name: 'Bio Müzliszelet 6db',
     category: 'Snackek',
     price: 1190,
@@ -214,7 +283,10 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrl: 'assets/images/placeholder-snacks.svg',
     rating: 4,
     reviews: 54,
-    inStock: true
+    inStock: true,
+    stockQuantity: 110,
+    isActive: true,
+    createdAt: new Date('2025-02-10')
   }
 ];
 

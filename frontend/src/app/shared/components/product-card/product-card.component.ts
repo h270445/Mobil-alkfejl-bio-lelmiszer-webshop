@@ -6,18 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { RouterLink } from '@angular/router';
 
-export interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  originalPrice?: number;
-  description: string;
-  imageUrl: string;
-  rating: number;
-  reviews: number;
-  inStock: boolean;
-}
+import { Product } from '../../models';
 
 @Component({
   selector: 'app-product-card',
