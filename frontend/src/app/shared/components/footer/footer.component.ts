@@ -34,6 +34,24 @@ export class FooterComponent {
     { name: 'Twitter', icon: 'assets/images/twitter-icon.svg', url: 'https://twitter.com' }
   ];
 
+  whyChooseItems = [
+    {
+      title: 'Friss, bio minőség',
+      text: 'Válogatott termékek ellenőrzött forrásból.',
+      icon: 'assets/images/favorite-icon.svg'
+    },
+    {
+      title: 'Széles választék',
+      text: 'Tejtermékektől a snackekig minden egy helyen.',
+      icon: 'assets/images/inventory-icon.svg'
+    },
+    {
+      title: 'Gyors ügyfélszolgálat',
+      text: 'Kérdés esetén gyorsan segítünk.',
+      icon: 'assets/images/phone-icon.svg'
+    }
+  ];
+
   get isProductsRoute(): boolean {
     return this.router.url.startsWith('/products');
   }

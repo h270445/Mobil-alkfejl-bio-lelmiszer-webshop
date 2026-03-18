@@ -210,18 +210,55 @@ export class AdminProductFormComponent implements OnInit, OnDestroy {
       isActive:      [true]
     });
 
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (idParam) {
-      this.editMode = true;
-      this.editId = Number(idParam);
-      const product = this.productService.getProductById(this.editId);
-      if (product) {
-        this.form.patchValue(product);
-      } else {
-        this.snackBar.open('Termék nem található.', 'OK', { duration: 3000 });
-        this.router.navigate(['/admin/products']);
-      }
-    }
+    this.route.paramMap
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        const idParam = params.get('id');
+
+        if (!idParam) {
+          this.editMode = false;
+          this.editId = null;
+          this.form.reset({
+            name: '',
+            category: '',
+            sku: '',
+            price: null,
+            originalPrice: null,
+            stockQuantity: 0,
+            description: '',
+            imageUrl: '',
+            isActive: true
+          });
+          return;
+        }
+
+        this.editMode = true;
+        this.editId = Number(idParam);
+        this.loadProductForEdit(this.editId);
+      });
+  }
+
+  private loadProductForEdit(id: number): void {
+    this.productService.getProductById(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(product => {
+        if (product) {
+          this.form.patchValue({
+            name: product.name,
+            category: product.category,
+            sku: product.sku,
+            price: product.price,
+            originalPrice: product.originalPrice ?? null,
+            stockQuantity: product.stockQuantity,
+            description: product.description,
+            imageUrl: product.imageUrl,
+            isActive: product.isActive
+          });
+        } else {
+          this.snackBar.open('Termék nem található.', 'OK', { duration: 3000 });
+          this.router.navigate(['/admin/products']);
+        }
+      });
   }
 
   ngOnDestroy(): void {

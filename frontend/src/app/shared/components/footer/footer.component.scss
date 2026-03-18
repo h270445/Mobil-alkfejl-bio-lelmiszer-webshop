@@ -149,6 +149,44 @@
   }
 }
 
+.why-choose {
+  margin-top: 8px;
+
+  .why-choose-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .why-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    .why-icon {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    .why-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .why-text {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      line-height: 1.35;
+    }
+  }
+}
+
 // Footer Bottom Bar
 .footer-bottom {
   display: flex;

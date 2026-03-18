@@ -35,6 +35,7 @@ import { Product } from '../../../shared/models';
       <!-- Filter -->
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>Keresés (név, SKU)</mat-label>
+        <img matPrefix src="assets/images/search-icon.svg" alt="Keresés" class="search-prefix-icon" />
         <input matInput [(ngModel)]="filterText" (input)="applyFilter()" placeholder="pl. TEJ-001..." />
       </mat-form-field>
 
@@ -86,7 +87,7 @@ import { Product } from '../../../shared/models';
               </button>
               <button mat-icon-button color="warn" (click)="onDelete(p)"
                       matTooltip="Törlés">
-                <img src="assets/images/trash-icon.svg" class="action-icon warn-icon" alt="Törlés" />
+                <img src="assets/images/delete-icon.svg" class="action-icon warn-icon" alt="Törlés" />
               </button>
             </td>
           </ng-container>
@@ -132,6 +133,13 @@ import { Product } from '../../../shared/models';
 
     .action-icon { width: 20px; height: 20px; }
     .warn-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(85%) saturate(3000%) hue-rotate(355deg); }
+
+    .search-prefix-icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 6px;
+      opacity: 0.7;
+    }
 
     .no-results { text-align: center; color: var(--color-text-secondary); padding: 32px; }
   `]

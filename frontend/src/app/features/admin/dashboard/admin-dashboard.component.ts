@@ -51,7 +51,7 @@ import { OrderService } from '../../../core/services/order.service';
       <!-- Navigation cards -->
       <div class="nav-grid">
         <mat-card class="nav-card" routerLink="/admin/products">
-          <img src="assets/images/leaf-icon.svg" class="nav-icon" alt="Termékek" />
+          <img src="assets/images/inventory-icon.svg" class="nav-icon" alt="Termékek" />
           <h3>Termékkezelés</h3>
           <p>Termékek hozzáadása, szerkesztése és törlése</p>
           <button mat-raised-button color="primary">Megnyitás</button>

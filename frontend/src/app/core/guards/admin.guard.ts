@@ -23,8 +23,14 @@ export const adminGuard: CanActivateFn = (_route, state) => {
     panelClass: ['warn-snack']
   });
 
+  // Only allow safe internal redirects; otherwise fallback to home.
   const previousUrl =
-    router.getCurrentNavigation()?.previousNavigation?.finalUrl?.toString();
-  const target = previousUrl && previousUrl !== state.url ? previousUrl : '/';
-  return router.createUrlTree([target]);
+    router.getCurrentNavigation()?.previousNavigation?.finalUrl?.toString() ?? '';
+
+  const canRedirectBack =
+    previousUrl.startsWith('/') &&
+    previousUrl !== state.url &&
+    !previousUrl.startsWith('/admin');
+
+  return router.parseUrl(canRedirectBack ? previousUrl : '/');
 };
