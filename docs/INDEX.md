@@ -92,7 +92,12 @@ Tartalom:
 ```bash
 git clone <repo-url>
 cd Mobil-alkfejl-bio-lelmiszer-webshop
+git checkout dev
 ```
+
+**⚠️ Fontos:** Mindig a `dev` branchről indíts! (`git checkout dev` minden munka-session előtt)  
+- `main` = kész, beadás-barát kód (mergezz ide csak a határidő előtt)
+- `dev` = aktív fejlesztés
 
 ### 2. Frontend setup
 ```bash

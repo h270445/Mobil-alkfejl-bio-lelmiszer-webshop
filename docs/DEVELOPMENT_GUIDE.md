@@ -61,47 +61,51 @@ docker-compose down
 ### Branch Nómenklatúra
 
 ```
-main                    - Production ready kód
-├── milestone-1         - Mérföldkő 1 (UI)
-├── milestone-2         - Mérföldkő 2 (Backend)
-└── milestone-3         - Mérföldkő 3 (Security & Deploy)
-
-feature/               - Új feature development
+main                    - Production ready kód (kiértékeléshez)
+dev                     - Aktív fejlesztés (merge ide a feature-t)
 ├── feature/auth-ui
 ├── feature/products-list
-└── feature/cart
-
-bugfix/                - Bug fix branchek
-├── bugfix/login-validation
+├── feature/cart
+└── bugfix/login-validation
 ```
+
+### Fejlesztési Workflow
+
+1. **Új feature**: checkout dev → új branch (feature/...) → PR dev-re
+2. **Kész mérföldkő**: dev → PR main-re → merge
+3. **Kiértékelés**: main branchről érkező kód
+
+Major commit előtt: `git pull origin dev` (ellentmondások elkerüléséhez)
 
 ### Commit Message Formátum
 
+**Conventional Commits** ajánlott:
 ```
-[TYPE] Modulus: Rövid leírás (max 50 char)
+type(scope): subject (max 50 char)
 
-Részletesebb leírás ha szükséges.
-Dapat megkulömböztetni a mit, miért és hogyan.
-
-Fixes: #123 (issue szám ha van)
+body (5-7 sor magyarázat, optional)
+footer (Fixes #123, optional)
 ```
 
 **Típusok:**
-- `FEAT`: Új feature
-- `FIX`: Bug javítás
-- `REFACTOR`: Kód tisztító refaktoring
-- `STYLE`: Formázás/stílus változások
-- `DOCS`: Dokumentáció
-- `TEST`: Test hozzáadás/módosítás
-- `CHORE`: Build, dependency, config
+- `feat`: Új feature
+- `fix`: Bug javítás
+- `refactor`: Kód tisztító refaktoring
+- `style`: Formázás/stílus változások
+- `docs`: Dokumentáció
+- `test`: Test hozzáadás/módosítás
+- `chore`: Build, dependency, config
+- `init`: Projekt inicializáció (egyszeri)
 
 **Példák:**
 ```
-[FEAT] auth: Login form komponens implementálása
+feat(auth): Login form komponens implementálása
 
-[FIX] products: Termék lista szűrési bug javítása
+fix(products): Termék lista szűrési bug javítása
 
-[DOCS] README update az 1. mérföldkővel
+docs: Add dev branch setup guide
+
+init: Project setup with milestone 1 completion
 ```
 
 ---
