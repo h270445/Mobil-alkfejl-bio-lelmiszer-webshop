@@ -1,0 +1,163 @@
+<div class="cart-container">
+  <!-- Header -->
+  <header class="cart-header">
+    <div class="header-content">
+      <button mat-button class="back-button" (click)="continueShopping()">
+        <img src="assets/images/arrow-back-icon.svg" alt="Vissza" class="back-icon" />
+      </button>
+      <h1>Bevásárlóköz</h1>
+    </div>
+    <span class="item-count" *ngIf="!isEmpty">{{ itemCount }} tétel</span>
+  </header>
+
+  <!-- Out-of-Stock Warning -->
+  <div class="out-of-stock-warning" *ngIf="isCheckoutDisabled">
+    <img src="assets/images/warning-icon.svg" alt="Figyelmeztetés" class="warning-icon" />
+    <p>Néhány termék elfogyott. Kérlek távolítsd el őket a vásárlás előtt.</p>
+  </div>
+
+  <!-- Cart Content -->
+  <div class="cart-content" *ngIf="!isEmpty; else emptyState">
+    <!-- Cart Items List -->
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of (cartItems$ | async)" [class.out-of-stock]="isOutOfStock(item.product.id)">
+        <!-- Product Image -->
+        <div class="item-image">
+          <img [src]="item.product.imageUrl" [alt]="item.product.name" title="{ item.product.name }"/>
+          <span class="out-of-stock-badge" *ngIf="isOutOfStock(item.product.id)">Elfogyott</span>
+        </div>
+
+        <!-- Product Info -->
+        <div class="item-info">
+          <h3 class="item-name">{{ item.product.name }}</h3>
+          <p class="item-price">{{ item.product.price | currency: 'HUF' : 'symbol' : '0.0' }}</p>
+        </div>
+
+        <!-- Quantity Controls -->
+        <div class="quantity-controls">
+          <button 
+            mat-icon-button 
+            (click)="decreaseQuantity(item.product.id)"
+            [disabled]="item.quantity <= 1"
+            aria-label="Mennyiség csökkentése">
+            <img src="assets/images/remove-icon.svg" alt="Csökkentés" class="quantity-icon" />
+          </button>
+          <span class="quantity">{{ item.quantity }}</span>
+          <button 
+            mat-icon-button 
+            (click)="increaseQuantity(item.product.id)"
+            aria-label="Mennyiség növelése">
+            <img src="assets/images/add-icon.svg" alt="Növelés" class="quantity-icon" />
+          </button>
+        </div>
+
+        <!-- Subtotal -->
+        <div class="item-subtotal">
+          <span class="subtotal-label">Összesen:</span>
+          <span class="subtotal-value">{{ (item.product.price * item.quantity) | currency: 'HUF' : 'symbol' : '0.0' }}</span>
+        </div>
+
+        <!-- Remove Button -->
+        <button 
+          mat-icon-button 
+          class="remove-button"
+          (click)="removeFromCart(item.product.id, item.product.name)"
+          aria-label="Termék eltávolítása">
+          <img src="assets/images/delete-icon.svg" alt="Törlés" class="delete-icon" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span class="summary-label">Termékek:</span>
+        <span class="summary-value">{{ subtotal | currency: 'HUF' : 'symbol' : '0.0' }}</span>
+      </div>
+
+      <div class="summary-row" [class.free-shipping]="shippingCost === 0">
+        <span class="summary-label">Szállítás:</span>
+        <span class="summary-value">
+          <span *ngIf="shippingCost === 0" class="free-badge">Ingyenes</span>
+          <span *ngIf="shippingCost > 0">{{ shippingCost | currency: 'HUF' : 'symbol' : '0.0' }}</span>
+        </span>
+      </div>
+
+      <div class="summary-row total">
+        <span class="summary-label">Végösszeg:</span>
+        <span class="summary-value">{{ total | currency: 'HUF' : 'symbol' : '0.0' }}</span>
+      </div>
+
+      <!-- Shipping Info -->
+      <div class="shipping-info" *ngIf="shippingCost > 0">
+        <p>Az ingyenes szállításig még {{ (3500 - subtotal) | currency: 'HUF' : 'symbol' : '0.0' }} érték szükséges</p>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="cart-actions">
+      <button 
+        mat-raised-button 
+        color="primary"
+        class="checkout-button"
+        (click)="proceedToCheckout()"
+        [disabled]="isCheckoutDisabled">
+        Megrendelés leadása
+      </button>
+      <button 
+        mat-raised-button
+        color="accent"
+        class="continue-shopping-button"
+        (click)="continueShopping()">
+        Vásárlás folytatása
+      </button>
+      <button 
+        mat-raised-button
+        color="warn"
+        class="clear-cart-button"
+        (click)="clearCart()">
+        Kosár ürítése
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty State with Recommended Products -->
+  <ng-template #emptyState>
+    <div class="empty-state">
+      <!-- Cart Icon Illustration -->
+      <div class="empty-icon">
+        <img src="assets/images/cart-icon.svg" alt="Üres kosár" class="large-cart-icon" />
+      </div>
+
+      <h2>A bevásárlóköz üres</h2>
+      <p>Add hozzá termékeket vásárláshoz</p>
+
+      <!-- Recommended Products -->
+      <div class="recommended-section" *ngIf="recommendedProducts.length > 0">
+        <h3>Javasolt termékek</h3>
+        <div class="recommended-grid">
+          <div class="recommended-card" *ngFor="let product of recommendedProducts">
+            <img [src]="product.imageUrl" [alt]="product.name" title="product.name"/>
+            <h4>{{ product.name }}</h4>
+            <p class="price">{{ product.price | currency: 'HUF' : 'symbol' : '0.0' }}</p>
+            <button 
+              mat-raised-button 
+              color="primary"
+              (click)="addRecommendedToCart(product)">
+              Kosárba
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Continue Shopping Button -->
+      <button 
+        mat-raised-button
+        color="primary"
+        class="continue-shopping-button"
+        (click)="continueShopping()">
+        Vásárlás indítása
+      </button>
+    </div>
+  </ng-template>
+</div>

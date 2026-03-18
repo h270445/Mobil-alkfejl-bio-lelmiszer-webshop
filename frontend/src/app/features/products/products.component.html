@@ -1,0 +1,129 @@
+<section class="products-page">
+  <header class="products-header">
+    <h1>Termékek</h1>
+    <p>{{ activeCategoryName }} • {{ filteredProducts.length }} találat</p>
+  </header>
+
+  <div class="filters">
+    <div class="category-filter">
+      <button
+        mat-stroked-button
+        [class.active]="!selectedCategory"
+        (click)="onCategorySelect('')"
+      >
+        Összes
+      </button>
+      <button
+        mat-stroked-button
+        *ngFor="let category of categories"
+        [class.active]="normalizeCategory(category) === normalizeCategory(selectedCategory)"
+        (click)="onCategorySelect(normalizeCategory(category))"
+      >
+        {{ category }}
+      </button>
+    </div>
+
+    <mat-form-field appearance="outline" class="sort-field">
+      <mat-label>Rendezés</mat-label>
+      <mat-select [(ngModel)]="sortBy" (selectionChange)="onSortChange()">
+        <mat-option value="name">Név (A-Z)</mat-option>
+        <mat-option value="price-asc">Ár szerint növekvő</mat-option>
+        <mat-option value="price-desc">Ár szerint csökkenő</mat-option>
+        <mat-option value="rating">Értékelés szerint</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
+  <div *ngIf="!loading && filteredProducts.length === 0" class="empty-state">
+    <img src="assets/images/inventory-icon.svg" alt="Nincs találat" class="empty-icon" />
+    <h2>Nincs találat</h2>
+    <p>Próbálj másik keresést vagy kategóriát.</p>
+    <button mat-raised-button color="primary" (click)="onCategorySelect('')">Szűrők törlése</button>
+  </div>
+
+  <div *ngIf="!loading && filteredProducts.length > 0" class="product-grid">
+    <app-product-card
+      *ngFor="let product of filteredProducts"
+      [product]="product"
+      (addToCart)="onAddToCart($event)"
+    ></app-product-card>
+  </div>
+
+  <!-- Floating Search Button (FAB) -->
+  <button
+    mat-fab
+    class="floating-search-btn"
+    (click)="toggleSearchPanel()"
+    [class.active]="showSearchPanel"
+    aria-label="Keresés"
+  >
+    <img src="assets/images/search-icon.svg" alt="Keresés" class="fab-icon" />
+  </button>
+
+  <!-- Expandable Search Panel -->
+  <div class="search-panel-overlay" *ngIf="showSearchPanel" (click)="closeSearchPanel()"></div>
+  <div class="search-panel" [class.active]="showSearchPanel">
+    <div class="search-panel-header">
+      <h2>Termék keresése</h2>
+      <button
+        mat-icon-button
+        (click)="closeSearchPanel()"
+        class="close-btn"
+        aria-label="Bezárás"
+      >
+        <img src="assets/images/close-icon.svg" alt="Bezárás" class="close-icon" />
+      </button>
+    </div>
+
+    <div class="search-panel-content">
+      <!-- Text Search -->
+      <mat-form-field appearance="outline" class="search-field-expanded">
+        <mat-label>Keresés</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Pl. bio tej, joghurt..."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch(); closeSearchPanel()"
+          autofocus
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="onSearch(); closeSearchPanel()"
+          aria-label="Keresés"
+        >
+          <img src="assets/images/search-icon.svg" alt="Keresés" class="search-button-icon" />
+        </button>
+      </mat-form-field>
+
+      <!-- Category Filters -->
+      <div class="panel-category-filter">
+        <h3>Kategóriák</h3>
+        <div class="category-buttons-grid">
+          <button
+            mat-stroked-button
+            [class.active]="!selectedCategory"
+            (click)="onCategorySelect(''); onSearch(); closeSearchPanel()"
+            class="category-filter-btn"
+          >
+            Összes
+          </button>
+          <button
+            mat-stroked-button
+            *ngFor="let category of categories"
+            [class.active]="normalizeCategory(category) === normalizeCategory(selectedCategory)"
+            (click)="onCategorySelect(normalizeCategory(category)); onSearch(); closeSearchPanel()"
+            class="category-filter-btn"
+          >
+            {{ category }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,113 @@
+<mat-card class="product-card bio-card">
+  <!-- Image Container -->
+  <div class="product-image-container">
+    <img
+      [src]="product.imageUrl"
+      [alt]="product.name"
+      [title]="product.name"
+      (error)="onImageError($event)"
+      class="product-image"
+      title="product-name"
+    />
+
+    <!-- Discount Badge -->
+    <div *ngIf="discount" class="discount-badge">
+      -{{ discount }}%
+    </div>
+
+    <!-- Favorite Button -->
+    <button
+      mat-icon-button
+      class="favorite-button"
+      (click)="toggleFavorite()"
+      [class.favorited]="isFavorite"
+      title="Kedvencek kezelese"
+      matRipple
+    >
+      <img 
+        [src]="isFavorite ? 'assets/images/favorite-icon.svg' : 'assets/images/favorite-border-icon.svg'" 
+        [alt]="isFavorite ? 'Kedvenc' : 'Hozzáadás a kedvencekhez'" 
+        title="Kedvenc ikon"
+        class="favorite-icon" 
+      />
+    </button>
+
+    <!-- Stock Status -->
+    <div class="stock-status" [class.out-of-stock]="!product.inStock">
+      {{ product.inStock ? 'Raktáron' : 'Elfogyott' }}
+    </div>
+  </div>
+
+  <!-- Product Details -->
+  <mat-card-content class="product-details">
+    <!-- Category -->
+    <span class="product-category">{{ product.category }}</span>
+
+    <!-- Product Name -->
+    <h2 class="product-name" [routerLink]="['/products', product.id]">
+      {{ product.name }}
+    </h2>
+
+    <!-- Description -->
+    <p class="product-description">
+      {{ product.description }}
+    </p>
+
+    <!-- Rating -->
+    <div class="product-rating" *ngIf="product.rating > 0">
+      <div class="stars">
+        <img 
+          *ngFor="let i of [1,2,3,4,5]" 
+          [src]="i <= product.rating ? 'assets/images/star-filled.svg' : 'assets/images/star-empty.svg'"
+          [alt]="i <= product.rating ? 'Telt csillag' : 'Üres csillag'"
+          title="Ertekeles csillag"
+          class="star"
+        />
+      </div>
+      <span class="rating-value">({{ product.reviews }})</span>
+    </div>
+
+    <!-- Price Section -->
+    <div class="product-price-section">
+      <div class="price-container">
+        <span class="price">{{ product.price }} Ft</span>
+        <span *ngIf="product.originalPrice" class="original-price">
+          {{ product.originalPrice }} Ft
+        </span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <!-- Actions -->
+  <mat-card-actions class="product-actions">
+    <button
+      mat-stroked-button
+      class="details-button"
+      (click)="onViewDetails()"
+      [routerLink]="['/products', product.id]"
+    >
+      <img src="assets/images/info-icon.svg" alt="Részletek" class="info-icon" />
+      Részletek
+    </button>
+
+    <button
+      *ngIf="showAddToCart && product.inStock"
+      mat-raised-button
+      color="primary"
+      class="add-to-cart-button"
+      (click)="onAddToCart()"
+    >
+      <img src="assets/images/cart-icon.svg" alt="Kosár" class="cart-button-icon" />
+      Kosárba
+    </button>
+
+    <button
+      *ngIf="!product.inStock"
+      mat-raised-button
+      disabled
+      class="out-of-stock-button"
+    >
+      Elfogyott
+    </button>
+  </mat-card-actions>
+</mat-card>

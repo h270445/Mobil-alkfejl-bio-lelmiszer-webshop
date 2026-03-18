@@ -1,0 +1,85 @@
+<footer class="footer">
+  <div class="footer-content">
+    <!-- About / Contact Section -->
+    <div class="footer-section">
+      <h3 class="footer-title">
+        <img src="assets/images/tree-logo.svg" alt="BioMarket" title="BioMarket logó" class="footer-logo-icon" />
+        BioMarket
+      </h3>
+      <p class="footer-description">
+        Bio élelmiszerek és természetes termékek a legjobb minőségben.
+        Válogatott termékek az ökológiai gazdálkodásból.
+      </p>
+
+      <div class="why-choose">
+        <h4 class="section-title">Miért válaszd a BioMarketot?</h4>
+        <div class="why-choose-list">
+          <div class="why-item" *ngFor="let item of whyChooseItems">
+            <img [src]="item.icon" [alt]="item.title" title="{{ item.title }}" class="why-icon" />
+            <div>
+              <p class="why-title">{{ item.title }}</p>
+              <p class="why-text">{{ item.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="footer-section">
+      <h4 class="section-title">Kapcsolat</h4>
+      <div class="contact-info">
+        <div class="contact-item">
+          <img src="assets/images/email-icon.svg" alt="Email" title="Email ikon" class="contact-icon" />
+          <a [href]="'mailto:' + contactInfo.email">{{ contactInfo.email }}</a>
+        </div>
+        <div class="contact-item">
+          <img src="assets/images/phone-icon.svg" alt="Telefon" title="Telefon ikon" class="contact-icon" />
+          <a [href]="'tel:' + contactInfo.phone">{{ contactInfo.phone }}</a>
+        </div>
+        <div class="contact-item">
+          <img src="assets/images/location-icon.svg" alt="Cím" title="Cím ikon" class="contact-icon" />
+          <span>{{ contactInfo.address }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-section">
+      <h4 class="section-title">Kövess minket</h4>
+      <div class="social-links">
+        <button
+          mat-icon-button
+          *ngFor="let social of socialLinks"
+          [attr.aria-label]="social.name"
+          title="Kozossegi media link"
+          (click)="onSocialClick(social.name)"
+          class="social-button"
+        >
+          <img [src]="social.icon" [alt]="social.name" title="Kozossegi media ikon" class="social-icon" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="copyright">
+      <span>&copy; {{ currentYear }} BioMarket. Minden jog fenntartva.</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button
+      mat-mini-fab
+      color="primary"
+      (click)="scrollToTop()"
+      class="back-to-top"
+      [class.with-products-fab]="isProductsRoute"
+      aria-label="Vissza a tetejére"
+    >
+      <img src="assets/images/arrow-up-icon.svg" alt="Vissza" title="Vissza a tetejére" class="back-to-top-icon" />
+    </button>
+  </div>
+</footer>

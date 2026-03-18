@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Warning triangle with exclamation -->
+  <path d="M1 21 L12 2 L23 21 Z" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linejoin="round"/>
+  <!-- Exclamation mark -->
+  <line x1="12" y1="10" x2="12" y2="14" 
+        stroke="currentColor" 
+        stroke-width="2.5" 
+        stroke-linecap="round"/>
+  <circle cx="12" cy="17" r="1" fill="currentColor"/>
+</svg>

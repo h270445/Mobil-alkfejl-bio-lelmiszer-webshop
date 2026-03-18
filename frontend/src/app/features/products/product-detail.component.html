@@ -1,0 +1,56 @@
+<section class="product-detail-page">
+  <button mat-stroked-button class="back-button" (click)="onBackToProducts()">
+    <img src="assets/images/arrow-back-icon.svg" alt="Vissza" class="back-icon" />
+    Vissza a termékekhez
+  </button>
+
+  <div *ngIf="loading" class="loading-container">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
+  <div *ngIf="!loading && notFound" class="not-found-state">
+    <img src="assets/images/inventory-icon.svg" alt="Nem található" class="not-found-icon" />
+    <h2>A termék nem található</h2>
+    <p>Lehet, hogy a termék már nem elérhető vagy hibás az azonosító.</p>
+    <button mat-raised-button color="primary" (click)="onBackToProducts()">
+      Vissza a listához
+    </button>
+  </div>
+
+  <article *ngIf="!loading && product" class="product-layout">
+    <div class="image-panel">
+      <img [src]="product.imageUrl" [alt]="product.name" [title]="product.name" title="product.name" />
+    </div>
+
+    <div class="info-panel">
+      <span class="category">{{ product.category }}</span>
+      <h1>{{ product.name }}</h1>
+      <p class="description">{{ product.description }}</p>
+
+      <div class="meta-row">
+        <span class="rating">Értékelés: {{ product.rating }}/5 ({{ product.reviews }} értékelés)</span>
+      </div>
+
+      <div class="price-row">
+        <span class="price">{{ product.price }} Ft</span>
+        <span *ngIf="product.originalPrice" class="original-price">{{ product.originalPrice }} Ft</span>
+      </div>
+
+      <p class="stock" [class.out-of-stock]="!product.inStock">
+        {{ product.inStock ? 'Raktáron' : 'Elfogyott' }}
+      </p>
+
+      <div class="actions">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onAddToCart()"
+          [disabled]="!product.inStock"
+        >
+          <img src="assets/images/cart-icon.svg" alt="Kosár" class="button-icon" />
+          Kosárba
+        </button>
+      </div>
+    </div>
+  </article>
+</section>

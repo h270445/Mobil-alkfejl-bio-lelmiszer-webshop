@@ -1,0 +1,146 @@
+<header>
+  <!-- Top Toolbar: Logo, Search, User Menu -->
+  <mat-toolbar class="header-toolbar">
+    <!-- Logo -->
+    <div class="logo-section">
+      <a routerLink="/" class="logo-link">
+        <img src="assets/images/tree-logo.svg" alt="BioMarket Logo" class="logo-icon" />
+        <span class="logo-text">BioMarket</span>
+      </a>
+    </div>
+
+    <!-- Search Bar (hidden on mobile, replaced by icon) -->
+    <div class="search-section" *ngIf="!isMinimalMode">
+      <mat-form-field appearance="outline" class="search-field">
+        <img src="assets/images/search-icon.svg" alt="Keresés" matPrefix class="search-prefix-icon" />
+        <input
+          matInput
+          type="text"
+          placeholder="Termék keresése..."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"
+        />
+      </mat-form-field>
+    </div>
+
+    <!-- Mobile Search Icon -->
+    <button
+      mat-icon-button
+      class="mobile-search-button"
+      (click)="toggleMobileSearch()"
+      *ngIf="!isMinimalMode"
+      [attr.aria-expanded]="showMobileSearch"
+      aria-label="Kereső megnyitása"
+    >
+      <img src="assets/images/search-icon.svg" alt="Keresés" class="button-icon" />
+    </button>
+
+    <!-- User Menu -->
+    <div class="user-menu-section" [class.auth-mode]="isMinimalMode">
+      <!-- Not logged in -->
+      <ng-container *ngIf="!isLoggedIn">
+        <button mat-button (click)="onLogin()" *ngIf="!isOnLoginPage" aria-label="Bejelentkezés">
+          <img src="assets/images/login-icon.svg" alt="Bejelentkezés" class="auth-icon" />
+          <span class="auth-label">Bejelentkezés</span>
+        </button>
+        <button mat-raised-button color="primary" (click)="onRegister()" *ngIf="!isOnRegisterPage" aria-label="Regisztráció">
+          <img src="assets/images/person-add-icon.svg" alt="Regisztráció" class="auth-icon-white" />
+          <span class="auth-label">Regisztráció</span>
+        </button>
+      </ng-container>
+
+      <!-- Logged in -->
+      <ng-container *ngIf="isLoggedIn">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu">
+          <img src="assets/images/account-circle-icon.svg" alt="Profil" class="button-icon" />
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <div class="user-menu-header">
+            <img src="assets/images/user-icon.svg" alt="Felhasználó" class="menu-icon" />
+            <span>{{ userName }}</span>
+              <span *ngIf="isAdmin" class="admin-role-badge">Admin</span>
+          </div>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="onProfile()">
+            <img src="assets/images/settings-icon.svg" alt="Profil" class="menu-icon" />
+            <span>Profil</span>
+          </button>
+          <button mat-menu-item routerLink="/orders">
+            <img src="assets/images/receipt-icon.svg" alt="Rendelések" class="menu-icon" />
+            <span>Rendeléseim</span>
+          </button>
+            <mat-divider></mat-divider>
+            <!-- Admin panel entry -->
+            <ng-container *ngIf="isAdmin">
+              <button mat-menu-item (click)="onAdminPanel()">
+                <img src="assets/images/admin-icon.svg" alt="Admin" class="menu-icon" />
+                <span>Admin felület</span>
+              </button>
+              <mat-divider></mat-divider>
+            </ng-container>
+            <span *ngIf="!isAdmin" [matTooltip]="'Admin jogosultság szükséges'" class="admin-disabled-wrap">
+              <button mat-menu-item disabled>
+                <img src="assets/images/admin-icon.svg" alt="Admin" class="menu-icon admin-disabled-icon" />
+                <span>Admin felület</span>
+              </button>
+            </span>
+            <mat-divider *ngIf="!isAdmin"></mat-divider>
+            <button mat-menu-item (click)="onLogout()">
+              <img src="assets/images/logout-icon.svg" alt="Kijelentkezés" class="menu-icon" />
+              <span>Kijelentkezés</span>
+            </button>
+        </mat-menu>
+      </ng-container>
+
+      <!-- Shopping Cart -->
+      <button
+        mat-icon-button
+        [matBadge]="cartItemCount"
+        [matBadgeHidden]="cartItemCount === 0"
+        matBadgeColor="accent"
+        (click)="onCart()"
+        class="cart-button"
+        *ngIf="!isMinimalMode"
+      >
+        <img src="assets/images/cart-icon.svg" alt="Kosár" class="button-icon" />
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <!-- Mobile Expandable Search -->
+  <div class="mobile-search-panel" *ngIf="!isMinimalMode" [class.open]="showMobileSearch">
+    <mat-form-field appearance="outline" class="mobile-search-field">
+      <img src="assets/images/search-icon.svg" alt="Keresés" matPrefix class="search-prefix-icon" />
+      <input
+        matInput
+        type="text"
+        placeholder="Termék keresése..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="closeMobileSearch()"
+        aria-label="Kereső bezárása"
+      >
+        <img src="assets/images/close-icon.svg" alt="Bezárás" class="button-icon" />
+      </button>
+    </mat-form-field>
+  </div>
+
+  <!-- Category Navigation -->
+  <nav class="category-nav" *ngIf="!isMinimalMode">
+    <button
+      mat-button
+      *ngFor="let category of categories"
+      [routerLink]="'/products'"
+      [queryParams]="{ category: category.slug }"
+      routerLinkActive="active-category"
+      class="category-button"
+    >
+      {{ category.name }}
+    </button>
+  </nav>
+</header>
