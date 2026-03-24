@@ -169,9 +169,9 @@ frontend/
 
 #### Feladatok
 
-- [ ] Cart modul
-- [ ] Checkout/Order form
-- [ ] Responsive design finomítása
+- [x] Cart modul
+- [x] Checkout/Order form
+- [x] Responsive design finomítása
 - [ ] User Orders lista
 
 #### Specifikus lépések
@@ -221,10 +221,10 @@ frontend/
 
 #### Feladatok
 
-- [ ] Admin modul UI
-- [ ] Product management (CRUD UI)
+- [x] Admin modul UI
+- [x] Product management (CRUD UI)
 - [ ] Authentication UI integrálása
-- [ ] Route Guards előkészítése
+- [x] Route Guards előkészítése
 
 #### Specifikus lépések
 

@@ -14,7 +14,7 @@
 | ✅ | Material Icon → Custom SVG Icon System | 100% |
 | ✅ | Floating Action Button (FAB) Pattern | 100% |
 | ✅ | FAB kategória keresés szűrőkkel | 100% |
-| 🟡 | **Responsive Smoke Testing (Day 9-10)** | 0% |
+| ✅ | Responsive Smoke Testing (Day 9-10) | 100% |
 
 ---
 
@@ -22,23 +22,23 @@
 
 ### Feladatok
 
-- [ ] **Angular projekt inicializálása** (~2-3 óra)
+- [x] **Angular projekt inicializálása** (~2-3 óra)
   - [x] npm install a frontend könyvtárban
   - [x] Angular Material telepítésés
   - [x] Theme konfiguráció (style.scss)
 
-- [ ] **Alapvető komponensek létrehozása** (~4-5 óra)
+- [x] **Alapvető komponensek létrehozása** (~4-5 óra)
   - [x] HeaderComponent (navigáció, user info, logout)
   - [x] FooterComponent (link section-ök, copyright)
   - [x] LoadingSpinnerComponent (általános spinner)
   - [x] ProductCardComponent (reusable termék kártya)
 
-- [ ] **App routing setup** (~2-3 óra)
+- [x] **App routing setup** (~2-3 óra)
   - [x] Routes konfigáció
   - [x] HomeComponent hero + kategóriaks + info szekciók
-  - [ ] Lazy loading placeholder route-ok
+  - [x] Lazy loading placeholder route-ok
 
-- [ ] **Mock data service** (~2-3 óra)
+- [x] **Mock data service** (~2-3 óra)
   - [x] ProductService (mock adatokkal)
   - [x] AuthService (mock, localStorage alapú)
   - [x] CartService (localStorage cart management)
@@ -137,7 +137,7 @@
 - [x] Auth check redirect /auth/login?returnUrl=/checkout
 - [x] /checkout route placeholder
 
-**Day 8 - UI/UX Refinement & FAB Keresés (TODAY)**
+**Day 8 - UI/UX Refinement & FAB Keresés**
 - [x] Header search bar szöveg- és magasság igazítása (középre, szintbe a gombokkal)
 - [x] Products oldal redundáns search field eltávolítása (filterek fenn maradtak)
 - [x] **Floating Action Button (FAB)** implementálása kereséshez
@@ -210,7 +210,7 @@
 **Hátralevő (Week 2 végéig - Day 9-10):**
 - [x] **Responsive smoke teszt az osszes route-on** (`/`, `/products`, `/auth/login`, `/auth/register`, `/cart`)
   - [x] Breakpoints: 375px, 390px, 768px, 820px, 1024px
-  - [ ] Ellenőrzés:
+  - [x] Ellenőrzés:
     - [x] Nincs vízszintes overflow egyetlen breakpoint-on sem
     - [x] Header search bar, auth gombok, cart badge helyesen rendezve
     - [x] Header kategória nav mobil rájátékra swipe-olható
@@ -261,7 +261,7 @@
 - [x] Products lista és detail oldalak
 - [x] Cart page (checkout flow kezdet)
 - [x] ProductCard addToCart integráció (Home + Products oldalak)
-- [ ] ErrorMessage komponens bekötése az auth/cart/product flow-kba
+- [x] ErrorMessage komponens bekötése az auth/cart/product flow-kba
 
 ---
 
