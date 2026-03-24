@@ -9,11 +9,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import {
+  CartStatusDialogAction,
+  CartStatusDialogComponent
+} from '../../shared/components/cart-status-dialog/cart-status-dialog.component';
 import { Product } from '../../shared/models';
 
 @Component({
@@ -27,6 +32,7 @@ import { Product } from '../../shared/models';
     MatInputModule,
     MatIconModule,
     MatSelectModule,
+    MatDialogModule,
     ProductCardComponent,
     LoadingSpinnerComponent
   ],
@@ -50,7 +56,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private cartService: CartService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -105,6 +112,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onAddToCart(product: Product): void {
     this.cartService.addToCart(product);
+    this.openCartStatusDialog(product.name);
+  }
+
+  private openCartStatusDialog(productName: string): void {
+    const dialogRef = this.dialog.open(CartStatusDialogComponent, {
+      width: '380px',
+      maxWidth: '92vw',
+      data: {
+        title: 'Termék kosárba helyezve',
+        message: `${productName} sikeresen a kosárba került.`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((action: CartStatusDialogAction | undefined) => {
+      if (action === 'cart') {
+        this.router.navigate(['/cart']);
+      }
+    });
   }
 
   get activeCategoryName(): string {

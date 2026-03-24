@@ -5,11 +5,15 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CartService } from '../../core/services/cart.service';
 import { ProductService } from '../../core/services/product.service';
 import { AuthService } from '../../core/services/auth.service';
-import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import {
+  CartStatusDialogAction,
+  CartStatusDialogComponent
+} from '../../shared/components/cart-status-dialog/cart-status-dialog.component';
 import { Product, CartItem } from '../../shared/models';
 
 @Component({
@@ -19,8 +23,8 @@ import { Product, CartItem } from '../../shared/models';
     CommonModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule,
     MatSnackBarModule,
-    LoadingSpinnerComponent,
   ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
@@ -43,7 +47,8 @@ export class CartComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -189,7 +194,20 @@ export class CartComponent implements OnInit, OnDestroy {
    */
   addRecommendedToCart(product: Product): void {
     this.cartService.addToCart(product, 1);
-    this.snackBar.open(`${product.name} hozzáadva a kosárhoz`, 'Bezár', { duration: 2000 });
+    const dialogRef = this.dialog.open(CartStatusDialogComponent, {
+      width: '380px',
+      maxWidth: '92vw',
+      data: {
+        title: 'Termék kosárba helyezve',
+        message: `${product.name} sikeresen a kosárba került.`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((action: CartStatusDialogAction | undefined) => {
+      if (action === 'cart') {
+        this.router.navigate(['/cart']);
+      }
+    });
   }
 
   /**

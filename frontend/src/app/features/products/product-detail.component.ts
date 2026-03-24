@@ -5,10 +5,15 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import {
+  CartStatusDialogAction,
+  CartStatusDialogComponent
+} from '../../shared/components/cart-status-dialog/cart-status-dialog.component';
 import { Product } from '../../shared/models';
 
 @Component({
@@ -18,6 +23,7 @@ import { Product } from '../../shared/models';
     CommonModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule,
     LoadingSpinnerComponent
   ],
   templateUrl: './product-detail.component.html',
@@ -34,7 +40,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +72,25 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   onAddToCart(): void {
     if (this.product && this.product.inStock) {
       this.cartService.addToCart(this.product);
+      this.openCartStatusDialog(this.product.name);
     }
+  }
+
+  private openCartStatusDialog(productName: string): void {
+    const dialogRef = this.dialog.open(CartStatusDialogComponent, {
+      width: '380px',
+      maxWidth: '92vw',
+      data: {
+        title: 'Termék kosárba helyezve',
+        message: `${productName} sikeresen a kosárba került.`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((action: CartStatusDialogAction | undefined) => {
+      if (action === 'cart') {
+        this.router.navigate(['/cart']);
+      }
+    });
   }
 
   private loadProduct(productId: number): void {
