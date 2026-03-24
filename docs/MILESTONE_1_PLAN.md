@@ -223,90 +223,145 @@ frontend/
 
 - [x] Admin modul UI
 - [x] Product management (CRUD UI)
-- [ ] Authentication UI integrálása
+- [x] Authentication UI integrálása
 - [x] Route Guards előkészítése
 
 #### Specifikus lépések
 
 1. **Admin Module** (8-10 óra)
-   - `AdminDashboardComponent` (overview)
-   - `ProductManagementComponent`
-     - Termék lista (admin view)
-     - Termék létrehozás form
-     - Termék szerkesztés form
-     - Termék törlés confirmation
-   - Táblázat/lista megjelenítés (mat-table)
+   - [x] `AdminDashboardComponent` (overview skeleton)
+   - [x] `AdminProductsComponent` (CRUD lista + mobile FAB)
+   - [x] AdminOrdersComponent skeleton
+   - [x] Admin User Management skeleton
+   - [x] Táblázat/lista megjelenítés (mat-table)
+   - [x] Mobile responsivness (oszlopok rejt\u00e9se, FAB pattern)
 
 2. **Route Guards UI** (2-3 óra)
-   - Login redirect ha nincs auth
-   - Admin-only route indikálása
-   - Role-based navigation megjeleníthető/rejtett menüelemek
+   - [x] Login redirect ha nincs auth
+   - [x] Admin-only route indikálása
+   - [x] Role-based navigation (admin menü)
+   - [x] Header minimal mód admin route-okon
 
 3. **UI Finomítások** (4-5 óra)
-   - Placeholder/skeleton loaders
-   - Error notification toasts
-   - Success notifications
-   - Loading states a gombokba
+   - [x] Footer minimal mode admin oldalak-ra
+   - [x] Back-to-top scroll context fix
+   - [x] Search field UX egységesítés (header + admin)
+   - [x] Loading states és transitions
 
-#### Részletes napi bontás (4. hét)
+#### Napi Bontás (4. Hét)
 
-**Nap 17-18 - Admin dashboard és lista nézetek**
-- Admin dashboard skeleton + KPI kártyák
-- Admin terméklista (mat-table) alap funkciók
+**Nap 17-18 (03.17-03.18)**
+- [x] Admin routing setup
+- [x] Admin Dashboard skeleton
+- [x] Git dev branch strategy
 
-**Nap 19-20 - Product management UI**
-- Új termék felvétel/szerkesztés form
-- Törlés megerősítés és kliens oldali validáció
+**Nap 19-20 (03.19-03.20)**
+- [x] Admin Products CRUD lista (mat-table)
+- [x] Keresés/szűrés oldal
 
-**Nap 21 - Auth/Role-alapú UI**
-- Admin menüpontok role szerint megjelenítve
-- Guard UX: redirect + visszajelzés
+**Nap 21 (03.21)**
+- [x] Mobile responsivness (FAB, oszlopok)
+- [x] Footer minimal mode implementation
 
-**Nap 22-23 - Hardening + puffer**
-- Betöltési állapotok és toastok egységesítése
-- Admin és user útvonalak smoke tesztje
-- Heti dokumentáció frissítés
-
----
-
-### **5. Hét (Március 24 – Március 29)**
-
-#### Feladatok
-
-- [ ] Teljes UI tesztelés
-- [ ] Responsive testing különböző eszközökön
-- [ ] Accessibility (a11y) alapok
-- [ ] Bug fixes és UI polishing
-- [ ] Dokumentáció
-
-#### Specifikus lépések
-
-1. **Testing** (6-8 óra)
-   - Desktop böngészők (Chrome, Firefox, Edge)
-   - Mobile szimuláció (DevTools)
-   - Tablet breakpoints
-   - Touch interakciók
-
-2. **Accessibility** (3-4 óra)
-   - ARIA labels
-   - Keyboard navigation
-   - Color contrast ellenőrzés
-   - Semantic HTML
-
-3. **UI Polishing** (4-5 óra)
-   - Animációk (Angular Animations)
-   - Átmenetek (transitions)
-   - Loading states
-   - Empty states (üres listák)
-
-4. **Dokumentáció** (2-3 óra)
-   - Component dokumentáció (TODO lista az implementációra)
-   - Fejlesztői útmutató (environment setup)
-   - Komponens screenshot-jai
+**Nap 22-24 (03.22-03.24)**
+- [x] Header admin menu UX
+- [x] Back-to-top fix
+- [x] Search field UX alignment
+- [x] Responsive smoke testing admin route-okon
+- [x] Bundle warning azonosítva: **85 kB overage**
 
 ---
 
-## ✅ Elfogadási Kritériumok
+### **5. Hét (Március 24 – Március 29) - Bundle Optimization & Final Polish**
+
+#### Feladatok (PRIORITÁS)
+
+- [ ] **Bundle Optimization** (KRITIKUS - M1 submission 1.00 MB limit)
+  - [ ] Lazy load `/admin` modul (~30-40 kB reduction)
+  - [ ] SVG inline optimization (~15-20 kB reduction)
+  - [ ] Material unused components cleanup (~10-15 kB reduction)
+  - [ ] Tree shaking production build (~15-25 kB reduction)
+  - **Cél: 1.08 MB → ≤1.00 MB**
+
+- [x] Admin UX finalizálása (KÉSZ: 2026.03.24)
+- [ ] Final responsive testing
+- [ ] M1 submission előkészítés
+
+#### Specifikus Bundle Optimizations
+
+1. **Lazy Load Admin Module** (~30-40 kB)
+   ```typescript
+   // app.routes.ts
+   {
+     path: 'admin',
+     canActivate: [adminGuard],
+     loadChildren: () => import('./features/admin/admin.routes')
+       .then(m => m.ADMIN_ROUTES)
+   }
+   ```
+   - Admin komponensek csak `/admin` route-on töltödnek be
+   - Initial bundle feltöltés csökkentése
+
+2. **SVG Inline Optimization** (~15-20 kB)
+   - Critical SVG-k (header, footer icons) inline saját komponensba
+   - Ritka SVG-k (admin icons) HTTP reference marad
+   - SVG sprite sheet generálás (optional)
+
+3. **Material Unused Cleanup** (~10-15 kB)
+   - Nem használt Material módulok eltávolítása
+   - Csak szükséges komponensek importálása
+   - Angular Material konfigurációban csak szükséges ikonok
+
+4. **Tree Shaking + Production Flags** (~15-25 kB)
+   ```json
+   // angular.json
+   {
+     "optimization": true,
+     "buildOptimizer": true,
+     "namedChunks": false
+   }
+   ```
+
+#### Részletes napi bontás (3. hét)
+
+**Nap 10-11 - Cart + Checkout alapok**
+- Kosár oldal finomítása, validációs edge case-ek
+- Checkout form (szállítási adatok, mock fizetés)
+
+**Nap 12-13 - Orders**
+- `OrderListComponent` + `OrderDetailComponent`
+- OrderService integráció és státusz megjelenítés
+
+**Nap 14-16 - Responsive és stabilizálás**
+- Mobile/tablet breakpoint javítások
+- Hibakezelések, loading state-ek egységesítése
+- Heti regressziós ellenőrzés
+
+---
+
+### **Korábbi Hetet (Március 10 – Március 17) - Cart & Orders
+
+**Nap 24-25 (03.25-03.26)**
+- [ ] Bundle analysis `npm run build -- --stats-json`
+- [ ] Lazy load admin module implementálása
+- [ ] SVG inline optimization
+
+**Nap 26 (03.27)**
+- [ ] Material cleanup + tree shaking
+- [ ] Build size validáció
+
+**Nap 27-29 (03.28-03.29)**
+- [ ] Final responsive smoke test
+- [ ] Documentation finalize
+- [ ] Main branch merge + submission prep
+
+---
+
+### **Korábbi Hetet (Március 10 – Március 17) - Cart & Orders
+
+---
+
+## ✅ Elfogadási Kritériumok (M1 Submission)
 
 A mérföldkő sikeres teljesítéséhez:
 
@@ -315,10 +370,13 @@ A mérföldkő sikeres teljesítéséhez:
 3. ✔️ Kosár működése (add/remove/update, localStorage)
 4. ✔️ Rendelés leadás UI és mock mentés
 5. ✔️ Admin oldalak (szerepkör-alapú) UI teljes
-6. ✔️ Material Design szépen alkalmazva
-7. ✔️ Nincs konzolos JavaScript error
-8. ✔️ Mobile-friendly az összes oldal
-9. ✔️ Git verzió 1. mérföldkő branch-ben
+6. ✔️ Admin Products CRUD mobil-friendly (FAB pattern, responsive table)
+7. ✔️ Material Design szépen alkalmazva
+8. ✔️ Nincs konzolos JavaScript error
+9. ✔️ Mobile-friendly az összes oldal (375px-1024px)
+10. ✔️ Bundle size ≤1.00 MB (M1 submission requirement)
+11. ✔️ Git verzió dev branch-ben, commits tracked
+12. ✔️ Dokumentáció: SPECIFICATION, DATAMODEL, COMPONENTS, DEVELOPMENT_GUIDE
 
 ---
 

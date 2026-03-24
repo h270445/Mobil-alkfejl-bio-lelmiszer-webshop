@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 
@@ -15,7 +15,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
         <router-outlet></router-outlet>
       </main>
       
-      <app-footer></app-footer>
+      <app-footer [minimalMode]="isAdminRoute"></app-footer>
     </div>
   `,
   styles: [`
@@ -63,5 +63,11 @@ import { FooterComponent } from './shared/components/footer/footer.component';
   `]
 })
 export class AppComponent {
+  constructor(private router: Router) {}
+
   title = 'BioMarket';
+
+  get isAdminRoute(): boolean {
+    return this.router.url.startsWith('/admin');
+  }
 }

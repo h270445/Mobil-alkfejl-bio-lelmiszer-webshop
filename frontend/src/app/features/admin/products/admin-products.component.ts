@@ -132,7 +132,17 @@ import { Product } from '../../../shared/models';
       display: none;
     }
 
-    .search-field { width: 100%; margin-bottom: 8px; }
+    .search-field { 
+      width: 100%; 
+      margin-bottom: 8px; 
+    }
+
+    .search-field ::ng-deep .mat-mdc-form-field-icon-prefix {
+      padding-left: 10px;
+      padding-right: 2px;
+    }
+
+
 
     .table-wrapper { overflow-x: auto; }
     .products-table { width: 100%; }
@@ -160,7 +170,7 @@ import { Product } from '../../../shared/models';
     .search-prefix-icon {
       width: 18px;
       height: 18px;
-      margin-right: 6px;
+      margin-right: 8px;
       opacity: 0.7;
     }
 
@@ -191,7 +201,30 @@ import { Product } from '../../../shared/models';
       }
 
       .products-table {
-        min-width: 760px;
+        width: 100%;
+      }
+
+      /* Hide columns on mobile to prevent horizontal scroll */
+      .mat-column-category,
+      .mat-column-price,
+      .mat-column-stockQuantity,
+      .mat-column-isActive {
+        display: none;
+      }
+
+      .mat-column-sku {
+        flex: 0 0 70px;
+        min-width: 70px;
+      }
+
+      .mat-column-name {
+        flex: 1;
+        min-width: auto;
+      }
+
+      .mat-column-actions {
+        flex: 0 0 70px;
+        min-width: 70px;
       }
     }
   `]

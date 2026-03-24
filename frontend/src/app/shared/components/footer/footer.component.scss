@@ -9,6 +9,11 @@
   overflow-x: clip;
 }
 
+.footer.minimal {
+  margin-top: 24px;
+  padding-top: 16px;
+}
+
 .footer * {
   min-width: 0;
 }
@@ -219,6 +224,10 @@
     &.with-products-fab {
       margin-right: 72px;
     }
+  }
+
+  &.minimal {
+    padding-top: 0;
   }
 }
 

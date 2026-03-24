@@ -266,3 +266,88 @@
 ---
 
 **Utolso frissites**: 2026.03.09 (nap 9-10 smoke tesztek kesz, handoff ready)
+
+---
+
+## 🛠️ Hét 3 (Március 18-24) - Admin Interface & UX Refinement
+
+### Március 18
+**Terv**: Dev branch setup + dokumentáció
+
+- [x] `dev` branch létrehozása (main clean marad)
+- [x] Dev branch strategy dokumentáció hozzáadása (INDEX.md, DEVELOPMENT_GUIDE.md)
+- [x] Git commits: dokumentáció updates
+
+---
+
+### Március 24 (nap 14-18) - Admin Interface Finalization
+**Terv**: Admin interface mobilon működő, UX finalizálva
+
+- [x] Admin routing (`/admin`, `/admin/dashboard`, `/admin/products`)
+- [x] Admin Products CRUD lista (Material table)
+- [x] Admin Products keres/szűrés oldal
+- [x] Admin Products mobile responsivness:
+  - [x] Mobile FAB "+ Új termék" gomb (fixed position, zöld, z-index 1000)
+  - [x] Desktop: "+ Új termék" header gomb (nowrap)
+  - [x] Ár oszlop formatting: `white-space: nowrap`, `tabular-nums`
+  - [x] Táblázat oszlopok rejt\u00e9se 768px alatt (csak SKU, Név, Műveletek)
+  - [x] Keresésáv UX header mintájára igazítva:
+    - [x] Icon prefix spacing: `.mat-mdc-form-field-icon-prefix { padding-left: 10px; padding-right: 2px; }`
+    - [x] Icon margin-right: 8px (header egységes UX-hez)
+    - [x] Input placeholder szöveg nem túl messze (infix padding eltávolítva)
+- [x] Admin Orders skeleton komponens
+- [x] Admin Dashboard skeleton komponens
+- [x] Footer minimal mode admin route-okon:
+  - [x] Route detection: `router.url.startsWith('/admin')`
+  - [x] Marketing szekciók rejt\u00e9se (social, contact)
+  - [x] Copyright + back-to-top gomb marad
+  - [x] Minimal mode styles (compact spacing)
+- [x] Header admin menu:
+  - [x] "Admin felület" opció csak admin user-eknek (conditional render)
+  - [x] Disabled option eltávolítva (UX tiszta)
+- [x] Back-to-top button scroll context fix:
+  - [x] `.main-content` internal scroll container ellenőrzés
+  - [x] Fallback window.scrollTo()
+  - [x] Type="button" attribute hozzáadva (form submit megelőzés)
+
+**Bundle Status:**
+- ⚠️ 1.08 MB vs 1.00 MB (85 kB overage)
+- 🔧 Optimization szükséges M1 bead\u00e9shez
+
+**Responsive Validation (375, 390, 768, 1024px):**
+- [x] Admin Products: FAB megjelenik mobil, auto-hide desktop
+- [x] Admin Products: tábla oszlopok rejt\u00e9se 768px alatt
+- [x] Admin Products: keresésáv spacing helyes
+- [x] Admin Orders/Dashboard: nincs layout break
+- [x] Footer: minimal mode működik `/admin` route-okon
+- [x] Header: admin menu csak admin user-nek
+
+**Git Commits:**
+```
+fix(admin,footer): Minimal footer mode, header menu cleanup, mobile FAB for products
+fix(admin,search): Search field icon prefix styling, spacing alignment
+fix(admin,products): Mobile table columns hide, FAB button responsive, price formatting
+fix(header): Admin menu conditional render, disabled option remove
+fix(footer): Back-to-top scroll handler, internal container support
+```
+
+---
+
+## 📋 M1 Submission Checklist (2026.03.29 deadline)
+
+| Komponens | Status | Notes |
+|-----------|--------|-------|
+| UI/UX Components | ✅ 100% | Header, Footer, ProductCard, Loading - desktop & mobile |
+| Responsive Design | ✅ 100% | 375px-1024px breakpoints tested |
+| Auth Flow | ✅ 100% | Login/Register/Guards working |
+| Admin Interface | ✅ 95% | Products CRUD mobile-ready; Orders/Dashboard skeleton |
+| Bundle Size | ⚠️ 108% | **1.08 MB / 1.00 MB - Optimization Required** |
+| Documentation | ✅ 100% | SPECIFICATION, DATAMODEL, COMPONENTS, DEVELOPMENT_GUIDE |
+| Git History | ✅ 100% | Dev branch with clear commit messages |
+
+**Critical Next Steps:**
+1. Bundle optimization (lazy load admin, SVG optimization)
+2. Final smoke testing admin routes
+3. Main branch merge + final submission prep
+
+**Utolso frissites**: 2026.03.24 (admin interface teljes, bundle optimization terv aktív)

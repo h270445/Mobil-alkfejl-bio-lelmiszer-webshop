@@ -1,5 +1,5 @@
-<footer class="footer">
-  <div class="footer-content">
+<footer class="footer" [class.minimal]="minimalMode">
+  <div class="footer-content" *ngIf="!minimalMode">
     <!-- About / Contact Section -->
     <div class="footer-section">
       <h3 class="footer-title">
@@ -62,10 +62,10 @@
     </div>
   </div>
 
-  <mat-divider></mat-divider>
+  <mat-divider *ngIf="!minimalMode"></mat-divider>
 
   <!-- Bottom Bar -->
-  <div class="footer-bottom">
+  <div class="footer-bottom" [class.minimal]="minimalMode">
     <div class="copyright">
       <span>&copy; {{ currentYear }} BioMarket. Minden jog fenntartva.</span>
     </div>

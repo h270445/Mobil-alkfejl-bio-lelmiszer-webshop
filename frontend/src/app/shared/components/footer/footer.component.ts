@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,6 +19,8 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class FooterComponent {
   constructor(private router: Router) {}
+
+  @Input() minimalMode = false;
 
   currentYear = new Date().getFullYear();
 
