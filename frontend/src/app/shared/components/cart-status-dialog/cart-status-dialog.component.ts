@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 export type CartStatusDialogAction = 'continue' | 'cart';
-export type CartStatusDialogType = 'add-to-cart' | 'order-success';
+export type CartStatusDialogType = 'add-to-cart' | 'order-success' | 'purchase-failed';
 
 export interface CartStatusDialogData {
   type?: CartStatusDialogType;
@@ -92,6 +92,10 @@ export class CartStatusDialogComponent {
 
     if (this.data.type === 'order-success') {
       return 'Rendelés sikeres';
+    }
+
+    if (this.data.type === 'purchase-failed') {
+      return 'Vásárlás sikertelen';
     }
 
     return 'Termék kosárba helyezve';

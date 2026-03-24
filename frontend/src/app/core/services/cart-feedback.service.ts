@@ -21,7 +21,7 @@ export class CartFeedbackService {
   ) {}
 
   showAddToCartStatus(productName: string, quantity: number): void {
-    if (this.isAddToCartPopupSuppressed()) {
+    if (!this.isAddToCartPopupEnabled()) {
       return;
     }
 
@@ -33,6 +33,16 @@ export class CartFeedbackService {
     });
   }
 
+  showPurchaseFailedStatus(message: string): void {
+    this.openStatusDialog({
+      type: 'purchase-failed',
+      message,
+      continueLabel: 'Rendben',
+      cartLabel: 'Kosár megtekintése',
+      showDoNotShowAgain: false
+    });
+  }
+
   showOrderSuccessStatus(message: string): void {
     this.openStatusDialog({
       type: 'order-success',
@@ -41,6 +51,19 @@ export class CartFeedbackService {
       cartLabel: 'Kosár megtekintése',
       showDoNotShowAgain: false
     });
+  }
+
+  isAddToCartPopupEnabled(): boolean {
+    return localStorage.getItem(this.SUPPRESS_ADD_TO_CART_KEY) !== 'true';
+  }
+
+  setAddToCartPopupEnabled(enabled: boolean): void {
+    if (enabled) {
+      localStorage.removeItem(this.SUPPRESS_ADD_TO_CART_KEY);
+      return;
+    }
+
+    localStorage.setItem(this.SUPPRESS_ADD_TO_CART_KEY, 'true');
   }
 
   private openStatusDialog(data: CartStatusDialogData): void {
@@ -65,7 +88,4 @@ export class CartFeedbackService {
     });
   }
 
-  private isAddToCartPopupSuppressed(): boolean {
-    return localStorage.getItem(this.SUPPRESS_ADD_TO_CART_KEY) === 'true';
-  }
 }

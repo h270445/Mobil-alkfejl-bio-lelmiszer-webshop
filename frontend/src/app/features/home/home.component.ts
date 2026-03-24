@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { CartFeedbackService } from '../../core/services/cart-feedback.service';
+import { CartService } from '../../core/services/cart.service';
 import { ProductService } from '../../core/services/product.service';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
@@ -249,7 +251,11 @@ export class HomeComponent implements OnInit {
     { name: 'Snackek', slug: 'snackek' }
   ];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private cartFeedbackService: CartFeedbackService
+  ) {}
 
   ngOnInit(): void {
     this.loadFeaturedProducts();
@@ -270,8 +276,15 @@ export class HomeComponent implements OnInit {
   }
 
   onAddToCart(product: Product): void {
-    console.log('Add to cart:', product.name);
-    // CartService integrációra vár (Week 2-ben)
+    const addResult = this.cartService.addToCart(product, 1);
+    if (addResult.addedQuantity > 0) {
+      this.cartFeedbackService.showAddToCartStatus(product.name, addResult.addedQuantity);
+      return;
+    }
+
+    this.cartFeedbackService.showPurchaseFailedStatus(
+      'A termékből jelenleg nincs rendelhető készlet, ezért nem került a kosárba.'
+    );
   }
 
   onViewDetails(product: Product): void {

@@ -2,11 +2,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
-import { ProductsComponent } from './features/products/products.component';
-import { ProductDetailComponent } from './features/products/product-detail.component';
-import { CartComponent } from './features/cart/cart.component';
-import { OrderListComponent } from './features/orders/order-list.component';
-import { OrderDetailComponent } from './features/orders/order-detail.component';
 import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
 
@@ -17,11 +12,11 @@ export const routes: Routes = [
   },
   {
     path: 'products',
-    component: ProductsComponent
+    loadComponent: () => import('./features/products/products.component').then(m => m.ProductsComponent)
   },
   {
     path: 'products/:id',
-    component: ProductDetailComponent
+    loadComponent: () => import('./features/products/product-detail.component').then(m => m.ProductDetailComponent)
   },
   {
     path: 'auth',
@@ -32,14 +27,20 @@ export const routes: Routes = [
   },
   {
     path: 'cart',
-    component: CartComponent
+    loadComponent: () => import('./features/cart/cart.component').then(m => m.CartComponent)
   },
   {
     path: 'orders',
     canActivate: [authGuard],
     children: [
-      { path: '', component: OrderListComponent },
-      { path: ':id', component: OrderDetailComponent }
+      {
+        path: '',
+        loadComponent: () => import('./features/orders/order-list.component').then(m => m.OrderListComponent)
+      },
+      {
+        path: ':id',
+        loadComponent: () => import('./features/orders/order-detail.component').then(m => m.OrderDetailComponent)
+      }
     ]
   },
   {
@@ -54,8 +55,8 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    component: HomeComponent
-    // TODO: Create profile page
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/profile/profile-settings.component').then(m => m.ProfileSettingsComponent)
   },
   {
     path: '**',

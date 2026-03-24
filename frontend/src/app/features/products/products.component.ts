@@ -109,7 +109,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const addResult = this.cartService.addToCart(product);
     if (addResult.addedQuantity > 0) {
       this.cartFeedbackService.showAddToCartStatus(product.name, addResult.addedQuantity);
+      return;
     }
+
+    this.cartFeedbackService.showPurchaseFailedStatus(
+      'A termékből már nincs rendelhető készlet, ezért nem került a kosárba.'
+    );
   }
 
   get activeCategoryName(): string {

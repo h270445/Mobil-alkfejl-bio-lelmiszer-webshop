@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CartFeedbackService } from '../../core/services/cart-feedback.service';
 import { ProductService } from '../../core/services/product.service';
@@ -22,7 +21,6 @@ import { Product } from '../../shared/models';
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule,
     LoadingSpinnerComponent
   ],
   templateUrl: './product-detail.component.html',
@@ -41,8 +39,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private cartFeedbackService: CartFeedbackService,
     private productService: ProductService,
-    private cartService: CartService,
-    private snackBar: MatSnackBar
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +69,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   onAddToCart(): void {
     if (!this.product || !this.product.inStock || this.maxAddableQuantity === 0) {
-      this.snackBar.open('A termék jelenleg nem elérhető.', 'Bezár', { duration: 2500 });
+      this.cartFeedbackService.showPurchaseFailedStatus('A termék jelenleg nem elérhető, ezért nem került a kosárba.');
       return;
     }
 
@@ -82,7 +79,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         if (!latestProduct || !latestProduct.isActive || !latestProduct.inStock) {
           this.product = latestProduct ?? this.product;
           this.selectedQuantity = 0;
-          this.snackBar.open('A termék időközben elfogyott.', 'Bezár', { duration: 3000 });
+          this.cartFeedbackService.showPurchaseFailedStatus('A termék időközben elfogyott, ezért a vásárlás nem sikerült.');
           return;
         }
 
@@ -93,22 +90,29 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
         if (currentlyAvailable === 0) {
           this.selectedQuantity = 0;
-          this.snackBar.open('A kiválasztott termékből már nincs rendelhető mennyiség.', 'Bezár', { duration: 3000 });
+          this.cartFeedbackService.showPurchaseFailedStatus(
+            'A kiválasztott termékből már nincs rendelhető mennyiség. A vásárlás nem történt meg.'
+          );
           return;
         }
 
         const requestedQuantity = this.normalizeQuantity(this.selectedQuantity);
-        const safeQuantity = Math.min(requestedQuantity, currentlyAvailable);
-
-        if (safeQuantity < requestedQuantity) {
-          this.snackBar.open(`Készletváltozás történt, csak ${safeQuantity} db rendelhető.`, 'Bezár', {
-            duration: 3200
-          });
+        if (requestedQuantity > currentlyAvailable) {
+          this.cartFeedbackService.showPurchaseFailedStatus(
+            `Készletváltozás történt: ${requestedQuantity} db helyett csak ${currentlyAvailable} db érhető el. ` +
+            'A vásárlás nem történt meg, kérlek módosítsd a mennyiséget.'
+          );
+          this.syncSelectedQuantity();
+          return;
         }
 
-        const addResult = this.cartService.addToCart(latestProduct, safeQuantity);
+        const addResult = this.cartService.addToCart(latestProduct, requestedQuantity);
         if (addResult.addedQuantity > 0) {
           this.cartFeedbackService.showAddToCartStatus(latestProduct.name, addResult.addedQuantity);
+        } else {
+          this.cartFeedbackService.showPurchaseFailedStatus(
+            'A kiválasztott mennyiség már nem rendelhető, ezért a vásárlás nem sikerült.'
+          );
         }
 
         this.syncSelectedQuantity();
