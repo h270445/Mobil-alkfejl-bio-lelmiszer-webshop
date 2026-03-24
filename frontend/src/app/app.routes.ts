@@ -7,11 +7,6 @@ import { ProductDetailComponent } from './features/products/product-detail.compo
 import { CartComponent } from './features/cart/cart.component';
 import { OrderListComponent } from './features/orders/order-list.component';
 import { OrderDetailComponent } from './features/orders/order-detail.component';
-import { AdminDashboardComponent } from './features/admin/dashboard/admin-dashboard.component';
-import { AdminProductsComponent } from './features/admin/products/admin-products.component';
-import { AdminProductFormComponent } from './features/admin/products/admin-product-form.component';
-import { AdminOrdersComponent } from './features/admin/orders/admin-orders.component';
-import { AdminOrderDetailComponent } from './features/admin/orders/admin-order-detail.component';
 import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
 
@@ -50,24 +45,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [adminGuard],
-    children: [
-      { path: '', component: AdminDashboardComponent },
-      {
-        path: 'products',
-        children: [
-          { path: '', component: AdminProductsComponent },
-          { path: 'new', component: AdminProductFormComponent },
-          { path: ':id/edit', component: AdminProductFormComponent }
-        ]
-      },
-      {
-        path: 'orders',
-        children: [
-          { path: '', component: AdminOrdersComponent },
-          { path: ':id', component: AdminOrderDetailComponent }
-        ]
-      }
-    ]
+    loadChildren: () => import('./features/admin/admin.routes').then(m => m.ADMIN_ROUTES)
   },
   {
     path: 'checkout',
