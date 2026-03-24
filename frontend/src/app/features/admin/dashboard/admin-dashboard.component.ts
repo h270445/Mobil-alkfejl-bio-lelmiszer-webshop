@@ -9,6 +9,7 @@ import { Subject, combineLatest, takeUntil } from 'rxjs';
 
 import { ProductService } from '../../../core/services/product.service';
 import { OrderService } from '../../../core/services/order.service';
+import { MOCK_USERS } from '../../../shared/mock-data';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -46,6 +47,14 @@ import { OrderService } from '../../../core/services/order.service';
           <div class="kpi-value">{{ stats.pendingOrders }}</div>
           <div class="kpi-label">Függőben lévő</div>
         </mat-card>
+        <mat-card class="kpi-card">
+          <div class="kpi-value">{{ stats.totalUsers }}</div>
+          <div class="kpi-label">Felhasználó</div>
+        </mat-card>
+        <mat-card class="kpi-card kpi-active">
+          <div class="kpi-value">{{ stats.adminUsers }}</div>
+          <div class="kpi-label">Admin</div>
+        </mat-card>
       </div>
 
       <!-- Navigation cards -->
@@ -61,6 +70,13 @@ import { OrderService } from '../../../core/services/order.service';
           <img src="assets/images/receipt-icon.svg" class="nav-icon" alt="Rendelések" />
           <h3>Rendeléskezelés</h3>
           <p>Rendelések megtekintése és státusz frissítése</p>
+          <button mat-raised-button color="primary">Megnyitás</button>
+        </mat-card>
+
+        <mat-card class="nav-card" routerLink="/admin/users">
+          <img src="assets/images/user-icon.svg" class="nav-icon" alt="Felhasználók" />
+          <h3>Felhasználókezelés</h3>
+          <p>Profil adatok és jogosultságok adminisztrációja</p>
           <button mat-raised-button color="primary">Megnyitás</button>
         </mat-card>
       </div>
@@ -149,7 +165,15 @@ import { OrderService } from '../../../core/services/order.service';
 export class AdminDashboardComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  stats = { totalProducts: 0, activeProducts: 0, outOfStock: 0, totalOrders: 0, pendingOrders: 0 };
+  stats = {
+    totalProducts: 0,
+    activeProducts: 0,
+    outOfStock: 0,
+    totalOrders: 0,
+    pendingOrders: 0,
+    totalUsers: 0,
+    adminUsers: 0
+  };
   resetting = false;
 
   constructor(
@@ -170,7 +194,9 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         activeProducts: products.filter(p => p.isActive).length,
         outOfStock:     products.filter(p => !p.inStock).length,
         totalOrders:    orders.length,
-        pendingOrders:  orders.filter(o => o.status === 'pending').length
+        pendingOrders:  orders.filter(o => o.status === 'pending').length,
+        totalUsers:     MOCK_USERS.length,
+        adminUsers:     MOCK_USERS.filter(user => user.role === 'admin').length
       };
     });
   }

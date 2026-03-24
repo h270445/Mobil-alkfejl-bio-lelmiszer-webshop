@@ -3,6 +3,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User, LoginRequest, RegisterRequest, AuthResponse } from '../../shared/models';
 import { MOCK_USERS, validateCredentials, findUserByEmail } from '../../shared/mock-data';
 
+type UserEditableFields = Pick<User, 'firstName' | 'lastName' | 'phone' | 'address'>;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -126,7 +128,49 @@ export class AuthService {
 
   // Update user profile
   updateProfile(user: User): void {
-    this.setCurrentUser(user, this.isUsingLocalStorage());
+    const updatedUser = this.syncUserToMockData(user, false);
+    this.setCurrentUser(updatedUser, this.isUsingLocalStorage());
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return new Observable(observer => {
+      setTimeout(() => {
+        const safeUsers = MOCK_USERS.map(({ password, ...safeUser }) => safeUser as User);
+        observer.next(safeUsers);
+        observer.complete();
+      }, 300);
+    });
+  }
+
+  updateUserByAdmin(userId: number, updates: Partial<UserEditableFields & Pick<User, 'role'>>): Observable<AuthResponse> {
+    return new Observable(observer => {
+      setTimeout(() => {
+        const existing = MOCK_USERS.find(user => user.id === userId);
+
+        if (!existing) {
+          observer.next({
+            success: false,
+            user: null as any,
+            message: 'A felhasználó nem található.'
+          });
+          observer.complete();
+          return;
+        }
+
+        const updatedUser = this.syncUserToMockData({
+          ...existing,
+          ...updates,
+          address: updates.address ?? existing.address
+        } as User, true);
+
+        observer.next({
+          success: true,
+          user: updatedUser,
+          message: 'Felhasználó sikeresen frissítve.'
+        });
+        observer.complete();
+      }, 300);
+    });
   }
 
   // Private helper methods
@@ -171,5 +215,21 @@ export class AuthService {
 
   private isUsingLocalStorage(): boolean {
     return localStorage.getItem(this.STORAGE_KEY) !== null;
+  }
+
+  private syncUserToMockData(user: User, preservePassword: boolean): User {
+    const index = MOCK_USERS.findIndex(mockUser => mockUser.id === user.id);
+
+    if (index !== -1) {
+      const existing = MOCK_USERS[index];
+      MOCK_USERS[index] = {
+        ...existing,
+        ...user,
+        password: preservePassword ? existing.password : existing.password ?? user.password
+      };
+    }
+
+    const { password, ...safeUser } = (index !== -1 ? MOCK_USERS[index] : user) as User;
+    return safeUser as User;
   }
 }
