@@ -56,11 +56,18 @@ export class FooterComponent {
     return this.router.url.startsWith('/products');
   }
 
-  scrollToTop(): void {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+  scrollToTop(event?: Event): void {
+    event?.preventDefault();
+
+    const mainContent = document.querySelector('.main-content') as HTMLElement | null;
+    if (mainContent && mainContent.scrollHeight > mainContent.clientHeight) {
+      mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   onSocialClick(name: string): void {

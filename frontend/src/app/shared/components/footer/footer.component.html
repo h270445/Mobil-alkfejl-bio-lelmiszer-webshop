@@ -74,7 +74,8 @@
     <button
       mat-mini-fab
       color="primary"
-      (click)="scrollToTop()"
+      type="button"
+      (click)="scrollToTop($event)"
       class="back-to-top"
       [class.with-products-fab]="isProductsRoute"
       aria-label="Vissza a tetejére"
