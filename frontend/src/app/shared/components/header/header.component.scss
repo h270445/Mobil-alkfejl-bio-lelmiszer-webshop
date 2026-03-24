@@ -171,9 +171,17 @@ header {
   justify-content: flex-end;
   margin-left: auto;
 
-  .cart-button {
-    margin-left: 8px;
-    flex: 0 0 auto;
+    .cart-button {
+      margin-left: 4px; // Adjusted margin for better alignment
+      flex: 0 0 auto;
+
+      // Keep the badge visually attached to the cart icon.
+      ::ng-deep .mat-badge-content {
+        top: 2px;
+        right: 2px;
+        transform: scale(0.85);
+        transform-origin: top right;
+      }
   }
 }
 
@@ -323,7 +331,13 @@ header {
     }
 
     .cart-button {
-      margin-left: 0;
+      margin-left: 2px; // Adjusted margin for better alignment
+
+      ::ng-deep .mat-badge-content {
+        top: 1px;
+        right: 1px;
+        transform: scale(0.8);
+      }
     }
   }
 
