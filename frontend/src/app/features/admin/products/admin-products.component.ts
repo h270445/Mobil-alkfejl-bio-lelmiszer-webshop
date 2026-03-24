@@ -27,7 +27,7 @@ import { Product } from '../../../shared/models';
     <div class="products-container">
       <div class="page-header">
         <h1>Termékkezelés</h1>
-        <button mat-raised-button color="primary" routerLink="/admin/products/new">
+        <button mat-raised-button color="primary" routerLink="/admin/products/new" class="desktop-add-btn">
           + Új termék
         </button>
       </div>
@@ -59,7 +59,7 @@ import { Product } from '../../../shared/models';
 
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef>Ár</th>
-            <td mat-cell *matCellDef="let p">{{ p.price | number }} Ft</td>
+            <td mat-cell *matCellDef="let p" class="price-cell">{{ p.price | number }} Ft</td>
           </ng-container>
 
           <ng-container matColumnDef="stockQuantity">
@@ -100,6 +100,16 @@ import { Product } from '../../../shared/models';
           Nincs találat a keresési feltételekre.
         </p>
       </div>
+
+      <button
+        mat-fab
+        color="primary"
+        routerLink="/admin/products/new"
+        class="mobile-add-fab"
+        aria-label="Új termék hozzáadása"
+      >
+        <img src="assets/images/add-icon.svg" alt="Új termék" class="fab-icon" />
+      </button>
     </div>
   `,
   styles: [`
@@ -114,10 +124,23 @@ import { Product } from '../../../shared/models';
 
     h1 { margin: 0; }
 
+    .desktop-add-btn {
+      white-space: nowrap;
+    }
+
+    .mobile-add-fab {
+      display: none;
+    }
+
     .search-field { width: 100%; margin-bottom: 8px; }
 
     .table-wrapper { overflow-x: auto; }
     .products-table { width: 100%; }
+
+    .price-cell {
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
 
     .out-of-stock { color: var(--color-error); font-weight: 600; }
 
@@ -142,6 +165,35 @@ import { Product } from '../../../shared/models';
     }
 
     .no-results { text-align: center; color: var(--color-text-secondary); padding: 32px; }
+
+    .fab-icon {
+      width: 22px;
+      height: 22px;
+      filter: brightness(0) invert(1);
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-add-btn {
+        display: none;
+      }
+
+      .mobile-add-fab {
+        display: inline-flex;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 1000;
+      }
+
+      .page-header {
+        margin-bottom: 12px;
+      }
+
+      .products-table {
+        min-width: 760px;
+      }
+    }
   `]
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
