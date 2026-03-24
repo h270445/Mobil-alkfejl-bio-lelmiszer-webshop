@@ -135,14 +135,50 @@ export class CartComponent implements OnInit, OnDestroy {
    */
   decreaseQuantity(productId: number): void {
     this.cartService.decreaseQuantity(productId);
+    this.snackBar.open('Mennyiség csökkentve', 'Bezár', { duration: 2000 });
   }
 
   /**
    * Remove product from cart
    */
   removeFromCart(productId: number, productName: string): void {
+    const removedItem = this.cartService.cartItemsValue.find(item => item.product.id === productId);
+
     this.cartService.removeFromCart(productId);
-    this.snackBar.open(`${productName} eltávolítva a kosárból`, 'Bezár', { duration: 2000 });
+
+    const snackRef = this.snackBar.open(
+      `${productName} eltávolítva a kosárból`,
+      'Visszavonás',
+      { duration: 5000 }
+    );
+
+    snackRef.onAction().pipe(takeUntil(this.destroy$)).subscribe(() => {
+      if (!removedItem) {
+        return;
+      }
+
+      const restoreResult = this.cartService.addToCart(removedItem.product, removedItem.quantity);
+
+      if (restoreResult.addedQuantity === removedItem.quantity) {
+        this.snackBar.open(`${productName} visszaállítva`, 'Bezár', { duration: 2000 });
+        return;
+      }
+
+      if (restoreResult.addedQuantity > 0) {
+        this.snackBar.open(
+          `Készletváltozás történt: ${restoreResult.addedQuantity} db került vissza a kosárba.`,
+          'Bezár',
+          { duration: 3200 }
+        );
+        return;
+      }
+
+      this.snackBar.open(
+        `${productName} nem állítható vissza, mert időközben elfogyott.`,
+        'Bezár',
+        { duration: 3200 }
+      );
+    });
   }
 
   /**
