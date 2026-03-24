@@ -15,6 +15,8 @@
 | ✅ | Floating Action Button (FAB) Pattern | 100% |
 | ✅ | FAB kategória keresés szűrőkkel | 100% |
 | ✅ | Responsive Smoke Testing (Day 9-10) | 100% |
+| ✅ | Profile beállítások bővítése | 100% |
+| ✅ | Admin felhasználókezelés | 100% |
 
 ---
 
@@ -340,14 +342,43 @@ fix(footer): Back-to-top scroll handler, internal container support
 | UI/UX Components | ✅ 100% | Header, Footer, ProductCard, Loading - desktop & mobile |
 | Responsive Design | ✅ 100% | 375px-1024px breakpoints tested |
 | Auth Flow | ✅ 100% | Login/Register/Guards working |
-| Admin Interface | ✅ 95% | Products CRUD mobile-ready; Orders/Dashboard skeleton |
-| Bundle Size | ⚠️ 108% | **1.08 MB / 1.00 MB - Optimization Required** |
+| Admin Interface | ✅ 100% | Dashboard, Products, Orders, Users menedzsment kész |
+| Bundle Size | ✅ 100% | **~928 kB / 1.00 MB alatt** |
 | Documentation | ✅ 100% | SPECIFICATION, DATAMODEL, COMPONENTS, DEVELOPMENT_GUIDE |
 | Git History | ✅ 100% | Dev branch with clear commit messages |
 
-**Critical Next Steps:**
-1. Bundle optimization (lazy load admin, SVG optimization)
-2. Final smoke testing admin routes
-3. Main branch merge + final submission prep
+**Milestone 1 záráshoz hátralévő lépések:**
+1. Final smoke teszt összefoglaló (admin users + profile edit flow)
+2. Dev ág végső takarítás (csak releváns commitok)
+3. Main branch merge + beadás
 
-**Utolso frissites**: 2026.03.24 (admin interface teljes, bundle optimization terv aktív)
+**Utolso frissites**: 2026.03.26 (profile funkciók + admin user management kész, M1 zárás folyamatban)
+
+---
+
+## ✅ Március 25-26 (nap 19-20) - Profile & Admin Users Completion
+
+**Terv**: Profil oldal funkcióbővítés + admin oldali felhasználókezelés implementáció
+
+- [x] Profil oldal bővítése alap account funkciókkal:
+  - [x] Személyes adatok szerkesztése (név, telefon, cím)
+  - [x] Mentés / visszaállítás flow
+  - [x] Beépített validáció + snackbar visszajelzés
+  - [x] Kosár popup beállítás megtartása ugyanazon a settings oldalon
+- [x] AuthService mock user management API bővítése:
+  - [x] Felhasználó lista lekérés
+  - [x] Admin oldali user update (név/telefon/cím/szerepkör)
+  - [x] Current user profil és MOCK_USERS szinkronizáció
+- [x] Admin felhasználókezelés oldal (`/admin/users`) elkészítve:
+  - [x] Keresés név/email szerint
+  - [x] Szerepkör szűrés (összes/admin/vásárló)
+  - [x] Inline szerkesztés (név, telefon, város)
+  - [x] Szerepkör váltás (user/admin), saját admin védelmi szabály
+- [x] Admin dashboard bővítés:
+  - [x] Új KPI-k (összes felhasználó, adminok)
+  - [x] Új navigációs kártya a felhasználókezeléshez
+
+**Notes**:
+- A profile és admin users funkciók mock adatmodellel stabilan működnek.
+- Az admin jogosultság ön-visszavonás tiltása csökkenti az accidental lockout kockázatot.
+- A bundle limit továbbra is teljesül az eddigi optimalizáció után.

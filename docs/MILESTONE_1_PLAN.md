@@ -284,6 +284,8 @@ frontend/
   - **Cél: 1.08 MB → ≤1.00 MB**
 
 - [x] Admin UX finalizálása (KÉSZ: 2026.03.24)
+- [x] Profile settings bővítés (KÉSZ: 2026.03.26)
+- [x] Admin User Management implementáció (KÉSZ: 2026.03.26)
 - [ ] Final responsive testing
 - [ ] M1 submission előkészítés
 
@@ -355,6 +357,12 @@ frontend/
 - [ ] Documentation finalize
 - [ ] Main branch merge + submission prep
 
+**Nap 25-26 (03.25-03.26) - Kész**
+- [x] Profile settings oldal bővítése szerkeszthető account adatokkal
+- [x] AuthService bővítése admin user management helper metódusokkal
+- [x] Admin Users oldal (`/admin/users`) lista + szűrés + inline szerkesztés + role váltás
+- [x] Admin Dashboard frissítés (users KPI + users nav card)
+
 ---
 
 ### **Korábbi Hetet (Március 10 – Március 17) - Cart & Orders
@@ -377,6 +385,8 @@ A mérföldkő sikeres teljesítéséhez:
 10. ✔️ Bundle size ≤1.00 MB (M1 submission requirement)
 11. ✔️ Git verzió dev branch-ben, commits tracked
 12. ✔️ Dokumentáció: SPECIFICATION, DATAMODEL, COMPONENTS, DEVELOPMENT_GUIDE
+13. ✔️ Profil beállítások (alap account adatok + preferenciák)
+14. ✔️ Admin felhasználókezelés (jogosultság és alapadat kezelés)
 
 ---
 
