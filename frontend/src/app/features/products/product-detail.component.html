@@ -40,15 +40,47 @@
         {{ product.inStock ? 'Raktáron' : 'Elfogyott' }}
       </p>
 
+      <p class="available" *ngIf="product.inStock">
+        Rendelhető mennyiség: {{ maxAddableQuantity }} db
+      </p>
+      <p class="available warning" *ngIf="product.inStock && maxAddableQuantity === 0">
+        A kosárban már a maximálisan rendelhető mennyiség van ebből a termékből.
+      </p>
+
+      <div class="quantity-selector" *ngIf="product.inStock && maxAddableQuantity > 0">
+        <span class="quantity-label">Mennyiség</span>
+        <div class="quantity-controls">
+          <button mat-stroked-button type="button" (click)="onDecreaseQuantity()" [disabled]="selectedQuantity <= 1">
+            -
+          </button>
+          <input
+            class="quantity-input"
+            type="number"
+            min="1"
+            [max]="maxAddableQuantity"
+            [ngModel]="selectedQuantity"
+            (ngModelChange)="onQuantityInput($event)"
+          />
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="onIncreaseQuantity()"
+            [disabled]="selectedQuantity >= maxAddableQuantity"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
       <div class="actions">
         <button
           mat-raised-button
           color="primary"
           (click)="onAddToCart()"
-          [disabled]="!product.inStock"
+          [disabled]="!product.inStock || maxAddableQuantity === 0"
         >
           <img src="assets/images/cart-icon.svg" alt="Kosár" class="button-icon" />
-          Kosárba
+          Kosárba helyezés
         </button>
       </div>
     </div>

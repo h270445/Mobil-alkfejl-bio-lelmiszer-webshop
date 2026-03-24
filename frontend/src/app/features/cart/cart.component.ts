@@ -5,15 +5,11 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CartService } from '../../core/services/cart.service';
+import { CartFeedbackService } from '../../core/services/cart-feedback.service';
 import { ProductService } from '../../core/services/product.service';
 import { AuthService } from '../../core/services/auth.service';
-import {
-  CartStatusDialogAction,
-  CartStatusDialogComponent
-} from '../../shared/components/cart-status-dialog/cart-status-dialog.component';
 import { Product, CartItem } from '../../shared/models';
 
 @Component({
@@ -23,7 +19,6 @@ import { Product, CartItem } from '../../shared/models';
     CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule,
     MatSnackBarModule,
   ],
   templateUrl: './cart.component.html',
@@ -48,7 +43,7 @@ export class CartComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private cartFeedbackService: CartFeedbackService
   ) {}
 
   ngOnInit(): void {
@@ -193,21 +188,10 @@ export class CartComponent implements OnInit, OnDestroy {
    * Add recommended product to cart
    */
   addRecommendedToCart(product: Product): void {
-    this.cartService.addToCart(product, 1);
-    const dialogRef = this.dialog.open(CartStatusDialogComponent, {
-      width: '380px',
-      maxWidth: '92vw',
-      data: {
-        title: 'Termék kosárba helyezve',
-        message: `${product.name} sikeresen a kosárba került.`
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((action: CartStatusDialogAction | undefined) => {
-      if (action === 'cart') {
-        this.router.navigate(['/cart']);
-      }
-    });
+    const addResult = this.cartService.addToCart(product, 1);
+    if (addResult.addedQuantity > 0) {
+      this.cartFeedbackService.showAddToCartStatus(product.name, addResult.addedQuantity);
+    }
   }
 
   /**
