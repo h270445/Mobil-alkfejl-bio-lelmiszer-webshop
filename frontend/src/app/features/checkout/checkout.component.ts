@@ -444,7 +444,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   private initializeForm() {
     const currentUser = this.authService.currentUserValue;
-    const savedAddress = currentUser?.address || {};
+    const savedAddress: Address = currentUser?.address || { street: '', city: '', zipCode: '', country: '' };
 
     this.checkoutForm = this.fb.group({
       street: [savedAddress.street || '', Validators.required],
