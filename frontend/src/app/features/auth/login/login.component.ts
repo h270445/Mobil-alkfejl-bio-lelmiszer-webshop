@@ -162,7 +162,7 @@ export class LoginComponent {
     this.authService.login(request).subscribe({
       next: (response) => {
         if (response.success) {
-          this.router.navigateByUrl(this.returnUrl);
+          this.router.navigateByUrl(this.resolvePostAuthUrl(response.user.role));
           return;
         }
 
@@ -175,5 +175,18 @@ export class LoginComponent {
         this.isSubmitting = false;
       }
     });
+  }
+
+  private resolvePostAuthUrl(role: 'user' | 'admin'): string {
+    const isSafeReturnUrl =
+      !!this.returnUrl &&
+      this.returnUrl.startsWith('/') &&
+      !this.returnUrl.startsWith('/auth');
+
+    if (isSafeReturnUrl) {
+      return this.returnUrl;
+    }
+
+    return role === 'admin' ? '/admin' : '/';
   }
 }
