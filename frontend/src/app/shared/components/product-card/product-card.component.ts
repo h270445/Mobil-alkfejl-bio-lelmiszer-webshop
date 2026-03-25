@@ -1,12 +1,15 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { RouterLink } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { Product } from '../../models';
+import { ProductService } from '../../../core/services/product.service';
 
 @Component({
   selector: 'app-product-card',
@@ -22,16 +25,34 @@ import { Product } from '../../models';
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
   @Input() showAddToCart = true;
   @Output() addToCart = new EventEmitter<Product>();
   @Output() viewDetails = new EventEmitter<Product>();
+  @Output() removeFavorite = new EventEmitter<number>();
 
   isFavorite = false;
 
+  private destroy$ = new Subject<void>();
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit() {
+    this.productService.favoriteProductIds$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(favorites => {
+        this.isFavorite = favorites.includes(this.product.id);
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   toggleFavorite(): void {
-    this.isFavorite = !this.isFavorite;
+    this.productService.toggleFavorite(this.product.id);
   }
 
   onAddToCart(): void {

@@ -17,6 +17,10 @@
 | ✅ | Responsive Smoke Testing (Day 9-10) | 100% |
 | ✅ | Profile beállítások bővítése | 100% |
 | ✅ | Admin felhasználókezelés | 100% |
+| ⏳ | Checkout + Szállítási cím mentése | 0% |
+| ⏳ | Favorites feature (szív ikon, lista) | 0% |
+| ⏳ | Final responsivity + functionality test | 0% |
+| ⏳ | Main merge + M1 submission | 0% |
 
 ---
 
@@ -348,37 +352,74 @@ fix(footer): Back-to-top scroll handler, internal container support
 | Git History | ✅ 100% | Dev branch with clear commit messages |
 
 **Milestone 1 záráshoz hátralévő lépések:**
-1. Final smoke teszt összefoglaló (admin users + profile edit flow)
-2. Dev ág végső takarítás (csak releváns commitok)
-3. Main branch merge + beadás
+1. Checkout + Favorites feature-ök (MA: 2026.03.25)
+2. Responsivity + functionality smoke test (HOLNAP: 2026.03.26)
+3. Dev → Main merge + M1 submission (HOLNAP: 2026.03.26)
 
-**Utolso frissites**: 2026.03.26 (profile funkciók + admin user management kész, M1 zárás folyamatban)
+**Utolso frissites**: 2026.03.25 (checkout + favorites sprint started, 24 órás M1 closure plan)
 
 ---
 
-## ✅ Március 25-26 (nap 19-20) - Profile & Admin Users Completion
+## ✅ Március 25-26 (Sprint: 24 órás M1 Closure)
 
-**Terv**: Profil oldal funkcióbővítés + admin oldali felhasználókezelés implementáció
+### Március 25 (MA) - Checkout + Favorites Implementation
 
-- [x] Profil oldal bővítése alap account funkciókkal:
-  - [x] Személyes adatok szerkesztése (név, telefon, cím)
-  - [x] Mentés / visszaállítás flow
-  - [x] Beépített validáció + snackbar visszajelzés
-  - [x] Kosár popup beállítás megtartása ugyanazon a settings oldalon
-- [x] AuthService mock user management API bővítése:
-  - [x] Felhasználó lista lekérés
-  - [x] Admin oldali user update (név/telefon/cím/szerepkör)
-  - [x] Current user profil és MOCK_USERS szinkronizáció
-- [x] Admin felhasználókezelés oldal (`/admin/users`) elkészítve:
-  - [x] Keresés név/email szerint
-  - [x] Szerepkör szűrés (összes/admin/vásárló)
-  - [x] Inline szerkesztés (név, telefon, város)
-  - [x] Szerepkör váltás (user/admin), saját admin védelmi szabály
-- [x] Admin dashboard bővítés:
-  - [x] Új KPI-k (összes felhasználó, adminok)
-  - [x] Új navigációs kártya a felhasználókezeléshez
+**Terv**: Checkout szállítási cím form + Favorites feature
 
-**Notes**:
-- A profile és admin users funkciók mock adatmodellel stabilan működnek.
-- Az admin jogosultság ön-visszavonás tiltása csökkenti az accidental lockout kockázatot.
-- A bundle limit továbbra is teljesül az eddigi optimalizáció után.
+- [ ] Checkout Component:
+  - [ ] /checkout route (loadComponent)
+  - [ ] Szállítási cím form: utca, város, irányítószám, ország
+  - [ ] Pre-fill profil adatokból (bejelentkezett felhasználó)
+  - [ ] "Mentés profilba" checkbox + AuthService.updateProfile()
+  - [ ] OrderService.createOrder() integrálás
+  - [ ] Order summary: cart items + shipping cost (dinamikus 3500 Ft threshold)
+  - [ ] Success screen + cart clear
+  - [ ] Mobile responsive (grid, stack inputs, summary jól látható)
+
+- [ ] Favorites Feature (FR-7):
+  - [ ] ProductService: favoriteProducts$ BehaviorSubject
+  - [ ] localStorage: `biomarket_favorites` key
+  - [ ] ProductCard: szív ikon toggle (add/remove)
+  - [ ] /favorites route (list view, remove action)
+  - [ ] Responsive grid layout
+
+**Acceptance**: Checkout + Favorites kódban kész, build sikeres
+
+---
+
+### Március 26 (HOLNAP) - Final Testing + Merge + Submit
+
+**Terv**: Comprehensive smoke testing + dev→main merge + M1 submission
+
+- [ ] Responsivity Testing (ALL routes, ALL breakpoints: 375, 390, 768, 1024px):
+  - [ ] / (Home)
+  - [ ] /products
+  - [ ] /products/:id
+  - [ ] /cart
+  - [ ] /checkout (NEW)
+  - [ ] /favorites (NEW)
+  - [ ] /orders
+  - [ ] /profile
+  - [ ] /auth/login, /auth/register
+  - [ ] /admin/dashboard, /admin/products, /admin/orders, /admin/users
+
+- [ ] Functionality Validation (critical paths):
+  - [ ] Auth: login → register → profile
+  - [ ] Shopping: products → cart → checkout → favorites → order success
+  - [ ] Admin: products CRUD + users management
+  - [ ] Error handling: out-of-stock, validation, network delays
+
+- [ ] Build Validation:
+  - [ ] npm run build (no errors)
+  - [ ] Bundle size < 1.00 MB
+  - [ ] No console JavaScript errors
+
+- [ ] Git & Submission:
+  - [ ] Dev branch: clean commit history
+  - [ ] Merge dev → main
+  - [ ] Final docs update (TRACKER, PLAN)
+  - [ ] M1 Submission to teacher
+
+**Acceptance**: All tests PASS, main branch updated, submission delivered
+
+**Expected Friday**: March 29 submission deadline (3 days buffer)

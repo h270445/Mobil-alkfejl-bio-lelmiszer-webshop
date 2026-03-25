@@ -54,6 +54,11 @@ Az adminisztrátorok külön felületen keresztül kezelhetik a termékkínálat
 - **FR-4.3**: Sikeres rendelés után a kosár kiürül
 - **FR-4.4**: A felhasználó visszajelzést kap a sikeres rendelésről (Toast/Snackbar)
 - **FR-4.5**: A rendelések listázhatók a felhasználó profiljában
+- **FR-4.6**: A bejelentkezett felhasználók `/checkout` oldalán a szállítási cím pre-fill-elt a profilban mentett adatokkal (ha rendelkezésre állnak)
+- **FR-4.7**: A checkout form tartalmaz egy "Szállítási cím mentése profilba" checkboxot (opcionális, csak auth flow-ban aktív)
+- **FR-4.8**: Ha a checkbox be van jelölve és a form beküldésre kerül, az AuthService.updateProfile() meghívódik az új szállítási cím adatokkal
+- **FR-4.9**: A checkout oldal mobil-barát: szöveges input mezők responsive grid-ben, végösszeg (kosár + szállítás) jól látható
+- **FR-4.10**: A szállítási költség dinamikus: 3500 Ft felett ingyenes, alatta 500 Ft
 
 ### FR-5: Felhasználói Profil
 - **FR-5.1**: A bejelentkezett felhasználók megtekinthetik profiljukat (név, email, telefon, cím)

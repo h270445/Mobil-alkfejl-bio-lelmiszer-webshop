@@ -272,22 +272,16 @@ frontend/
 
 ---
 
-### **5. Hét (Március 24 – Március 29) - Bundle Optimization & Final Polish**
+### **5. Hét (Március 24 – Március 26) - Final Features, Testing & M1 Submission**
 
-#### Feladatok (PRIORITÁS)
-
-- [ ] **Bundle Optimization** (KRITIKUS - M1 submission 1.00 MB limit)
-  - [ ] Lazy load `/admin` modul (~30-40 kB reduction)
-  - [ ] SVG inline optimization (~15-20 kB reduction)
-  - [ ] Material unused components cleanup (~10-15 kB reduction)
-  - [ ] Tree shaking production build (~15-25 kB reduction)
-  - **Cél: 1.08 MB → ≤1.00 MB**
+#### Feladatok (SPRINT: 24 óra)
 
 - [x] Admin UX finalizálása (KÉSZ: 2026.03.24)
 - [x] Profile settings bővítés (KÉSZ: 2026.03.26)
 - [x] Admin User Management implementáció (KÉSZ: 2026.03.26)
-- [ ] Final responsive testing
-- [ ] M1 submission előkészítés
+- [ ] **Checkout Feature + Favorites** (TODAY: 2026.03.25)
+- [ ] **Responsivity & Functionality Testing** (TOMORROW: 2026.03.26)
+- [ ] **Main Merge + M1 Submission** (TOMORROW: 2026.03.26)
 
 #### Specifikus Bundle Optimizations
 
@@ -352,10 +346,45 @@ frontend/
 - [ ] Material cleanup + tree shaking
 - [ ] Build size validáció
 
-**Nap 27-29 (03.28-03.29)**
-- [ ] Final responsive smoke test
-- [ ] Documentation finalize
-- [ ] Main branch merge + submission prep
+**Nap 27-29 (03.25 TODAY) - Checkout + Favorites Implementation**
+- [ ] Checkout Component (`/checkout` loadComponent)
+  - [ ] Szállítási cím form (utca, város, irányítószám, ország)
+  - [ ] Pre-fill profil adatokból (AuthService.currentUser)
+  - [ ] "Mentés profilba" checkbox + AuthService.updateProfile() integrálás
+  - [ ] OrderService.createOrder() bekötése
+  - [ ] Order summary display (cart items + shipping cost)
+  - [ ] Success screen + cart clear
+  - [ ] Mobile responsive layout (grid, inputs, summary)
+- [ ] Favorites Feature (FR-7 implementation)
+  - [ ] ProductService: favoriteProducts$ BehaviorSubject + localStorage
+  - [ ] ProductCard: szív ikon toggle + add/remove favorites
+  - [ ] Favorites page: `/favorites` route (loadComponent)
+  - [ ] Favorites list display (grid, remove action)
+  - [ ] localStorage persistence
+
+**Nap 28 (03.26 TOMORROW) - Final Testing + Merge + Submit**
+- [ ] Cross-route responsivity smoke test (ALL routes):
+  - [ ] Breakpoints: 375px, 390px, 768px, 1024px
+  - [ ] Routes: /home, /products, /products/:id, /cart, /checkout, /orders, /profile, /admin/*, /favorites
+  - [ ] Auth flow: login → checkout → favorites → order success
+  - [ ] Admin flow: admin users + products (mobile FAB, table responsive)
+- [ ] Functionality validation (critical paths):
+  - [ ] Product search/filter
+  - [ ] Add to cart + remove + quantity
+  - [ ] Checkout: address form + save to profile
+  - [ ] Favorites: add/remove + persist
+  - [ ] Admin: products CRUD, users management
+- [ ] No console errors / warnings
+- [ ] Build validation (npm run build)
+- [ ] Dev → Main merge
+- [ ] Final docs update (tracker completion)
+- [ ] M1 Submission
+
+**Notes**:
+- Checkout szállítási költség: 3500 Ft felett ingyenes, alatta 500 Ft.
+- Favorites localStorage key: `biomarket_favorites`
+- Pre-fill profilból: ha bejelentkezve van, adatok jönnek az auth-ból.
+- Test coverage: összes breakpoint + auth/admin flow + error states (out-of-stock, validation).
 
 **Nap 25-26 (03.25-03.26) - Kész**
 - [x] Profile settings oldal bővítése szerkeszthető account adatokkal
@@ -376,7 +405,7 @@ A mérföldkő sikeres teljesítéséhez:
 1. ✔️ Összes nem-admin oldal responsív és működő mock adatokkal
 2. ✔️ Login/Logout UI működik (localStorage szint)
 3. ✔️ Kosár működése (add/remove/update, localStorage)
-4. ✔️ Rendelés leadás UI és mock mentés
+4. ✔️ Rendelés leadás UI és mock mentés (checkout oldal szállítási cím formmal)
 5. ✔️ Admin oldalak (szerepkör-alapú) UI teljes
 6. ✔️ Admin Products CRUD mobil-friendly (FAB pattern, responsive table)
 7. ✔️ Material Design szépen alkalmazva
@@ -387,6 +416,7 @@ A mérföldkő sikeres teljesítéséhez:
 12. ✔️ Dokumentáció: SPECIFICATION, DATAMODEL, COMPONENTS, DEVELOPMENT_GUIDE
 13. ✔️ Profil beállítások (alap account adatok + preferenciák)
 14. ✔️ Admin felhasználókezelés (jogosultság és alapadat kezelés)
+15. ✔️ Checkout oldal (szállítási cím pre-fill + "mentés profilba" opció)
 
 ---
 

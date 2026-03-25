@@ -50,8 +50,13 @@ export const routes: Routes = [
   },
   {
     path: 'checkout',
-    component: HomeComponent
-    // TODO: Create checkout page (Week 3 backlog)
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/checkout/checkout.component').then(m => m.CheckoutComponent)
+  },
+  {
+    path: 'favorites',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/favorites/favorites.component').then(m => m.FavoritesComponent)
   },
   {
     path: 'profile',

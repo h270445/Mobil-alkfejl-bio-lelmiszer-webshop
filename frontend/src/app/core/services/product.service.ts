@@ -9,14 +9,22 @@ import { MOCK_PRODUCTS, CATEGORIES } from '../../shared/mock-data';
 })
 export class ProductService {
   private readonly STORAGE_KEY = 'biomarket_products';
+  private readonly FAVORITES_KEY = 'biomarket_favorites';
 
   private productsSubject!: BehaviorSubject<Product[]>;
   public products$!: Observable<Product[]>;
+
+  private favoriteProductIdsSubject!: BehaviorSubject<number[]>;
+  public favoriteProductIds$!: Observable<number[]>;
 
   constructor() {
     const initial = this.loadFromStorage();
     this.productsSubject = new BehaviorSubject<Product[]>(initial);
     this.products$ = this.productsSubject.asObservable();
+
+    const favorites = this.loadFavoritesFromStorage();
+    this.favoriteProductIdsSubject = new BehaviorSubject<number[]>(favorites);
+    this.favoriteProductIds$ = this.favoriteProductIdsSubject.asObservable();
   }
 
   // --- Persistence helpers ---
@@ -36,13 +44,34 @@ export class ProductService {
     return [...MOCK_PRODUCTS];
   }
 
+  private loadFavoritesFromStorage(): number[] {
+    const stored = localStorage.getItem(this.FAVORITES_KEY);
+    if (stored) {
+      try {
+        return JSON.parse(stored) as number[];
+      } catch {
+        localStorage.removeItem(this.FAVORITES_KEY);
+      }
+    }
+    return [];
+  }
+
   private saveToStorage(products: Product[]): void {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(products));
+  }
+
+  private saveFavoritesToStorage(favorites: number[]): void {
+    localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(favorites));
   }
 
   private emit(products: Product[]): void {
     this.productsSubject.next(products);
     this.saveToStorage(products);
+  }
+
+  private emitFavorites(favorites: number[]): void {
+    this.favoriteProductIdsSubject.next(favorites);
+    this.saveFavoritesToStorage(favorites);
   }
 
   // --- Read ---
@@ -214,5 +243,35 @@ export class ProductService {
     return !this.productsSubject.value.some(
       p => p.sku === sku && p.id !== excludeId
     );
+  }
+
+  // --- Favorites Management ---
+
+  addFavorite(productId: number): void {
+    const current = this.favoriteProductIdsSubject.value;
+    if (!current.includes(productId)) {
+      this.emitFavorites([...current, productId]);
+    }
+  }
+
+  removeFavorite(productId: number): void {
+    const current = this.favoriteProductIdsSubject.value;
+    this.emitFavorites(current.filter(id => id !== productId));
+  }
+
+  isFavorite(productId: number): boolean {
+    return this.favoriteProductIdsSubject.value.includes(productId);
+  }
+
+  toggleFavorite(productId: number): void {
+    if (this.isFavorite(productId)) {
+      this.removeFavorite(productId);
+    } else {
+      this.addFavorite(productId);
+    }
+  }
+
+  getProducts(): Observable<Product[]> {
+    return this.products$;
   }
 }
