@@ -54,6 +54,10 @@ import { CartItem, Address } from '../../shared/models';
         <!-- Checkout Form -->
         <div *ngIf="!successScreen">
           <h1>Szállítási Cím</h1>
+
+          <div *ngIf="addressPrefilled" class="prefill-info" role="status" aria-live="polite">
+            A profilodból betöltöttük a szállítási címet. Rendelés előtt ellenőrizd az adatokat.
+          </div>
           
           <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
             <!-- Address Fields -->
@@ -152,7 +156,7 @@ import { CartItem, Address } from '../../shared/models';
                 mat-raised-button
                 color="primary"
                 [disabled]="checkoutForm.invalid || isSubmitting"
-                class="full-width"
+                class="full-width desktop-submit-btn"
               >
                 <mat-spinner *ngIf="isSubmitting" diameter="20" class="spinner-inline"></mat-spinner>
                 {{ isSubmitting ? 'Feldolgozás...' : 'Rendelés Leadása' }}
@@ -167,6 +171,24 @@ import { CartItem, Address } from '../../shared/models';
               </button>
             </div>
           </form>
+
+          <div class="mobile-sticky-checkout" *ngIf="cartItems.length > 0">
+            <div class="sticky-total">
+              <span class="sticky-total-label">Végösszeg</span>
+              <strong>{{ (subTotal + shippingCost) | number:'1.0-0' }} Ft</strong>
+            </div>
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              [disabled]="checkoutForm.invalid || isSubmitting"
+              class="sticky-submit-btn"
+            >
+              <mat-spinner *ngIf="isSubmitting" diameter="18" class="spinner-inline"></mat-spinner>
+              {{ isSubmitting ? 'Feldolgozás...' : 'Rendelés Leadása' }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -176,6 +198,10 @@ import { CartItem, Address } from '../../shared/models';
       max-width: 900px;
       margin: 0 auto;
       padding: 24px 16px;
+    }
+
+    .mobile-sticky-checkout {
+      display: none;
     }
 
     .checkout-content {
@@ -223,6 +249,17 @@ import { CartItem, Address } from '../../shared/models';
 
     .save-checkbox {
       margin-top: 8px;
+    }
+
+    .prefill-info {
+      margin: 0 0 16px;
+      background: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #c8e6c9;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 500;
     }
 
     .order-summary {
@@ -368,6 +405,7 @@ import { CartItem, Address } from '../../shared/models';
     @media (max-width: 768px) {
       .checkout-container {
         padding: 16px 12px;
+        padding-bottom: calc(96px + env(safe-area-inset-bottom));
       }
 
       h1 {
@@ -389,6 +427,42 @@ import { CartItem, Address } from '../../shared/models';
 
       .total-row.grand-total {
         font-size: 16px;
+      }
+
+      .desktop-submit-btn {
+        display: none;
+      }
+
+      .mobile-sticky-checkout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1100;
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(255, 255, 255, 0.97);
+        border-top: 1px solid #e6e6e6;
+        box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.08);
+      }
+
+      .sticky-total {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        color: var(--text-dark, #333);
+      }
+
+      .sticky-total-label {
+        font-size: 12px;
+        color: var(--text-secondary, #666);
+      }
+
+      .sticky-submit-btn {
+        white-space: nowrap;
       }
     }
 
@@ -420,6 +494,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   isSubmitting = false;
   successScreen = false;
   createdOrderId: number | null = null;
+  addressPrefilled = false;
 
   private destroy$ = new Subject<void>();
 
@@ -433,6 +508,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.scrollToTop();
     this.initializeForm();
     this.loadCart();
   }
@@ -445,6 +521,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   private initializeForm() {
     const currentUser = this.authService.currentUserValue;
     const savedAddress: Address = currentUser?.address || { street: '', city: '', zipCode: '', country: '' };
+    this.addressPrefilled = !!(
+      currentUser?.address?.street ||
+      currentUser?.address?.city ||
+      currentUser?.address?.zipCode ||
+      currentUser?.address?.country
+    );
 
     this.checkoutForm = this.fb.group({
       street: [savedAddress.street || '', Validators.required],
@@ -480,6 +562,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.checkoutForm.invalid || this.cartItems.length === 0) {
+      this.checkoutForm.markAllAsTouched();
+      this.scrollToFirstInvalidField();
       this.snackBar.open('Kérjük, töltsön ki minden mezőt és legyen tétel a kosárban', 'Bezárás', {
         duration: 4000,
         panelClass: ['error-snackbar']
@@ -555,5 +639,26 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   goBack() {
     this.router.navigate(['/cart']);
+  }
+
+  private scrollToTop() {
+    const mainContent = document.querySelector('.main-content') as HTMLElement | null;
+    if (mainContent) {
+      mainContent.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    document.documentElement.scrollTo({ top: 0, behavior: 'auto' });
+    document.body.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  private scrollToFirstInvalidField() {
+    setTimeout(() => {
+      const firstInvalid = document.querySelector('.checkout-form .ng-invalid') as HTMLElement | null;
+      if (!firstInvalid) return;
+
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalid.focus?.();
+    });
   }
 }
