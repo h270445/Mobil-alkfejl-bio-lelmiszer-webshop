@@ -279,7 +279,7 @@ frontend/
 - [x] Admin UX finalizálása (KÉSZ: 2026.03.24)
 - [x] Profile settings bővítés (KÉSZ: 2026.03.26)
 - [x] Admin User Management implementáció (KÉSZ: 2026.03.26)
-- [ ] **Checkout Feature + Favorites** (TODAY: 2026.03.25)
+- [x] **Checkout Feature + Favorites** (TODAY: 2026.03.25)
 - [ ] **Responsivity & Functionality Testing** (TOMORROW: 2026.03.26)
 - [ ] **Main Merge + M1 Submission** (TOMORROW: 2026.03.26)
 
