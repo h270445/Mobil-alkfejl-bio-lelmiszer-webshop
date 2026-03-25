@@ -280,7 +280,7 @@ frontend/
 - [x] Profile settings bővítés (KÉSZ: 2026.03.26)
 - [x] Admin User Management implementáció (KÉSZ: 2026.03.26)
 - [x] **Checkout Feature + Favorites** (TODAY: 2026.03.25)
-- [ ] **Responsivity & Functionality Testing** (TOMORROW: 2026.03.26)
+- [x] **Responsivity & Functionality Testing** (KÉSZ: 2026.03.25)
 - [ ] **Main Merge + M1 Submission** (TOMORROW: 2026.03.26)
 
 #### Specifikus Bundle Optimizations
@@ -338,46 +338,39 @@ frontend/
 ### **Korábbi Hetet (Március 10 – Március 17) - Cart & Orders
 
 **Nap 24-25 (03.25-03.26)**
-- [ ] Bundle analysis `npm run build -- --stats-json`
-- [ ] Lazy load admin module implementálása
-- [ ] SVG inline optimization
+- [x] Bundle analysis `npm run build -- --stats-json`
+- [x] Lazy load admin module implementálása
+- [x] SVG inline optimization
 
 **Nap 26 (03.27)**
-- [ ] Material cleanup + tree shaking
-- [ ] Build size validáció
+- [x] Material cleanup + tree shaking
+- [x] Build size validáció
 
 **Nap 27-29 (03.25 TODAY) - Checkout + Favorites Implementation**
-- [ ] Checkout Component (`/checkout` loadComponent)
-  - [ ] Szállítási cím form (utca, város, irányítószám, ország)
-  - [ ] Pre-fill profil adatokból (AuthService.currentUser)
-  - [ ] "Mentés profilba" checkbox + AuthService.updateProfile() integrálás
-  - [ ] OrderService.createOrder() bekötése
-  - [ ] Order summary display (cart items + shipping cost)
-  - [ ] Success screen + cart clear
-  - [ ] Mobile responsive layout (grid, inputs, summary)
-- [ ] Favorites Feature (FR-7 implementation)
-  - [ ] ProductService: favoriteProducts$ BehaviorSubject + localStorage
-  - [ ] ProductCard: szív ikon toggle + add/remove favorites
-  - [ ] Favorites page: `/favorites` route (loadComponent)
-  - [ ] Favorites list display (grid, remove action)
-  - [ ] localStorage persistence
+- [x] Checkout Component (`/checkout` loadComponent)
+   - [x] Szállítási cím form (utca, város, irányítószám, ország)
+   - [x] Pre-fill profil adatokból (AuthService.currentUser)
+   - [x] "Mentés profilba" checkbox + AuthService.updateProfile() integrálás
+   - [x] OrderService.createOrder() bekötése
+   - [x] Order summary display (cart items + shipping cost)
+   - [x] Success screen + cart clear
+   - [x] Mobile responsive layout (grid, inputs, summary)
+   - [x] Mobile sticky checkout CTA
+- [x] Favorites Feature (FR-7 implementation)
+   - [x] ProductService: favoriteProducts$ BehaviorSubject + localStorage
+   - [x] ProductCard: szív ikon toggle + add/remove favorites
+   - [x] Favorites page: `/favorites` route (loadComponent)
+   - [x] Favorites list display (grid, remove action)
+   - [x] localStorage persistence
+   - [x] Favorites link a felhasználói menüben
 
-**Nap 28 (03.26 TOMORROW) - Final Testing + Merge + Submit**
-- [ ] Cross-route responsivity smoke test (ALL routes):
-  - [ ] Breakpoints: 375px, 390px, 768px, 1024px
-  - [ ] Routes: /home, /products, /products/:id, /cart, /checkout, /orders, /profile, /admin/*, /favorites
-  - [ ] Auth flow: login → checkout → favorites → order success
-  - [ ] Admin flow: admin users + products (mobile FAB, table responsive)
-- [ ] Functionality validation (critical paths):
-  - [ ] Product search/filter
-  - [ ] Add to cart + remove + quantity
-  - [ ] Checkout: address form + save to profile
-  - [ ] Favorites: add/remove + persist
-  - [ ] Admin: products CRUD, users management
-- [ ] No console errors / warnings
-- [ ] Build validation (npm run build)
+**Nap 28 (03.26 TOMORROW) - Merge + Submit**
+- [x] Cross-route responsivity smoke test (ALL routes)
+- [x] Functionality validation (critical paths)
+- [x] No overflow / layout break
+- [x] Build validation (npm run build)
 - [ ] Dev → Main merge
-- [ ] Final docs update (tracker completion)
+- [x] Final docs update (tracker completion)
 - [ ] M1 Submission
 
 **Notes**:

@@ -17,9 +17,9 @@
 | ✅ | Responsive Smoke Testing (Day 9-10) | 100% |
 | ✅ | Profile beállítások bővítése | 100% |
 | ✅ | Admin felhasználókezelés | 100% |
-| ⏳ | Checkout + Szállítási cím mentése | 0% |
-| ⏳ | Favorites feature (szív ikon, lista) | 0% |
-| ⏳ | Final responsivity + functionality test | 0% |
+| ✅ | Checkout + Szállítási cím mentése | 100% |
+| ✅ | Favorites feature (szív ikon, lista) | 100% |
+| ✅ | Final responsivity + functionality test | 100% |
 | ⏳ | Main merge + M1 submission | 0% |
 
 ---
@@ -352,11 +352,10 @@ fix(footer): Back-to-top scroll handler, internal container support
 | Git History | ✅ 100% | Dev branch with clear commit messages |
 
 **Milestone 1 záráshoz hátralévő lépések:**
-1. Checkout + Favorites feature-ök (MA: 2026.03.25)
-2. Responsivity + functionality smoke test (HOLNAP: 2026.03.26)
-3. Dev → Main merge + M1 submission (HOLNAP: 2026.03.26)
+1. Dev → Main merge (HOLNAP: 2026.03.26)
+2. M1 submission (HOLNAP: 2026.03.26)
 
-**Utolso frissites**: 2026.03.25 (checkout + favorites sprint started, 24 órás M1 closure plan)
+**Utolso frissites**: 2026.03.25 (checkout + favorites kész, smoke PASS, no overflow)
 
 ---
 
@@ -366,60 +365,43 @@ fix(footer): Back-to-top scroll handler, internal container support
 
 **Terv**: Checkout szállítási cím form + Favorites feature
 
-- [ ] Checkout Component:
-  - [ ] /checkout route (loadComponent)
-  - [ ] Szállítási cím form: utca, város, irányítószám, ország
-  - [ ] Pre-fill profil adatokból (bejelentkezett felhasználó)
-  - [ ] "Mentés profilba" checkbox + AuthService.updateProfile()
-  - [ ] OrderService.createOrder() integrálás
-  - [ ] Order summary: cart items + shipping cost (dinamikus 3500 Ft threshold)
-  - [ ] Success screen + cart clear
-  - [ ] Mobile responsive (grid, stack inputs, summary jól látható)
+- [x] Checkout Component:
+  - [x] /checkout route (loadComponent)
+  - [x] Szállítási cím form: utca, város, irányítószám, ország
+  - [x] Pre-fill profil adatokból (bejelentkezett felhasználó)
+  - [x] "Mentés profilba" checkbox + AuthService.updateProfile()
+  - [x] OrderService.createOrder() integrálás
+  - [x] Order summary: cart items + shipping cost (dinamikus 3500 Ft threshold)
+  - [x] Success screen + cart clear
+  - [x] Mobile responsive (grid, stack inputs, summary jól látható)
+  - [x] Sticky mobile checkout CTA (végösszeg + rendelés leadása)
 
-- [ ] Favorites Feature (FR-7):
-  - [ ] ProductService: favoriteProducts$ BehaviorSubject
-  - [ ] localStorage: `biomarket_favorites` key
-  - [ ] ProductCard: szív ikon toggle (add/remove)
-  - [ ] /favorites route (list view, remove action)
-  - [ ] Responsive grid layout
+- [x] Favorites Feature (FR-7):
+  - [x] ProductService: favoriteProducts$ BehaviorSubject
+  - [x] localStorage: `biomarket_favorites` key
+  - [x] ProductCard: szív ikon toggle (add/remove)
+  - [x] /favorites route (list view, remove action)
+  - [x] Favorites belépési pont a user menüben
+  - [x] Responsive grid layout
 
-**Acceptance**: Checkout + Favorites kódban kész, build sikeres
+**Acceptance**: Checkout + Favorites kódban kész, build sikeres, manuális smoke PASS, nincs overflow.
 
 ---
 
-### Március 26 (HOLNAP) - Final Testing + Merge + Submit
+### Március 26 (HOLNAP) - Merge + Submit
 
 **Terv**: Comprehensive smoke testing + dev→main merge + M1 submission
 
-- [ ] Responsivity Testing (ALL routes, ALL breakpoints: 375, 390, 768, 1024px):
-  - [ ] / (Home)
-  - [ ] /products
-  - [ ] /products/:id
-  - [ ] /cart
-  - [ ] /checkout (NEW)
-  - [ ] /favorites (NEW)
-  - [ ] /orders
-  - [ ] /profile
-  - [ ] /auth/login, /auth/register
-  - [ ] /admin/dashboard, /admin/products, /admin/orders, /admin/users
-
-- [ ] Functionality Validation (critical paths):
-  - [ ] Auth: login → register → profile
-  - [ ] Shopping: products → cart → checkout → favorites → order success
-  - [ ] Admin: products CRUD + users management
-  - [ ] Error handling: out-of-stock, validation, network delays
-
-- [ ] Build Validation:
-  - [ ] npm run build (no errors)
-  - [ ] Bundle size < 1.00 MB
-  - [ ] No console JavaScript errors
+- [x] Responsivity Testing (ALL routes, ALL breakpoints: 375, 390, 768, 1024px)
+- [x] Functionality Validation (critical paths)
+- [x] Build Validation (`npm run build`, bundle limit OK, no blocking console error)
 
 - [ ] Git & Submission:
   - [ ] Dev branch: clean commit history
   - [ ] Merge dev → main
-  - [ ] Final docs update (TRACKER, PLAN)
+  - [x] Final docs update (TRACKER, PLAN)
   - [ ] M1 Submission to teacher
 
-**Acceptance**: All tests PASS, main branch updated, submission delivered
+**Acceptance**: Main branch updated, submission delivered
 
 **Expected Friday**: March 29 submission deadline (3 days buffer)
