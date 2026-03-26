@@ -118,17 +118,17 @@
   - [x] Update checkout summary display to use submitted totals
   - [x] Verify threshold logic remains `>= 3500` => free shipping
 
-### 11. ❌ Admin Users Page Mobile Collapse & Delete
-- **Status**: Not started
+### 11. ✅ Admin Users Page Mobile Collapse & Delete
+- **Status**: Completed (2026-03-26)
 - **Description**: 
   - Mobile view doesn't collapse user info like products page does
   - No delete option for users
 - **Affected Files**: `features/admin/users/admin-users.component.ts`, `features/admin/users/admin-users.component.html`
 - **Priority**: MEDIUM (Admin UX, functionality)
 - **Changes Needed**:
-  - Add mobile-responsive card layout (collapse/expand like products)
-  - Add delete button/confirmation dialog for users
-  - Update UserService with deleteUser() method if needed
+  - [x] Add mobile-responsive card layout (collapse/expand like products)
+  - [x] Add delete button/confirmation dialog for users
+  - [x] Update user service with admin delete operation
 
 ### 12. ✅ Select Dropdown Transparent Background
 - **Status**: Completed (2026-03-26)
@@ -189,5 +189,5 @@
 - Comments/reviews flow was implemented with create + list + rating-based filter.
 - Footer branding and typo cleanups were completed (Twitter -> X).
 - Dropdown transparency fix is active globally.
-- Remaining non-blocking item for M1: Issue #11 (Admin users mobile collapse + delete).
+- All smoke-test issues are implemented for M1 scope.
 - Open note: if old localStorage data exists, comment seed/mocks may require storage reset to verify initial seeded set.

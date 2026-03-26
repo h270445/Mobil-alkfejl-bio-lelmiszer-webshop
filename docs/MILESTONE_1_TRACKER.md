@@ -437,7 +437,7 @@ See **SMOKE_TEST_ISSUES.md** for complete documentation of all 12 issues.
 - [x] #7: Footer typo + Twitter to X update
 - [x] #8: Address field separation
 - [x] #9: Payment method selector
-- [ ] #11: Admin users mobile interface
+- [x] #11: Admin users mobile interface
 - [x] #12: Select dropdown styling
 
 ---

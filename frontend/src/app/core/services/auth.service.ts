@@ -173,6 +173,41 @@ export class AuthService {
     });
   }
 
+  deleteUserByAdmin(userId: number): Observable<AuthResponse> {
+    return new Observable(observer => {
+      setTimeout(() => {
+        if (this.currentUserValue?.id === userId) {
+          observer.next({
+            success: false,
+            user: null as any,
+            message: 'A saját felhasználó nem törölhető.'
+          });
+          observer.complete();
+          return;
+        }
+
+        const index = MOCK_USERS.findIndex(user => user.id === userId);
+        if (index === -1) {
+          observer.next({
+            success: false,
+            user: null as any,
+            message: 'A felhasználó nem található.'
+          });
+          observer.complete();
+          return;
+        }
+
+        MOCK_USERS.splice(index, 1);
+        observer.next({
+          success: true,
+          user: null as any,
+          message: 'Felhasználó törölve.'
+        });
+        observer.complete();
+      }, 300);
+    });
+  }
+
   // Private helper methods
   private setCurrentUser(user: User, rememberMe: boolean): void {
     const serialized = JSON.stringify(user);

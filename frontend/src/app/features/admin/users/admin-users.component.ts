@@ -139,6 +139,15 @@ interface EditableUserRow {
                 >
                   {{ user.role === 'admin' ? 'Legyen vásárló' : 'Legyen admin' }}
                 </button>
+                <button
+                  mat-button
+                  color="warn"
+                  (click)="deleteUser(user)"
+                  [disabled]="user.id === currentUserId"
+                  aria-label="Felhasználó törlése"
+                >
+                  Törlés
+                </button>
               </ng-container>
 
               <ng-container *ngIf="editingUserId === user.id">
@@ -151,6 +160,51 @@ interface EditableUserRow {
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
+      </div>
+
+      <div class="mobile-users" *ngIf="filteredUsers.length > 0">
+        <article class="user-card" *ngFor="let user of filteredUsers">
+          <button
+            type="button"
+            class="mobile-card-header"
+            (click)="toggleExpanded(user.id)"
+            [attr.aria-expanded]="isExpanded(user.id)"
+          >
+            <div>
+              <p class="mobile-name">{{ user.firstName }} {{ user.lastName }}</p>
+              <p class="mobile-email">{{ user.email }}</p>
+            </div>
+            <span class="mobile-role" [class.admin]="user.role === 'admin'">
+              {{ user.role === 'admin' ? 'Admin' : 'Vásárló' }}
+            </span>
+          </button>
+
+          <div class="mobile-card-body" *ngIf="isExpanded(user.id)">
+            <p><strong>Telefon:</strong> {{ user.phone || '-' }}</p>
+            <p><strong>Város:</strong> {{ user.address?.city || '-' }}</p>
+
+            <div class="mobile-actions" *ngIf="editingUserId !== user.id">
+              <button mat-stroked-button color="primary" (click)="startEdit(user)">Szerkesztés</button>
+              <button mat-stroked-button (click)="toggleRole(user)" [disabled]="user.id === currentUserId">
+                {{ user.role === 'admin' ? 'Legyen vásárló' : 'Legyen admin' }}
+              </button>
+              <button mat-stroked-button color="warn" (click)="deleteUser(user)" [disabled]="user.id === currentUserId">
+                Törlés
+              </button>
+            </div>
+
+            <div class="mobile-edit-grid" *ngIf="editingUserId === user.id">
+              <input class="inline-input" [(ngModel)]="editableRow.firstName" placeholder="Keresztnév" />
+              <input class="inline-input" [(ngModel)]="editableRow.lastName" placeholder="Vezetéknév" />
+              <input class="inline-input" [(ngModel)]="editableRow.phone" placeholder="Telefonszám" />
+              <input class="inline-input" [(ngModel)]="editableRow.city" placeholder="Város" />
+              <div class="mobile-actions">
+                <button mat-raised-button color="primary" (click)="saveEdit(user)">Mentés</button>
+                <button mat-stroked-button (click)="cancelEdit()">Mégse</button>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
 
       <p *ngIf="filteredUsers.length === 0" class="no-results">
@@ -221,6 +275,85 @@ interface EditableUserRow {
       overflow-x: auto;
       border: 1px solid #ececec;
       border-radius: 12px;
+    }
+
+    .mobile-users {
+      display: none;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .user-card {
+      border: 1px solid #ececec;
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .mobile-card-header {
+      width: 100%;
+      text-align: left;
+      border: 0;
+      background: #fff;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .mobile-name {
+      margin: 0;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .mobile-email {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    .mobile-role {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #52525b;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .mobile-role.admin {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .mobile-card-body {
+      padding: 0 12px 12px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .mobile-card-body p {
+      margin: 10px 0 0;
+      color: var(--color-text-primary);
+      font-size: 14px;
+    }
+
+    .mobile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mobile-edit-grid {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
     }
 
     .users-table {
@@ -295,8 +428,12 @@ interface EditableUserRow {
         flex-direction: column;
       }
 
-      .users-table {
-        min-width: 680px;
+      .table-wrapper {
+        display: none;
+      }
+
+      .mobile-users {
+        display: grid;
       }
 
       .name-edit-grid {
@@ -316,6 +453,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   roleFilter: 'all' | 'admin' | 'user' = 'all';
 
   editingUserId: number | null = null;
+  expandedUserId: number | null = null;
   editableRow: EditableUserRow = {
     firstName: '',
     lastName: '',
@@ -380,6 +518,14 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
     };
   }
 
+  toggleExpanded(userId: number): void {
+    this.expandedUserId = this.expandedUserId === userId ? null : userId;
+  }
+
+  isExpanded(userId: number): boolean {
+    return this.expandedUserId === userId;
+  }
+
   saveEdit(user: User): void {
     const firstName = this.editableRow.firstName.trim();
     const lastName = this.editableRow.lastName.trim();
@@ -436,6 +582,41 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
           'OK',
           { duration: 3000 }
         );
+        this.loadUsers();
+      });
+  }
+
+  deleteUser(user: User): void {
+    if (user.id === this.currentUserId) {
+      this.snackBar.open('A saját felhasználó nem törölhető.', 'OK', { duration: 3000 });
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Biztosan törlöd ezt a felhasználót?\n\n${user.firstName} ${user.lastName} (${user.email})`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.authService.deleteUserByAdmin(user.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
+        if (!response.success) {
+          this.snackBar.open(response.message || 'Felhasználó törlése sikertelen.', 'OK', { duration: 3000 });
+          return;
+        }
+
+        if (this.editingUserId === user.id) {
+          this.cancelEdit();
+        }
+
+        if (this.expandedUserId === user.id) {
+          this.expandedUserId = null;
+        }
+
+        this.snackBar.open('Felhasználó törölve.', 'OK', { duration: 2500 });
         this.loadUsers();
       });
   }
