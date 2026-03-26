@@ -1,5 +1,10 @@
 # 🌿 BioMarket – Full-Stack Bio Élelmiszer Webshop
 
+> **Hallgató neve:** Varga Bence Tamás  
+> **Neptun kód:** DE4S8V
+> **Projekt téma:** Bio élelmiszer webshop  
+> **Keretrendszer:** Angular 17 + Spring Boot 3.2.0
+
 **Projekt státusz**: 🟢 1. Mérföldkő lezárás előtt  
 **Határidő**: 2026.03.29. 23:59 CET  
 **Framework**: Angular 17 + Spring Boot 3.2.0
@@ -16,6 +21,80 @@ Modern mobil-barát webalkalmazás fejlesztése Angular frontenddel és Spring B
 - 📅 **Mérföldkő 3** (05.10): Autentikáció, tesztelés, deploy
 
 **📄 Részletes specifikáció**: [SPECIFICATION.md](./docs/SPECIFICATION.md)
+
+---
+
+## 🚀 A projekt indítása (lokális futtatás)
+
+### Előfeltételek
+
+- Node.js 18+
+- npm 10+
+- Java 21 (backendhez)
+- Maven 3.8+ (backendhez)
+- Docker Desktop (opcionális, PostgreSQL-hez)
+
+### Telepítés és futtatás
+
+```bash
+git clone <repo-url>
+cd Mobil-alkfejl-bio-lelmiszer-webshop
+
+# Frontend (M1)
+cd frontend
+npm install
+npm start
+# http://localhost:4200
+
+# Backend (M2-től)
+cd ../backend
+mvn clean install
+mvn spring-boot:run
+# http://localhost:8080/api/swagger-ui.html
+
+# DB (opcionális)
+cd ..
+docker-compose up postgres
+```
+
+### Leállítás
+
+- Frontend/backend futó terminálban: `Ctrl + C`
+- Docker szolgáltatások leállítása: `docker-compose down`
+
+---
+
+## 📱 Letöltés / Telepítés
+
+Jelenleg fejlesztői/teszt környezetben fut lokálisan.
+
+- Web app URL (lokális): `http://localhost:4200`
+- Későbbi tervezett csatornák: GitHub Releases / AWS deploy link
+
+---
+
+## 📁 Projekt struktúra
+
+```text
+.
+├── docs/
+│   ├── SPECIFICATION.md
+│   ├── DATAMODEL.md
+│   ├── COMPONENTS.md
+│   ├── AI_PROMPT_LOG.md
+│   ├── USER_TESTING_GUIDE.md
+│   └── ...
+├── frontend/
+│   ├── src/
+│   ├── angular.json
+│   └── package.json
+├── backend/
+│   ├── src/
+│   ├── pom.xml
+│   └── Dockerfile
+├── docker-compose.yml
+└── README.md
+```
 
 ---
 
@@ -288,6 +367,23 @@ Frontend:
 
 ## 🎯 Fejlesztési Mérföldkövek
 
+| # | Tartalom | Határidő | Állapot |
+|---|----------|----------|---------|
+| 1 | Specifikáció, UI és megjelenés | 2026.03.29. 23:59 | 🟡 Folyamatban |
+| 2 | Backend és adatok | 2026.04.26. 23:59 | ⬜ Tervezett |
+| 3 | Biztonság és tesztelés | 2026.05.10. 23:59 | ⬜ Tervezett |
+
+### Hogyan kérd az értékelést?
+
+1. Commitold és push-old a munkádat a `main` vagy `master` branch-re.
+2. Menj a repó `Actions` fülére.
+3. Válaszd a `Mérföldkő értékelés` workflow-t.
+4. Kattints a `Run workflow` gombra, válaszd ki a mérföldkövet, majd futtasd.
+5. Az eredmény egy GitHub Issue-ban jelenik meg.
+
+> ⚠️ Mérföldkőnként maximum 2 alkalommal futtatható az értékelés.
+> ⚠️ A határidőkön automatikus értékelés is fut.
+
 ### 1️⃣ Mérföldkő: UI és Megjelenés
 
 **Beadási határidő: 2026.03.29. 23:59**
@@ -368,21 +464,8 @@ Mobil Alkalmazásfejlesztés – 2026
 
 ---
 
-## 🚀 Gyors Start
+## ⚠️ Fontos
 
-```bash
-# Frontend (Angular) - 1. mérföldkő
-cd frontend
-npm install
-npm start
-# http://localhost:4200
-
-# Backend (Spring Boot) - 2. mérföldkőtől
-cd ../backend
-mvn clean install
-mvn spring-boot:run
-# http://localhost:8080/api/swagger-ui.html
-
-# Database (Docker) - opcionális
-docker-compose up postgres
-```
+- A `.github/workflows/` könyvtár tartalmát ne módosítsd.
+- A dokumentációs fájlokat a `docs/` mappában tartsd.
+- Az `AI_PROMPT_LOG.md` fájlt a `docs/` mappában vezesd.
