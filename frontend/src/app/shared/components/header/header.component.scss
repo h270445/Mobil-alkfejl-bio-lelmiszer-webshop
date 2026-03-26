@@ -257,6 +257,15 @@ header {
   }
 }
 
+// Hide greeting on tablet and smaller
+@media (max-width: 1199px) {
+  .user-menu-section {
+    .desktop-greeting {
+      display: none;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .header-toolbar {
     padding: 8px 12px;
@@ -320,10 +329,6 @@ header {
     min-width: auto;
     gap: 4px;
     flex: 0 0 auto;
-
-    .desktop-greeting {
-      display: none;
-    }
 
     button:not(.cart-button) mat-icon {
       margin-right: 0;
