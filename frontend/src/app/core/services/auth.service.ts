@@ -228,7 +228,11 @@ export class AuthService {
     const sessionUser = sessionStorage.getItem(this.STORAGE_KEY);
     if (sessionUser) {
       try {
-        return JSON.parse(sessionUser);
+        const parsed = JSON.parse(sessionUser) as User;
+        return {
+          ...parsed,
+          createdAt: parsed.createdAt ? new Date(parsed.createdAt) : new Date()
+        };
       } catch (error) {
         console.error('Error parsing session user:', error);
         sessionStorage.removeItem(this.STORAGE_KEY);
@@ -238,7 +242,11 @@ export class AuthService {
     const localUser = localStorage.getItem(this.STORAGE_KEY);
     if (localUser) {
       try {
-        return JSON.parse(localUser);
+        const parsed = JSON.parse(localUser) as User;
+        return {
+          ...parsed,
+          createdAt: parsed.createdAt ? new Date(parsed.createdAt) : new Date()
+        };
       } catch (error) {
         console.error('Error parsing local user:', error);
         localStorage.removeItem(this.STORAGE_KEY);

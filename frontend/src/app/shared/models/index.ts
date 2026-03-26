@@ -1,3 +1,5 @@
+export type TemporalValue = Date | string;
+
 // User model
 export interface User {
   id: number;
@@ -9,7 +11,7 @@ export interface User {
   phone?: string;
   address?: Address;
   notificationAddress?: Address;
-  createdAt: Date;
+  createdAt: TemporalValue;
 }
 
 // Address model
@@ -36,8 +38,8 @@ export interface Product {
   inStock: boolean;
   stockQuantity: number;
   isActive: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: TemporalValue;
+  updatedAt?: TemporalValue;
 }
 
 // Order model
@@ -50,8 +52,8 @@ export interface Order {
   status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
   shippingAddress: Address;
   notificationAddress?: Address;
-  createdAt: Date;
-  updatedAt?: Date;
+  createdAt: TemporalValue;
+  updatedAt?: TemporalValue;
 }
 
 export type PaymentMethod = 'paypal' | 'bank-transfer' | 'cod' | 'card';
@@ -59,6 +61,7 @@ export type PaymentMethod = 'paypal' | 'bank-transfer' | 'cod' | 'card';
 // OrderItem model
 export interface OrderItem {
   id: number;
+  orderId?: number;
   productId: number;
   productName: string;
   quantity: number;
@@ -103,5 +106,33 @@ export interface Comment {
   userName: string;
   text: string;
   rating: 1 | 2 | 3 | 4 | 5;
-  timestamp: Date;
+  timestamp: TemporalValue;
+}
+
+// Backend DTO-like structures for explicit conversion boundaries
+export interface UserDto extends Omit<User, 'createdAt'> {
+  createdAt: string;
+}
+
+export interface ProductDto extends Omit<Product, 'createdAt' | 'updatedAt'> {
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface OrderItemDto extends OrderItem {
+  orderId: number;
+}
+
+export interface OrderDto extends Omit<Order, 'createdAt' | 'updatedAt' | 'items'> {
+  createdAt: string;
+  updatedAt?: string;
+  items: OrderItemDto[];
+}
+
+export interface CommentDto extends Omit<Comment, 'timestamp'> {
+  timestamp: string;
+}
+
+export function toIsoDate(value: TemporalValue): string {
+  return value instanceof Date ? value.toISOString() : new Date(value).toISOString();
 }

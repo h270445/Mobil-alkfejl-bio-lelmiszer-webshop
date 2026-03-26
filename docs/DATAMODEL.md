@@ -2,7 +2,7 @@
 
 **Projekt**: BioMarket - Bio Élelmiszer Webshop  
 **Verzió**: 1.0.0  
-**Utolsó frissítés**: 2026.03.04
+**Utolsó frissítés**: 2026.03.26
 
 ---
 
@@ -342,6 +342,10 @@ Egy rendelés szállított tételeit tartalmazza. Szétválasztva a Product-tól
 - quantity: > 0
 - priceAtPurchase: > 0
 
+**Frontend átmeneti szabály (M1 -> M2)**:
+- A frontend kliensoldali modellben az `orderId` opcionális lehet az order létrehozása előtt.
+- Mentéskor a rendszer minden `OrderItem` rekordhoz hozzárendeli a létrejött rendelés azonosítóját.
+
 ---
 
 ### 8️⃣ **Favorites** (Kedvencek - N:M Junction Table)
@@ -557,6 +561,11 @@ Az adatmodell **3. normál formában (3NF)** van:
 - 50-60 Review (mock)
 - Üres Order[], Address[], Favorites[] (mock inicializálva)
 
+**Frontend-backend kompatibilitási réteg**:
+- A frontend időbélyeg mezői (pl. `createdAt`, `updatedAt`, `orderDate`) `Date | string` formában kezelhetők.
+- API hívások határán DTO-alapú konverzió történik (ISO string normalizálás), így a localStorage-alapú és backendes működés párhuzamosan fenntartható.
+- A betöltés során a régi localStorage rekordok normalizálása megtörténik, hogy visszafelé kompatibilis maradjon az alkalmazás.
+
 ### Backend (Milestone 2+)
 
 **Adatbázis** (PostgreSQL):
@@ -581,10 +590,10 @@ Az adatmodell **3. normál formában (3NF)** van:
 - ✅ **Értelmes kapcsolatok**: 1:N, N:M, szeparáció
 - ✅ **Normalizálás**: 3NF-ben
 - ✅ **Mock adatok**: 18 Product, 3 User, 6 Category, 50+ Review
-- ✅ **Frontend-Backend szeparáció**: CartItem transziens, Favorites N:M
+- ✅ **Frontend-Backend szeparáció**: CartItem transziens, Favorites N:M, DTO konverziós határ és időbélyeg normalizálás
 
 ---
 
 **Verzió**: 1.0.0  
-**Utolsó frissítés**: 2026.03.04  
+**Utolsó frissítés**: 2026.03.26  
 **Készítette**: BioMarket Development Team

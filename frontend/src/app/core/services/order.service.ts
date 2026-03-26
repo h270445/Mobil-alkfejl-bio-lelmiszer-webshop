@@ -29,9 +29,15 @@ export class OrderService {
   ): Observable<Order> {
     return new Observable(observer => {
       setTimeout(() => {
+        // Generate new order ID
+        const newOrderId = this.orders.length > 0
+          ? Math.max(...this.orders.map(o => o.id)) + 1
+          : 1;
+
         // Convert CartItems to OrderItems
         const orderItems: OrderItem[] = cartItems.map((item, index) => ({
           id: index + 1,
+          orderId: newOrderId,
           productId: item.product.id,
           productName: item.product.name,
           quantity: item.quantity,
@@ -43,11 +49,6 @@ export class OrderService {
           (sum, item) => sum + (item.priceAtPurchase * item.quantity),
           0
         );
-
-        // Generate new order ID
-        const newOrderId = this.orders.length > 0
-          ? Math.max(...this.orders.map(o => o.id)) + 1
-          : 1;
 
         // Create order
         const newOrder: Order = {
@@ -172,7 +173,17 @@ export class OrderService {
     const storedOrders = localStorage.getItem(this.STORAGE_KEY);
     if (storedOrders) {
       try {
-        this.orders = JSON.parse(storedOrders);
+        const parsed = JSON.parse(storedOrders) as Order[];
+        this.orders = parsed.map(order => ({
+          ...order,
+          createdAt: new Date(order.createdAt),
+          updatedAt: order.updatedAt ? new Date(order.updatedAt) : undefined,
+          items: (order.items ?? []).map((item, index) => ({
+            ...item,
+            id: item.id ?? index + 1,
+            orderId: item.orderId ?? order.id
+          }))
+        }));
       } catch (error) {
         console.error('Error parsing stored orders:', error);
         localStorage.removeItem(this.STORAGE_KEY);
