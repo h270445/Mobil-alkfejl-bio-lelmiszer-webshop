@@ -108,7 +108,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
         const addResult = this.cartService.addToCart(latestProduct, requestedQuantity);
         if (addResult.addedQuantity > 0) {
-          this.cartFeedbackService.showAddToCartStatus(latestProduct.name, addResult.addedQuantity);
+          this.cartFeedbackService.showAddToCartStatus(latestProduct, addResult);
         } else {
           this.cartFeedbackService.showPurchaseFailedStatus(
             'A kiválasztott mennyiség már nem rendelhető, ezért a vásárlás nem sikerült.'

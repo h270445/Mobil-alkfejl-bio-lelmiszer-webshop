@@ -275,7 +275,7 @@ export class HomeComponent implements OnInit {
   onAddToCart(product: Product): void {
     const addResult = this.cartService.addToCart(product, 1);
     if (addResult.addedQuantity > 0) {
-      this.cartFeedbackService.showAddToCartStatus(product.name, addResult.addedQuantity);
+      this.cartFeedbackService.showAddToCartStatus(product, addResult);
       return;
     }
 

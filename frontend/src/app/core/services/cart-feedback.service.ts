@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { AddToCartResult, CartService } from './cart.service';
+import { Product } from '../../shared/models';
 
 import {
   CartStatusDialogComponent,
@@ -13,23 +15,27 @@ import {
   providedIn: 'root'
 })
 export class CartFeedbackService {
-  private readonly SUPPRESS_ADD_TO_CART_KEY = 'biomarket_suppress_add_to_cart_popup';
-
   constructor(
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) {}
 
-  showAddToCartStatus(productName: string, quantity: number): void {
-    if (!this.isAddToCartPopupEnabled()) {
-      return;
-    }
-
-    const quantityText = quantity > 1 ? `${quantity} db` : '1 db';
+  showAddToCartStatus(product: Product, addResult: AddToCartResult): void {
+    const quantityText = addResult.addedQuantity > 1 ? `${addResult.addedQuantity} db` : '1 db';
+    const previousQuantity = Math.max(0, addResult.finalQuantity - addResult.addedQuantity);
     this.openStatusDialog({
       type: 'add-to-cart',
-      message: `${quantityText} ${productName} sikeresen a kosárba került.`,
-      showDoNotShowAgain: true
+      productId: product.id,
+      productName: product.name,
+      addedQuantity: addResult.addedQuantity,
+      finalQuantity: addResult.finalQuantity,
+      previousQuantity,
+      availableStock: addResult.availableStock,
+      message: `${quantityText} ${product.name} sikeresen a kosárba került.`,
+      showDoNotShowAgain: false,
+      continueLabel: 'Tovább',
+      cartLabel: 'Kosár megtekintése'
     });
   }
 
@@ -53,17 +59,13 @@ export class CartFeedbackService {
     });
   }
 
+  // Compatibility methods used by profile settings.
   isAddToCartPopupEnabled(): boolean {
-    return localStorage.getItem(this.SUPPRESS_ADD_TO_CART_KEY) !== 'true';
+    return true;
   }
 
-  setAddToCartPopupEnabled(enabled: boolean): void {
-    if (enabled) {
-      localStorage.removeItem(this.SUPPRESS_ADD_TO_CART_KEY);
-      return;
-    }
-
-    localStorage.setItem(this.SUPPRESS_ADD_TO_CART_KEY, 'true');
+  setAddToCartPopupEnabled(_enabled: boolean): void {
+    // Intentionally no-op: add-to-cart notification is now always shown.
   }
 
   private openStatusDialog(data: CartStatusDialogData): void {
@@ -78,8 +80,13 @@ export class CartFeedbackService {
         return;
       }
 
-      if (result.suppressFuture && data.type === 'add-to-cart') {
-        localStorage.setItem(this.SUPPRESS_ADD_TO_CART_KEY, 'true');
+      if (result.action === 'undo' && (data.productId ?? 0) > 0) {
+        this.cartService.updateQuantity(data.productId!, data.previousQuantity ?? 0);
+        return;
+      }
+
+      if (data.type === 'add-to-cart' && (data.productId ?? 0) > 0 && typeof result.selectedQuantity === 'number') {
+        this.cartService.updateQuantity(data.productId!, result.selectedQuantity);
       }
 
       if (result.action === 'cart') {
