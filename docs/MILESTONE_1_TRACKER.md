@@ -420,7 +420,7 @@ After comprehensive smoke testing and user testing, 12 issues were identified re
 
 ### Issue Tracking
 
-See **SMOKE_TEST_ISSUES.md** for complete documentation of all 12 issues.
+See **archive/smoke/SMOKE_TEST_ISSUES_2026-03-26.md** for the archived, complete documentation of all 12 issues.
 
 ### Phase 1 (March 26) - Critical Fixes
 
@@ -444,8 +444,8 @@ See **SMOKE_TEST_ISSUES.md** for complete documentation of all 12 issues.
 
 ## UPDATE 2026.03.26 - End of Day
 
-- Smoke issue fixes completed: #1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #12.
-- Remaining open issue for M1 scope review: #11 (Admin users mobile interface).
+- Smoke issue fixes completed: #1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12.
+- M1 smoke-test issue scope is fully completed.
 - Scroll-to-top behavior was reinforced globally on route changes.
 - Reviews/comments feature is implemented with write/list/filter flow.
 - Known non-blocking note: mock review seeding can depend on existing localStorage state.

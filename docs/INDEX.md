@@ -86,6 +86,16 @@ Tartalom:
 
 ---
 
+### 🗂️ [archive/smoke/SMOKE_TEST_ISSUES_2026-03-26.md](./archive/smoke/SMOKE_TEST_ISSUES_2026-03-26.md)
+**Archivált M1 smoke test riport (lezárt állapot)**
+
+Tartalom:
+- 12 azonosított issue teljes státuszlistája
+- Javítási összefoglaló és priorizáció
+- M1 lezárási snapshot
+
+---
+
 ## 🚀 Gyors Start
 
 ### 1. Klónozd a repository-t
@@ -188,4 +198,4 @@ Mobil Alkalmazásfejlesztés kurzus – SZTE, 2026
 
 ---
 
-**Utolsó frissítés**: 2026.03.09 (nap 9-10 smoke test complete, handoff ready)
+**Utolsó frissítés**: 2026.03.26 (M1 smoke report archiválva)
