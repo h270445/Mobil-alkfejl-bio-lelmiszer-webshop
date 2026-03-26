@@ -171,6 +171,15 @@ header {
   justify-content: flex-end;
   margin-left: auto;
 
+  .desktop-greeting {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    max-width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
     .cart-button {
       margin-left: 4px; // Adjusted margin for better alignment
       flex: 0 0 auto;
@@ -311,6 +320,10 @@ header {
     min-width: auto;
     gap: 4px;
     flex: 0 0 auto;
+
+    .desktop-greeting {
+      display: none;
+    }
 
     button:not(.cart-button) mat-icon {
       margin-right: 0;

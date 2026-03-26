@@ -51,6 +51,9 @@
 
       <!-- Logged in -->
       <ng-container *ngIf="isLoggedIn">
+        <span class="desktop-greeting" *ngIf="!isMinimalMode">
+          Üdvözlünk, {{ userName }}!
+        </span>
         <button mat-icon-button [matMenuTriggerFor]="userMenu">
           <img src="assets/images/account-circle-icon.svg" alt="Profil" class="button-icon" />
         </button>
