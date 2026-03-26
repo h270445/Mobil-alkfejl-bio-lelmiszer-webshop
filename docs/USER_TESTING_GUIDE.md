@@ -24,7 +24,7 @@ Ha a fejlesztő már elindította az oldalt, csak nyisd meg ezt:
 - http://localhost:4200
 
 ### 2.2. Ha neked kell elindítani
-1. Nyisd meg a projekt mappáját VS Code-ban.
+1. Nyisd meg a projekt mappáját VS Code-ban vagy fájlkezelőben.
 2. Nyiss egy Terminált.
 3. Futtasd:
 
@@ -38,6 +38,12 @@ npm start
 - http://localhost:4200
 
 Ha hiba van induláskor, jelezd a fejlesztőnek, és küldd el a hibaüzenetet (képernyőfotóval).
+
+### 2.3. Leállítás (ha befejezted a tesztet)
+1. Menj vissza a terminál ablakba, ahol az `npm start` fut.
+2. Nyomd meg: `Ctrl + C`
+3. Ha rákérdez, hogy biztos leállítod-e (`Terminate batch job (Y/N)?`), nyomd meg: `Y`, majd Enter.
+4. Ezután bezárhatod a böngészőt és a terminált.
 
 ---
 
