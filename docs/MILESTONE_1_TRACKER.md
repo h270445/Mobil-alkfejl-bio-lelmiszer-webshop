@@ -451,3 +451,15 @@ See **archive/smoke/SMOKE_TEST_ISSUES_2026-03-26.md** for the archived, complete
 - Known non-blocking note: mock review seeding can depend on existing localStorage state.
 
 ---
+
+## HOLNAPI TODO (2026.03.27)
+
+**Kötelező sorrend:**
+
+1. [ ] Admin felületen **review kezelés** mobil nézetes tömörítése (a többi admin oldal mintájára: kártyás/collapse megjelenítés).
+2. [ ] Admin felületen **rendeléskezelés** mobil nézetes tömörítése (a többi admin oldal mintájára: kártyás/collapse megjelenítés).
+3. [ ] Gyors regressziós ellenőrzés mobil breakpointokon (375/390/768/1024) az admin review + orders nézeteken.
+4. [ ] **Csak ezután** repo migrálás a beadási repó `master` branchére.
+5. [ ] Végső leadás/értékelés indítása.
+
+---
