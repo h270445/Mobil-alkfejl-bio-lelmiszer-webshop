@@ -53,8 +53,8 @@
   - [x] Correct removal notification message text
   - [x] Improve clear-cart confirmation text
 
-### 6. ❌ Comments Feature Missing
-- **Status**: Not started
+### 6. ✅ Comments Feature (Ratings + Text + Filter)
+- **Status**: Completed (2026-03-26)
 - **Description**: Cannot write comments on products; need reader and writer views
 - **Affected Files**: 
   - New: `features/products/product-comments/`
@@ -63,22 +63,22 @@
   - `core/services/comment.service.ts` (new)
 - **Priority**: HIGH (Feature requirement)
 - **Changes Needed**:
-  - Create Comment model (id, productId, userId, text, rating, timestamp)
-  - Create CommentService with CRUD operations
-  - Create product-comments component with reader/writer views
-  - Integrate into product-detail page
+  - [x] Create Comment model (id, productId, userId, text, rating, timestamp)
+  - [x] Create CommentService with CRUD operations
+  - [x] Integrate comment reader/writer view into product detail page
+  - [x] Add rating filter (All, 5⭐, 4⭐, 3⭐, 2⭐, 1⭐)
 
-### 7. ❌ Footer Typo & Twitter → X Logo
-- **Status**: Not started
+### 7. ✅ Footer Typo & Twitter → X Logo
+- **Status**: Completed (2026-03-26)
 - **Description**: 
   - Typo in footer text
   - Twitter social link should be X (rebranding)
 - **Affected Files**: `shared/components/footer/footer.component.ts`, `shared/components/footer/footer.component.html`
 - **Priority**: LOW (Brand/cosmetic)
 - **Changes Needed**:
-  - Fix footer text typo
-  - Replace 'twitter' with 'x' branding
-  - Update icon to X logo
+  - [x] Fix footer typo and wording cleanup
+  - [x] Replace 'Twitter' with 'X' branding
+  - [x] Update icon to X logo
 
 ### 8. ✅ Address Fields Separation
 - **Status**: Completed (2026-03-26)
@@ -130,15 +130,15 @@
   - Add delete button/confirmation dialog for users
   - Update UserService with deleteUser() method if needed
 
-### 12. ❌ Select Dropdown Transparent Background
-- **Status**: Not started
+### 12. ✅ Select Dropdown Transparent Background
+- **Status**: Completed (2026-03-26)
 - **Description**: Dropdown select elements have transparent background, making text hard to read
 - **Affected Files**: `styles.scss`, component-level styles (admin pages)
 - **Priority**: MEDIUM (Accessibility, readability)
 - **Changes Needed**:
-  - Add background color to Material select components
-  - Ensure sufficient contrast for text readability
-  - Apply fix globally via styles.scss or Material theme override
+  - [x] Add background color to Material select components
+  - [x] Ensure sufficient contrast for text readability
+  - [x] Apply fix globally via styles.scss (Material theme override)
 
 ---
 
@@ -182,3 +182,12 @@
 - After each fix, run `npm run build` to verify no regressions
 - Update test results in test-results/ folder
 - Update MILESTONE_1_TRACKER.md after each phase completion
+
+### 2026-03-26 Update
+
+- Scroll-to-top behavior was reinforced globally via router navigation handling to avoid mid-page landing on route changes.
+- Comments/reviews flow was implemented with create + list + rating-based filter.
+- Footer branding and typo cleanups were completed (Twitter -> X).
+- Dropdown transparency fix is active globally.
+- Remaining non-blocking item for M1: Issue #11 (Admin users mobile collapse + delete).
+- Open note: if old localStorage data exists, comment seed/mocks may require storage reset to verify initial seeded set.

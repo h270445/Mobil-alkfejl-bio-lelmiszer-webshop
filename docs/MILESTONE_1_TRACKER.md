@@ -424,20 +424,30 @@ See **SMOKE_TEST_ISSUES.md** for complete documentation of all 12 issues.
 
 ### Phase 1 (March 26) - Critical Fixes
 
-- [ ] #1: Order summary detail + typo fix
-- [ ] #4: Scroll position reset on navigation  
-- [ ] #5: Cart deletion notification typo
-- [ ] #10: Free shipping at 3500 Ft threshold
+- [x] #1: Order summary detail + typo fix
+- [x] #4: Scroll position reset on navigation  
+- [x] #5: Cart deletion notification typo
+- [x] #10: Free shipping at 3500 Ft threshold
 
 ### Phase 2-4 (March 27) - Remaining Issues
 
-- [ ] #2: Notification address in profile/orders
-- [ ] #3: Registration form enhancements
-- [ ] #6: Comments feature implementation
-- [ ] #7: Footer typo + Twitter to X update
-- [ ] #8: Address field separation
-- [ ] #9: Payment method selector
+- [x] #2: Notification address in profile/orders
+- [x] #3: Registration form enhancements
+- [x] #6: Comments feature implementation
+- [x] #7: Footer typo + Twitter to X update
+- [x] #8: Address field separation
+- [x] #9: Payment method selector
 - [ ] #11: Admin users mobile interface
-- [ ] #12: Select dropdown styling
+- [x] #12: Select dropdown styling
+
+---
+
+## UPDATE 2026.03.26 - End of Day
+
+- Smoke issue fixes completed: #1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #12.
+- Remaining open issue for M1 scope review: #11 (Admin users mobile interface).
+- Scroll-to-top behavior was reinforced globally on route changes.
+- Reviews/comments feature is implemented with write/list/filter flow.
+- Known non-blocking note: mock review seeding can depend on existing localStorage state.
 
 ---

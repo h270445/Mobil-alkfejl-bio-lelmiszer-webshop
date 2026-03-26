@@ -17,6 +17,10 @@ Cel: a promptok, dontesek, javitasok es tanulsagok nyomon kovetese.
 | 8 | 2026-03-09 | Esztetikai hiba | "A keresesi ikon erinti a box szelet" | Prefix icon spacing szabaly desktop+mobil mezore | Elfogadva, implementalva |
 | 9 | 2026-03-09 | Floating CTA utkozes | "Fel ikon es FAB ugyanott van" | Route-fuggo eltolas a back-to-top gombnak | Elfogadva, implementalva |
 | 10 | 2026-03-09 | Auth alert UI | "Nincs megfelelo ikon az error bezarasahoz" | Material close icon -> SVG close-icon csere | Elfogadva, implementalva |
+| 11 | 2026-03-26 | Checkout/Order UX | "Legyen kulon szallitasi es ertesitesi cim + fizetesi mod" | Modell bovitese + checkout/profile/order flow frissites | Elfogadva, implementalva |
+| 12 | 2026-03-26 | Product review feature | "Legyen komment + ertekeles, szures csillag alapjan" | CommentService + product detail review UI + rating filter | Elfogadva, implementalva |
+| 13 | 2026-03-26 | Header/responsive polish | "Desktop koszones iPaden legyen elrejtve" | Breakpoint emeles 1200px-re | Elfogadva, implementalva |
+| 14 | 2026-03-26 | Navigation UX bug | "Navigaciokor felulrol induljon az oldal" | Globalis scroll-top megerositese AppComponent route eventtel | Elfogadva, implementalva |
 
 ## 2. Dokumentalt Dontesek (elfogadas/modositas/elutasitas)
 
@@ -60,4 +64,4 @@ Minden jelentosebb blokk utan (feature, bugfix, refactor) rogzits:
 
 ---
 
-Utolso frissites: 2026-03-09
+Utolso frissites: 2026-03-26
