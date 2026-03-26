@@ -10,7 +10,15 @@ export const MOCK_USERS: User[] = [
     role: 'admin',
     phone: '+36 1 234 5678',
     address: {
-      street: 'Bio utca 10.',
+      street: 'Bio utca',
+      houseNumber: '10.',
+      city: 'Budapest',
+      zipCode: '1234',
+      country: 'Magyarország'
+    },
+    notificationAddress: {
+      street: 'Bio utca',
+      houseNumber: '10.',
       city: 'Budapest',
       zipCode: '1234',
       country: 'Magyarország'
@@ -26,7 +34,15 @@ export const MOCK_USERS: User[] = [
     role: 'user',
     phone: '+36 30 123 4567',
     address: {
-      street: 'Fő utca 25.',
+      street: 'Fő utca',
+      houseNumber: '25.',
+      city: 'Budapest',
+      zipCode: '1011',
+      country: 'Magyarország'
+    },
+    notificationAddress: {
+      street: 'Fő utca',
+      houseNumber: '25.',
       city: 'Budapest',
       zipCode: '1011',
       country: 'Magyarország'
@@ -42,7 +58,15 @@ export const MOCK_USERS: User[] = [
     role: 'user',
     phone: '+36 70 987 6543',
     address: {
-      street: 'Kossuth tér 12.',
+      street: 'Kossuth tér',
+      houseNumber: '12.',
+      city: 'Debrecen',
+      zipCode: '4024',
+      country: 'Magyarország'
+    },
+    notificationAddress: {
+      street: 'Kossuth tér',
+      houseNumber: '12.',
       city: 'Debrecen',
       zipCode: '4024',
       country: 'Magyarország'

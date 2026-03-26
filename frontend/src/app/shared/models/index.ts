@@ -8,12 +8,14 @@ export interface User {
   role: 'user' | 'admin';
   phone?: string;
   address?: Address;
+  notificationAddress?: Address;
   createdAt: Date;
 }
 
 // Address model
 export interface Address {
   street: string;
+  houseNumber: string;
   city: string;
   zipCode: string;
   country: string;
@@ -46,6 +48,7 @@ export interface Order {
   totalPrice: number;
   status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
   shippingAddress: Address;
+  notificationAddress?: Address;
   createdAt: Date;
   updatedAt?: Date;
 }

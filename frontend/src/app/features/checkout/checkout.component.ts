@@ -81,14 +81,24 @@ import { CartItem, Address } from '../../shared/models';
             <!-- Address Fields -->
             <div class="form-section">
               <h3>Szállítási Adatok</h3>
-              
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Utca és házszám</mat-label>
-                <input matInput formControlName="street" placeholder="pl. Fő utca 123">
-                <mat-error *ngIf="checkoutForm.get('street')?.hasError('required')">
-                  Az utca megadása kötelező
-                </mat-error>
-              </mat-form-field>
+
+              <div class="form-row">
+                <mat-form-field appearance="fill" class="half-width">
+                  <mat-label>Utca</mat-label>
+                  <input matInput formControlName="street" placeholder="pl. Fő utca">
+                  <mat-error *ngIf="checkoutForm.get('street')?.hasError('required')">
+                    Az utca megadása kötelező
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="half-width">
+                  <mat-label>Házszám</mat-label>
+                  <input matInput formControlName="houseNumber" placeholder="pl. 123">
+                  <mat-error *ngIf="checkoutForm.get('houseNumber')?.hasError('required')">
+                    A házszám megadása kötelező
+                  </mat-error>
+                </mat-form-field>
+              </div>
 
               <mat-form-field appearance="fill" class="full-width">
                 <mat-label>Város</mat-label>
@@ -116,9 +126,46 @@ import { CartItem, Address } from '../../shared/models';
                 </mat-form-field>
               </div>
 
+              <h3>Értesítési adatok</h3>
+
+              <mat-checkbox formControlName="notificationSameAsShipping" class="save-checkbox">
+                Értesítési cím megegyezik a szállítási címmel
+              </mat-checkbox>
+
+              <div *ngIf="!checkoutForm.get('notificationSameAsShipping')?.value">
+                <div class="form-row">
+                  <mat-form-field appearance="fill" class="half-width">
+                    <mat-label>Értesítési utca</mat-label>
+                    <input matInput formControlName="notificationStreet" placeholder="pl. Fő utca">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" class="half-width">
+                    <mat-label>Értesítési házszám</mat-label>
+                    <input matInput formControlName="notificationHouseNumber" placeholder="pl. 123">
+                  </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>Értesítési város</mat-label>
+                  <input matInput formControlName="notificationCity" placeholder="pl. Budapest">
+                </mat-form-field>
+
+                <div class="form-row">
+                  <mat-form-field appearance="fill" class="half-width">
+                    <mat-label>Értesítési irányítószám</mat-label>
+                    <input matInput formControlName="notificationZipCode" placeholder="pl. 1011">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" class="half-width">
+                    <mat-label>Értesítési ország</mat-label>
+                    <input matInput formControlName="notificationCountry" placeholder="pl. Magyarország">
+                  </mat-form-field>
+                </div>
+              </div>
+
               <!-- Save to Profile Option -->
               <mat-checkbox formControlName="saveToProfile" class="save-checkbox">
-                Szállítási cím mentése a profilba
+                Szállítási és értesítési cím mentése a profilba
               </mat-checkbox>
             </div>
 
@@ -584,9 +631,17 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   private initializeForm() {
     const currentUser = this.authService.currentUserValue;
-    const savedAddress: Address = currentUser?.address || { street: '', city: '', zipCode: '', country: '' };
+    const savedAddress: Address = currentUser?.address || {
+      street: '',
+      houseNumber: '',
+      city: '',
+      zipCode: '',
+      country: ''
+    };
+    const savedNotificationAddress: Address = currentUser?.notificationAddress || savedAddress;
     this.addressPrefilled = !!(
       currentUser?.address?.street ||
+      currentUser?.address?.houseNumber ||
       currentUser?.address?.city ||
       currentUser?.address?.zipCode ||
       currentUser?.address?.country
@@ -594,9 +649,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
     this.checkoutForm = this.fb.group({
       street: [savedAddress.street || '', Validators.required],
+      houseNumber: [savedAddress.houseNumber || '', Validators.required],
       city: [savedAddress.city || '', Validators.required],
       zipCode: [savedAddress.zipCode || '', Validators.required],
       country: [savedAddress.country || 'Magyarország', Validators.required],
+      notificationSameAsShipping: [true],
+      notificationStreet: [savedNotificationAddress.street || ''],
+      notificationHouseNumber: [savedNotificationAddress.houseNumber || ''],
+      notificationCity: [savedNotificationAddress.city || ''],
+      notificationZipCode: [savedNotificationAddress.zipCode || ''],
+      notificationCountry: [savedNotificationAddress.country || 'Magyarország'],
       saveToProfile: [false]
     });
   }
@@ -649,29 +711,42 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
     const shippingAddress: Address = {
       street: this.checkoutForm.get('street')?.value,
+      houseNumber: this.checkoutForm.get('houseNumber')?.value,
       city: this.checkoutForm.get('city')?.value,
       zipCode: this.checkoutForm.get('zipCode')?.value,
       country: this.checkoutForm.get('country')?.value
     };
 
+    const notificationSameAsShipping = !!this.checkoutForm.get('notificationSameAsShipping')?.value;
+    const notificationAddress: Address = notificationSameAsShipping
+      ? { ...shippingAddress }
+      : {
+          street: this.checkoutForm.get('notificationStreet')?.value,
+          houseNumber: this.checkoutForm.get('notificationHouseNumber')?.value,
+          city: this.checkoutForm.get('notificationCity')?.value,
+          zipCode: this.checkoutForm.get('notificationZipCode')?.value,
+          country: this.checkoutForm.get('notificationCountry')?.value
+        };
+
     // Save to profile if selected
     if (this.checkoutForm.get('saveToProfile')?.value) {
       this.authService.updateProfile({
         ...currentUser,
-        address: shippingAddress
+        address: shippingAddress,
+        notificationAddress
       });
     }
 
     // Create order
-    this.createOrder(currentUser.id, shippingAddress);
+    this.createOrder(currentUser.id, shippingAddress, notificationAddress);
   }
 
-  private createOrder(userId: number, shippingAddress: Address) {
+  private createOrder(userId: number, shippingAddress: Address, notificationAddress: Address) {
     const submittedItems = this.cartItems.map(item => ({ ...item }));
     const submittedSubTotal = this.subTotal;
     const submittedShippingCost = this.shippingCost;
 
-    this.orderService.createOrder(userId, this.cartItems, shippingAddress)
+    this.orderService.createOrder(userId, this.cartItems, shippingAddress, notificationAddress)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (order) => {

@@ -395,10 +395,12 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
       phone: this.editableRow.phone.trim(),
       address: {
         street: user.address?.street ?? '',
+        houseNumber: user.address?.houseNumber ?? '',
         city: this.editableRow.city.trim(),
         zipCode: user.address?.zipCode ?? '',
         country: user.address?.country ?? 'Magyarország'
-      }
+      },
+      notificationAddress: user.notificationAddress
     })
     .pipe(takeUntil(this.destroy$))
     .subscribe(response => {

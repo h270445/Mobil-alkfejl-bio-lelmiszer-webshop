@@ -65,9 +65,16 @@ import { Order } from '../../shared/models';
         <!-- Shipping address -->
         <section class="section">
           <h2>Szállítási cím</h2>
-          <p>{{ order.shippingAddress.street }}</p>
+          <p>{{ order.shippingAddress.street }} {{ order.shippingAddress.houseNumber }}</p>
           <p>{{ order.shippingAddress.zipCode }} {{ order.shippingAddress.city }}</p>
           <p>{{ order.shippingAddress.country }}</p>
+        </section>
+
+        <section class="section" *ngIf="order.notificationAddress">
+          <h2>Értesítési cím</h2>
+          <p>{{ order.notificationAddress.street }} {{ order.notificationAddress.houseNumber }}</p>
+          <p>{{ order.notificationAddress.zipCode }} {{ order.notificationAddress.city }}</p>
+          <p>{{ order.notificationAddress.country }}</p>
         </section>
 
         <!-- Cancel button -->

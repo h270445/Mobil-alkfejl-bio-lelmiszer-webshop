@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User, LoginRequest, RegisterRequest, AuthResponse } from '../../shared/models';
 import { MOCK_USERS, validateCredentials, findUserByEmail } from '../../shared/mock-data';
 
-type UserEditableFields = Pick<User, 'firstName' | 'lastName' | 'phone' | 'address'>;
+type UserEditableFields = Pick<User, 'firstName' | 'lastName' | 'phone' | 'address' | 'notificationAddress'>;
 
 @Injectable({
   providedIn: 'root'

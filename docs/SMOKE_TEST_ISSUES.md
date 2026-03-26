@@ -14,15 +14,15 @@
   - [x] Fix typo in success message (`Továbbá Vásárlás` -> `További vásárlás`)
   - [x] Add detailed order summary with items, quantities, prices, shipping cost
 
-### 2. ❌ Missing Notification Address
-- **Status**: Not started
+### 2. ✅ Missing Notification Address
+- **Status**: Completed (2026-03-26)
 - **Description**: Profile page and order details missing notification/shipping address field
 - **Affected Files**: `features/profile/profile-settings.component.ts`, `shared/models/index.ts`, `features/orders/order-detail.component.ts`
 - **Priority**: HIGH (Data model, functional)
 - **Changes Needed**:
-  - Add notificationAddress field to User model
-  - Update profile form to include notification address
-  - Display notification address in order details
+  - [x] Add notificationAddress field to User and Order models
+  - [x] Update profile form to include notification address
+  - [x] Display notification address in order details
 
 ### 3. ❌ Registration Form Auto-Capitalize & Password Visibility
 - **Status**: Not started
@@ -80,8 +80,8 @@
   - Replace 'twitter' with 'x' branding
   - Update icon to X logo
 
-### 8. ❌ Address Fields Separation
-- **Status**: Not started
+### 8. ✅ Address Fields Separation
+- **Status**: Completed (2026-03-26)
 - **Description**: Street and house number should be separate input fields (currently combined)
 - **Affected Files**: 
   - `shared/models/index.ts` (Address model)
@@ -90,9 +90,9 @@
   - `features/admin/users/admin-users.component.ts`
 - **Priority**: HIGH (Data integrity, admin use)
 - **Changes Needed**:
-  - Split Address model: `street` and `houseNumber` separate fields
-  - Update all address forms (profile, checkout, admin)
-  - Update order display to show both fields
+  - [x] Split Address model: `street` and `houseNumber` separate fields
+  - [x] Update all address forms (profile, checkout, admin-save flow)
+  - [x] Update order display to show both fields
 
 ### 9. ❌ Payment Methods
 - **Status**: Not started

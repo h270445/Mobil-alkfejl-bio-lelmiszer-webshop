@@ -23,7 +23,8 @@ export class OrderService {
   createOrder(
     userId: number,
     cartItems: CartItem[],
-    shippingAddress: Address
+    shippingAddress: Address,
+    notificationAddress?: Address
   ): Observable<Order> {
     return new Observable(observer => {
       setTimeout(() => {
@@ -55,6 +56,7 @@ export class OrderService {
           totalPrice,
           status: 'pending',
           shippingAddress,
+          notificationAddress,
           createdAt: new Date(),
           updatedAt: new Date()
         };

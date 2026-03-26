@@ -63,14 +63,46 @@ import { User } from '../../shared/models';
             <input matInput formControlName="city" />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Utca, házszám</mat-label>
+          <mat-form-field appearance="outline">
+            <mat-label>Utca</mat-label>
             <input matInput formControlName="street" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Házszám</mat-label>
+            <input matInput formControlName="houseNumber" />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Ország</mat-label>
             <input matInput formControlName="country" />
+          </mat-form-field>
+
+          <h3 class="full-width section-title">Értesítési cím</h3>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Értesítési irányítószám</mat-label>
+            <input matInput formControlName="notificationZipCode" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Értesítési város</mat-label>
+            <input matInput formControlName="notificationCity" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Értesítési utca</mat-label>
+            <input matInput formControlName="notificationStreet" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Értesítési házszám</mat-label>
+            <input matInput formControlName="notificationHouseNumber" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Értesítési ország</mat-label>
+            <input matInput formControlName="notificationCountry" />
           </mat-form-field>
         </div>
 
@@ -160,6 +192,12 @@ import { User } from '../../shared/models';
       padding-top: 4px;
     }
 
+    .section-title {
+      margin: 8px 0 0;
+      color: var(--color-text-primary);
+      font-size: 16px;
+    }
+
     .setting-copy h2 {
       margin: 0 0 8px;
       font-size: 18px;
@@ -243,7 +281,13 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     zipCode: [''],
     city: [''],
     street: [''],
-    country: ['Magyarország']
+    houseNumber: [''],
+    country: ['Magyarország'],
+    notificationZipCode: [''],
+    notificationCity: [''],
+    notificationStreet: [''],
+    notificationHouseNumber: [''],
+    notificationCountry: ['Magyarország']
   });
 
   constructor(
@@ -270,7 +314,13 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
         zipCode: user.address?.zipCode ?? '',
         city: user.address?.city ?? '',
         street: user.address?.street ?? '',
-        country: user.address?.country ?? 'Magyarország'
+        houseNumber: user.address?.houseNumber ?? '',
+        country: user.address?.country ?? 'Magyarország',
+        notificationZipCode: user.notificationAddress?.zipCode ?? user.address?.zipCode ?? '',
+        notificationCity: user.notificationAddress?.city ?? user.address?.city ?? '',
+        notificationStreet: user.notificationAddress?.street ?? user.address?.street ?? '',
+        notificationHouseNumber: user.notificationAddress?.houseNumber ?? user.address?.houseNumber ?? '',
+        notificationCountry: user.notificationAddress?.country ?? user.address?.country ?? 'Magyarország'
       });
       });
   }
@@ -298,9 +348,17 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       phone: formValue.phone ?? undefined,
       address: {
         street: formValue.street ?? '',
+        houseNumber: formValue.houseNumber ?? '',
         city: formValue.city ?? '',
         zipCode: formValue.zipCode ?? '',
         country: formValue.country ?? 'Magyarország'
+      },
+      notificationAddress: {
+        street: formValue.notificationStreet ?? '',
+        houseNumber: formValue.notificationHouseNumber ?? '',
+        city: formValue.notificationCity ?? '',
+        zipCode: formValue.notificationZipCode ?? '',
+        country: formValue.notificationCountry ?? 'Magyarország'
       }
     };
 
@@ -320,7 +378,13 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
       zipCode: this.currentUser.address?.zipCode ?? '',
       city: this.currentUser.address?.city ?? '',
       street: this.currentUser.address?.street ?? '',
-      country: this.currentUser.address?.country ?? 'Magyarország'
+      houseNumber: this.currentUser.address?.houseNumber ?? '',
+      country: this.currentUser.address?.country ?? 'Magyarország',
+      notificationZipCode: this.currentUser.notificationAddress?.zipCode ?? this.currentUser.address?.zipCode ?? '',
+      notificationCity: this.currentUser.notificationAddress?.city ?? this.currentUser.address?.city ?? '',
+      notificationStreet: this.currentUser.notificationAddress?.street ?? this.currentUser.address?.street ?? '',
+      notificationHouseNumber: this.currentUser.notificationAddress?.houseNumber ?? this.currentUser.address?.houseNumber ?? '',
+      notificationCountry: this.currentUser.notificationAddress?.country ?? this.currentUser.address?.country ?? 'Magyarország'
     });
   }
 }

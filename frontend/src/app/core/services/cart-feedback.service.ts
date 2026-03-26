@@ -34,7 +34,7 @@ export class CartFeedbackService {
       availableStock: addResult.availableStock,
       message: `${quantityText} ${product.name} sikeresen a kosárba került.`,
       showDoNotShowAgain: false,
-      continueLabel: 'Tovább',
+      continueLabel: 'Vásárlás folytatása',
       cartLabel: 'Kosár megtekintése'
     });
   }
