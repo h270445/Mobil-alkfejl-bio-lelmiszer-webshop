@@ -8,7 +8,7 @@
       </h3>
       <p class="footer-description">
         Bio élelmiszerek és természetes termékek a legjobb minőségben.
-        Válogatott termékek az ökológiai gazdálkodásból.
+        Válogatott termékek ökológiai gazdálkodásból.
       </p>
 
       <div class="why-choose">
@@ -52,11 +52,11 @@
           mat-icon-button
           *ngFor="let social of socialLinks"
           [attr.aria-label]="social.name"
-          title="Kozossegi media link"
+          title="Közösségi média link"
           (click)="onSocialClick(social.name)"
           class="social-button"
         >
-          <img [src]="social.icon" [alt]="social.name" title="Kozossegi media ikon" class="social-icon" />
+          <img [src]="social.icon" [alt]="social.name" title="Közösségi média ikon" class="social-icon" />
         </button>
       </div>
     </div>
