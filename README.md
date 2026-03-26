@@ -1,6 +1,6 @@
 # 🌿 BioMarket – Full-Stack Bio Élelmiszer Webshop
 
-**Projekt státusz**: 🟢 1. Mérföldkő fejlesztés alatt  
+**Projekt státusz**: 🟢 1. Mérföldkő lezárás előtt  
 **Határidő**: 2026.03.29. 23:59 CET  
 **Framework**: Angular 17 + Spring Boot 3.2.0
 
@@ -106,38 +106,87 @@ Admin UI role-based renderinggel működik.
 ### User
 
 - id
-- name
+- firstName
+- lastName
 - email (unique)
 - password (BCrypt hash)
 - role (USER / ADMIN)
-- createdAt
+- phone (optional)
+- address (optional)
+- notificationAddress (optional)
+- createdAt (Date vagy ISO string)
+
+### Address
+
+- street
+- houseNumber
+- city
+- zipCode
+- country
 
 ### Product
 
 - id
+- sku
 - name
 - description
 - price
-- stock
+- originalPrice (optional)
 - imageUrl (S3 URL)
-- isBioCertified
 - category
-- createdAt
+- rating
+- reviews
+- inStock
+- stockQuantity
+- isActive
+- createdAt (optional, Date vagy ISO string)
+- updatedAt (optional, Date vagy ISO string)
+
+### PaymentMethod
+
+- card
+- paypal
+- bank-transfer
+- cod
 
 ### Order
 
 - id
-- user
+- userId
+- items
 - totalPrice
-- status (PENDING / PAID / SHIPPED)
-- createdAt
+- paymentMethod
+- status (PENDING / PAID / SHIPPED / DELIVERED / CANCELLED)
+- shippingAddress
+- notificationAddress (optional)
+- createdAt (Date vagy ISO string)
+- updatedAt (optional, Date vagy ISO string)
 
 ### OrderItem
 
-- order
-- product
+- id
+- orderId (optional, backend kompatibilitás miatt)
+- productId
+- productName
 - quantity
 - priceAtPurchase
+
+### Comment (review)
+
+- id
+- productId
+- userId
+- userName
+- text
+- rating (1-5)
+- timestamp (Date vagy ISO string)
+
+### Backend-kompatibilitási előkészítés (M2 readiness)
+
+- Frontend modellekben a dátum/idő mezők támogatják a Date és ISO string formátumot.
+- DTO-típusok előkészítve a backend API boundary-hez (pl. UserDto, ProductDto, OrderDto, CommentDto).
+- OrderItem szinten opcionális orderId bevezetve a későbbi relációs backend leképezéshez.
+- Storage betöltéskor normalizálás történik a visszafelé kompatibilitás megtartásával.
 
 ---
 
@@ -220,14 +269,20 @@ Frontend:
 
 - Regisztráció
 - Bejelentkezés
-- JWT auth
 - Terméklista
 - Termék részletek
 - Kosár
 - Rendelés leadás
 - Order history
+- Kedvencek (favorites)
+- Profil beállítások
+- Több fizetési mód (kártya, PayPal, banki átutalás, utánvét)
+- Külön szállítási és értesítési cím
+- Értékelés/komment írás és szűrés csillag alapján
 - Admin termék CRUD
-- S3 képfeltöltés
+- Admin felhasználókezelés (mobil collapse + törlés)
+- Globális scroll-to-top route váltáskor
+- S3 képfeltöltés (tervezett backend integrációval)
 
 ---
 
@@ -256,7 +311,7 @@ Feladatok:
 
 - Spring Boot REST API kidolgozása
 - PostgreSQL adatbázis implementálása
-- JPA/Hibernate entity mappinrek
+- JPA/Hibernate entity mappingek
 - Service layer és business logic
 - JWT autentikáció
 - Role-based access control (RBAC)
@@ -275,7 +330,7 @@ Feladatok:
 - Dockerizáció (backend + PostgreSQL)
 - CI/CD pipeline (GitHub Actions)
 - AWS Cloud deployment
-- S3 integrácó (képfeltöltés)
+- S3 integráció (képfeltöltés)
 - Production-ready konfigurációk
 
 ---
@@ -308,6 +363,7 @@ Mobil Alkalmazásfejlesztés – 2026
 - 🎯 [1. Mérföldkő Ütemterv](./docs/MILESTONE_1_PLAN.md)
 - 🔧 [Fejlesztői Setup Útmutató](./docs/DEVELOPMENT_GUIDE.md)
 - 📋 [1. Mérföldkő Feladatkövetés](./docs/MILESTONE_1_TRACKER.md)
+- 🗂️ [M1 Smoke Report (archív)](./docs/archive/smoke/SMOKE_TEST_ISSUES_2026-03-26.md)
 
 ---
 

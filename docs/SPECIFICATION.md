@@ -3,7 +3,7 @@
 **Projekt**: BioMarket - Bio Élelmiszer Webshop  
 **Keretrendszer**: Angular 17 (Standalone Components) + Spring Boot 3.2.0  
 **Verzió**: 1.0.0  
-**Utolsó frissítés**: 2026.03.02
+**Utolsó frissítés**: 2026.03.26
 
 ---
 
@@ -39,6 +39,8 @@ Az adminisztrátorok külön felületen keresztül kezelhetik a termékkínálat
 - **FR-2.4**: A termékek rendezhetők ár (növekvő/csökkenő), név, értékelés szerint
 - **FR-2.5**: A listázó nézetben megjelenik a termék neve, ára, képe, értékelése, készletállapota
 - **FR-2.6**: A termékekre kattintva részletes nézet érhető el (leírás, teljes specifikáció, értékelések)
+- **FR-2.7**: A termék részletek oldalon a kommentek/értékelések 1-5 csillag szerinti szűréssel listázhatók
+- **FR-2.8**: A bejelentkezett felhasználók új kommentet írhatnak és csillagos értékelést adhatnak termékekhez
 
 ### FR-3: Kosárkezelés
 - **FR-3.1**: A felhasználók termékeket helyezhetnek kosárba (mennyiség megadható)
@@ -50,7 +52,7 @@ Az adminisztrátorok külön felületen keresztül kezelhetik a termékkínálat
 
 ### FR-4: Rendelés Leadása
 - **FR-4.1**: A bejelentkezett felhasználók leadhatnak rendelést a kosár tartalmából
-- **FR-4.2**: A rendeléshez meg kell adni a szállítási címet (utca, város, irányítószám, ország)
+- **FR-4.2**: A rendeléshez meg kell adni a szállítási címet (utca, házszám, város, irányítószám, ország)
 - **FR-4.3**: Sikeres rendelés után a kosár kiürül
 - **FR-4.4**: A felhasználó visszajelzést kap a sikeres rendelésről (Toast/Snackbar)
 - **FR-4.5**: A rendelések listázhatók a felhasználó profiljában
@@ -59,6 +61,8 @@ Az adminisztrátorok külön felületen keresztül kezelhetik a termékkínálat
 - **FR-4.8**: Ha a checkbox be van jelölve és a form beküldésre kerül, az AuthService.updateProfile() meghívódik az új szállítási cím adatokkal
 - **FR-4.9**: A checkout oldal mobil-barát: szöveges input mezők responsive grid-ben, végösszeg (kosár + szállítás) jól látható
 - **FR-4.10**: A szállítási költség dinamikus: 3500 Ft felett ingyenes, alatta 500 Ft
+- **FR-4.11**: A checkout folyamatban fizetési mód választható (kártya, banki átutalás, utánvét)
+- **FR-4.12**: A rendelésben külön értesítési cím adható meg; ha nincs külön megadva, a szállítási címmel egyezik
 
 ### FR-5: Felhasználói Profil
 - **FR-5.1**: A bejelentkezett felhasználók megtekinthetik profiljukat (név, email, telefon, cím)
@@ -123,6 +127,7 @@ Az adminisztrátorok külön felületen keresztül kezelhetik a termékkínálat
 - **NFR-5.2**: Service réteg elkülönítése (core/services)
 - **NFR-5.3**: TypeScript strict mode használata
 - **NFR-5.4**: Egységes kód formázás (Angular style guide)
+- **NFR-5.5**: Frontend-backend kompatibilitás: időbélyegek `Date | string` típusú kezelése és DTO konverzió API határon
 
 ### NFR-6: Kompatibilitás
 - **NFR-6.1**: Modern böngészők támogatása (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
