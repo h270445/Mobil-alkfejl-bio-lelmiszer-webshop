@@ -362,6 +362,7 @@ Mobil Alkalmazásfejlesztés – 2026
 - 📖 [Teljes Dokumentáció Index](./docs/INDEX.md)
 - 🎯 [1. Mérföldkő Ütemterv](./docs/MILESTONE_1_PLAN.md)
 - 🔧 [Fejlesztői Setup Útmutató](./docs/DEVELOPMENT_GUIDE.md)
+- 👥 [Felhasználói Tesztelői Útmutató](./docs/USER_TESTING_GUIDE.md)
 - 📋 [1. Mérföldkő Feladatkövetés](./docs/MILESTONE_1_TRACKER.md)
 - 🗂️ [M1 Smoke Report (archív)](./docs/archive/smoke/SMOKE_TEST_ISSUES_2026-03-26.md)
 

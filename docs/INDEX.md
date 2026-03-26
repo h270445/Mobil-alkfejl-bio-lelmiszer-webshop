@@ -74,6 +74,20 @@ Tartalom:
 
 ---
 
+### 👥 [USER_TESTING_GUIDE.md](./USER_TESTING_GUIDE.md)
+**Felhasználói tesztelői útmutató (nem fejlesztőknek)**
+
+Tartalom:
+- Egyszerű setup lépések (Windows, localhost)
+- Teszt fiókok (user + admin)
+- Kattintásos teszt forgatókönyv
+- Hibabejelentő sablon
+- Gyors hibaelhárítás átlag felhasználóknak
+
+👉 **Add ezt a fájlt a tesztelőknek** a user teszt kör előtt!
+
+---
+
 ### 🤖 [AI_PROMPT_LOG.md](./AI_PROMPT_LOG.md)
 **AI tudatossági napló (követelmény: 15 pont komponens része)**
 
@@ -200,4 +214,4 @@ Mobil Alkalmazásfejlesztés kurzus – SZTE, 2026
 
 ---
 
-**Utolsó frissítés**: 2026.03.26 (M1 smoke report archiválva)
+**Utolsó frissítés**: 2026.03.26 (M1 smoke report archiválva, user testing guide hozzáadva)
