@@ -4,7 +4,7 @@ Ez a könyvtár tartalmazza az összes szükséges dokumentációt a BioMarket p
 
 ---
 
-## � Követelmények (Université Requirements)
+## 📋 Követelmények (University Requirements)
 
 ### 📜 [Mobil_Ertekeles_Szempontrendszer.md](./requirements/Mobil_Ertekeles_Szempontrendszer.md)
 **Hivatalos értékelési szempontok és pontozás**
@@ -49,7 +49,7 @@ Ez a könyvtár tartalmazza az összes szükséges dokumentációt a BioMarket p
 Tartalom:
 - Heti feladatok lebontása (február 27 – március 29)
 - Projektstruktúra (Angular modulok)
-- Kompoens lista és felelősségek
+- Komponens lista és felelősségek
 - Elfogadási kritériumok
 - Design útmutatás (szín, tipográfia)
 - Gyakori hibák és megoldásuk
@@ -78,11 +78,11 @@ Tartalom:
 **AI tudatossági napló (követelmény: 15 pont komponens része)**
 
 Tartalom:
-- Jelentős promptok naplója (datum + kontextus + eredmeny)
-- Dokumentalt fejlesztesi dontesek (elfogadas/modositas/elutasitas)
-- AI tevedesek es korrekciok (kritikai szemlelet)
+- Jelentős promptok naplója (dátum + kontextus + eredmény)
+- Dokumentált fejlesztési döntések (elfogadás/módosítás/elutasítás)
+- AI tévedések és korrekciók (kritikai szemlélet)
 
-👉 **Frissitsd folyamatosan**, ne csak a beadás elott!
+👉 **Frissítsd folyamatosan**, ne csak a beadás előtt!
 
 ---
 
@@ -166,6 +166,8 @@ docker-compose up postgres
 - ✅ Material Icon → SVG Icon System (28 custom ikonok, Font eltávolítva) **[Day 8]**
 - ✅ Floating Action Button (FAB) keresés kategória szűréssel **[Day 8]**
 - ✅ Header keresési sáv igazítása (szöveg, magasság, padding) **[Day 8]**
+- ✅ M1 smoke hibák lezárása és riport archiválása (`docs/archive/smoke`)
+- ✅ Backend-ready frontend modell előkészítés (Date|string, DTO konverziós határ)
 
 **Következő lépés**: Milestone 2 backend és adatintegrációs feladatok indítása
 
