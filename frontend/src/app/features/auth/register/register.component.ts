@@ -41,13 +41,29 @@ import { RegisterRequest } from '../../../shared/models';
           <div class="name-row">
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Keresztnév</mat-label>
-              <input matInput type="text" formControlName="firstName" autocomplete="given-name" />
+              <input
+                matInput
+                type="text"
+                formControlName="firstName"
+                autocomplete="given-name"
+                autocapitalize="words"
+                (input)="onNameInput('firstName')"
+                (blur)="capitalizeNameControl('firstName')"
+              />
               <mat-error *ngIf="registerForm.controls.firstName.hasError('required')">Kötelező mező.</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Vezetéknév</mat-label>
-              <input matInput type="text" formControlName="lastName" autocomplete="family-name" />
+              <input
+                matInput
+                type="text"
+                formControlName="lastName"
+                autocomplete="family-name"
+                autocapitalize="words"
+                (input)="onNameInput('lastName')"
+                (blur)="capitalizeNameControl('lastName')"
+              />
               <mat-error *ngIf="registerForm.controls.lastName.hasError('required')">Kötelező mező.</mat-error>
             </mat-form-field>
           </div>
@@ -66,14 +82,40 @@ import { RegisterRequest } from '../../../shared/models';
 
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Jelszó</mat-label>
-            <input matInput type="password" formControlName="password" autocomplete="new-password" />
+            <input
+              matInput
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              autocomplete="new-password"
+            />
+            <button mat-icon-button matSuffix type="button" class="password-toggle" (click)="togglePasswordVisibility()" aria-label="Jelszó megjelenítése/elrejtése">
+              <img
+                [src]="showPassword ? 'assets/images/eye-closed-icon.svg' : 'assets/images/eye-open-icon.svg'"
+                [alt]="showPassword ? 'Jelszó elrejtése' : 'Jelszó megjelenítése'"
+                [title]="showPassword ? 'Jelszó elrejtése' : 'Jelszó megjelenítése'"
+                class="password-toggle-icon"
+              />
+            </button>
             <mat-error *ngIf="registerForm.controls.password.hasError('required')">A jelszó kötelező.</mat-error>
             <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">Minimum 6 karakter szükséges.</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Jelszó megerősítése</mat-label>
-            <input matInput type="password" formControlName="passwordConfirm" autocomplete="new-password" />
+            <input
+              matInput
+              [type]="showPasswordConfirm ? 'text' : 'password'"
+              formControlName="passwordConfirm"
+              autocomplete="new-password"
+            />
+            <button mat-icon-button matSuffix type="button" class="password-toggle" (click)="togglePasswordConfirmVisibility()" aria-label="Jelszó megerősítés megjelenítése/elrejtése">
+              <img
+                [src]="showPasswordConfirm ? 'assets/images/eye-closed-icon.svg' : 'assets/images/eye-open-icon.svg'"
+                [alt]="showPasswordConfirm ? 'Jelszó megerősítés elrejtése' : 'Jelszó megerősítés megjelenítése'"
+                [title]="showPasswordConfirm ? 'Jelszó megerősítés elrejtése' : 'Jelszó megerősítés megjelenítése'"
+                class="password-toggle-icon"
+              />
+            </button>
             <mat-error *ngIf="registerForm.controls.passwordConfirm.hasError('required')">A megerősítés kötelező.</mat-error>
             <mat-error *ngIf="registerForm.hasError('passwordMismatch')">A két jelszó nem egyezik.</mat-error>
           </mat-form-field>
@@ -138,6 +180,20 @@ import { RegisterRequest } from '../../../shared/models';
       text-align: center;
     }
 
+    .password-toggle {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      min-width: 36px;
+    }
+
+    .password-toggle-icon {
+      width: 20px;
+      height: 20px;
+      display: block;
+      opacity: 0.85;
+    }
+
     @media (max-width: 768px) {
       .name-row {
         grid-template-columns: 1fr;
@@ -159,6 +215,8 @@ export class RegisterComponent {
   isSubmitting = false;
   errorMessage: string | null = null;
   returnUrl = '/';
+  showPassword = false;
+  showPasswordConfirm = false;
 
   registerForm = this.formBuilder.nonNullable.group({
     firstName: ['', [Validators.required]],
@@ -183,6 +241,9 @@ export class RegisterComponent {
       this.registerForm.markAllAsTouched();
       return;
     }
+
+    this.capitalizeNameControl('firstName');
+    this.capitalizeNameControl('lastName');
 
     this.errorMessage = null;
     this.isSubmitting = true;
@@ -226,6 +287,55 @@ export class RegisterComponent {
     }
 
     return role === 'admin' ? '/admin' : '/';
+  }
+
+  capitalizeNameControl(controlName: 'firstName' | 'lastName'): void {
+    const control = this.registerForm.controls[controlName];
+    const value = control.value ?? '';
+    if (!value.trim()) {
+      return;
+    }
+
+    const capitalized = this.capitalizeWords(value);
+
+    if (capitalized !== control.value) {
+      control.setValue(capitalized);
+    }
+  }
+
+  onNameInput(controlName: 'firstName' | 'lastName'): void {
+    const control = this.registerForm.controls[controlName];
+    const value = control.value ?? '';
+    if (!value) {
+      return;
+    }
+
+    const capitalized = this.capitalizeWords(value);
+
+    if (capitalized !== control.value) {
+      control.setValue(capitalized, { emitEvent: false });
+    }
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  togglePasswordConfirmVisibility(): void {
+    this.showPasswordConfirm = !this.showPasswordConfirm;
+  }
+
+  private capitalizeWords(value: string): string {
+    return value
+      .split(/(\s+)/)
+      .map(part => {
+        if (!part.trim()) {
+          return part;
+        }
+
+        return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+      })
+      .join('');
   }
 
   private passwordMatchValidator(): ValidatorFn {

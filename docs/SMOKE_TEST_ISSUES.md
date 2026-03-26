@@ -24,16 +24,16 @@
   - [x] Update profile form to include notification address
   - [x] Display notification address in order details
 
-### 3. ❌ Registration Form Auto-Capitalize & Password Visibility
-- **Status**: Not started
+### 3. ✅ Registration Form Auto-Capitalize & Password Visibility
+- **Status**: Completed (2026-03-26)
 - **Description**: 
   - Names don't auto-capitalize (should start with uppercase)
   - No password visibility toggle button
 - **Affected Files**: `features/auth/register/register.component.ts`, `features/auth/register/register.component.html`
 - **Priority**: MEDIUM (UX improvement)
 - **Changes Needed**:
-  - Add automatic capitalization to firstName/lastName inputs
-  - Add show/hide password toggle icon
+  - [x] Add automatic capitalization to firstName/lastName inputs
+  - [x] Add show/hide password toggle controls
 
 ### 4. ✅ Page Scroll Position on Navigation
 - **Status**: Completed (2026-03-26)
