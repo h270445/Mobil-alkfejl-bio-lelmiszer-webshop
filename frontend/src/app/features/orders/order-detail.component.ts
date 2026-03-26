@@ -9,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { AuthService } from '../../core/services/auth.service';
 import { OrderService } from '../../core/services/order.service';
-import { Order } from '../../shared/models';
+import { Order, PaymentMethod } from '../../shared/models';
 
 @Component({
   selector: 'app-order-detail',
@@ -75,6 +75,11 @@ import { Order } from '../../shared/models';
           <p>{{ order.notificationAddress.street }} {{ order.notificationAddress.houseNumber }}</p>
           <p>{{ order.notificationAddress.zipCode }} {{ order.notificationAddress.city }}</p>
           <p>{{ order.notificationAddress.country }}</p>
+        </section>
+
+        <section class="section">
+          <h2>Fizetési mód</h2>
+          <p>{{ getPaymentMethodLabel(order.paymentMethod) }}</p>
         </section>
 
         <!-- Cancel button -->
@@ -216,5 +221,16 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
 
   getStatusClass(status: Order['status']): string {
     return `status-${status}`;
+  }
+
+  getPaymentMethodLabel(method: PaymentMethod): string {
+    const labels: Record<PaymentMethod, string> = {
+      card: 'Bankkártya',
+      paypal: 'PayPal',
+      'bank-transfer': 'Banki utalás',
+      cod: 'Utánvét'
+    };
+
+    return labels[method] ?? method;
   }
 }

@@ -96,6 +96,7 @@ $biomarket-theme: mat.define-light-theme((
 @include mat.button-theme($biomarket-theme);
 @include mat.input-theme($biomarket-theme);
 @include mat.form-field-theme($biomarket-theme);
+@include mat.select-theme($biomarket-theme);
 @include mat.table-theme($biomarket-theme);
 @include mat.dialog-theme($biomarket-theme);
 @include mat.snack-bar-theme($biomarket-theme);
@@ -161,4 +162,20 @@ html, body {
 
 .bg-bio {
   background-color: var(--color-surface-bio);
+}
+
+// Ensure select dropdown is never transparent on any page.
+.cdk-overlay-pane .mat-mdc-select-panel {
+  background: #ffffff !important;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-overlay-pane .mat-mdc-option {
+  background: #ffffff !important;
+  color: var(--color-text-primary);
+}
+
+.cdk-overlay-pane .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+  background: #edf7ee !important;
 }

@@ -12,7 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { OrderService } from '../../../core/services/order.service';
 import { MOCK_USERS } from '../../../shared/mock-data';
-import { Order } from '../../../shared/models';
+import { Order, PaymentMethod } from '../../../shared/models';
 
 @Component({
   selector: 'app-admin-order-detail',
@@ -68,9 +68,14 @@ import { Order } from '../../../shared/models';
         <!-- Shipping address -->
         <section class="section">
           <h2>Szállítási cím</h2>
-          <p>{{ order.shippingAddress.street }}</p>
+          <p>{{ order.shippingAddress.street }} {{ order.shippingAddress.houseNumber }}</p>
           <p>{{ order.shippingAddress.zipCode }} {{ order.shippingAddress.city }}</p>
           <p>{{ order.shippingAddress.country }}</p>
+        </section>
+
+        <section class="section">
+          <h2>Fizetési mód</h2>
+          <p>{{ getPaymentMethodLabel(order.paymentMethod) }}</p>
         </section>
 
         <mat-divider></mat-divider>
@@ -217,5 +222,16 @@ export class AdminOrderDetailComponent implements OnInit, OnDestroy {
 
   getStatusClass(status: Order['status']): string {
     return `status-${status}`;
+  }
+
+  getPaymentMethodLabel(method: PaymentMethod): string {
+    const labels: Record<PaymentMethod, string> = {
+      card: 'Bankkártya',
+      paypal: 'PayPal',
+      'bank-transfer': 'Banki utalás',
+      cod: 'Utánvét'
+    };
+
+    return labels[method] ?? method;
   }
 }

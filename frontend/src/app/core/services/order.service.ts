@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Order, OrderItem, CartItem, Address } from '../../shared/models';
+import { Order, OrderItem, CartItem, Address, PaymentMethod } from '../../shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,8 @@ export class OrderService {
     userId: number,
     cartItems: CartItem[],
     shippingAddress: Address,
-    notificationAddress?: Address
+    notificationAddress?: Address,
+    paymentMethod: PaymentMethod = 'card'
   ): Observable<Order> {
     return new Observable(observer => {
       setTimeout(() => {
@@ -54,6 +55,7 @@ export class OrderService {
           userId,
           items: orderItems,
           totalPrice,
+          paymentMethod,
           status: 'pending',
           shippingAddress,
           notificationAddress,

@@ -46,12 +46,15 @@ export interface Order {
   userId: number;
   items: OrderItem[];
   totalPrice: number;
+  paymentMethod: PaymentMethod;
   status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
   shippingAddress: Address;
   notificationAddress?: Address;
   createdAt: Date;
   updatedAt?: Date;
 }
+
+export type PaymentMethod = 'paypal' | 'bank-transfer' | 'cod' | 'card';
 
 // OrderItem model
 export interface OrderItem {

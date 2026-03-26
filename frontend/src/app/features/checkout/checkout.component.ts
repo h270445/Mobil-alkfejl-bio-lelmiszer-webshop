@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,7 +17,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../core/services/auth.service';
 import { CartService } from '../../core/services/cart.service';
 import { OrderService } from '../../core/services/order.service';
-import { CartItem, Address } from '../../shared/models';
+import { CartItem, Address, PaymentMethod } from '../../shared/models';
 
 @Component({
   selector: 'app-checkout',
@@ -31,6 +32,7 @@ import { CartItem, Address } from '../../shared/models';
     MatCardModule,
     MatProgressSpinnerModule,
     MatDividerModule,
+    MatSelectModule,
     MatSnackBarModule
   ],
   template: `
@@ -54,6 +56,10 @@ import { CartItem, Address } from '../../shared/models';
             <div class="success-summary-total">
               <span>Szállítási költség:</span>
               <strong>{{ submittedShippingCost === 0 ? 'Ingyenes' : ((submittedShippingCost | number:'1.0-0') + ' Ft') }}</strong>
+            </div>
+            <div class="success-summary-total">
+              <span>Fizetési mód:</span>
+              <strong>{{ getPaymentMethodLabel(submittedPaymentMethod) }}</strong>
             </div>
             <div class="success-summary-total grand">
               <span>Végösszeg:</span>
@@ -167,6 +173,20 @@ import { CartItem, Address } from '../../shared/models';
               <mat-checkbox formControlName="saveToProfile" class="save-checkbox">
                 Szállítási és értesítési cím mentése a profilba
               </mat-checkbox>
+
+              <h3>Fizetési mód</h3>
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Fizetési mód kiválasztása</mat-label>
+                <mat-select formControlName="paymentMethod">
+                  <mat-option value="card">Bankkártya</mat-option>
+                  <mat-option value="paypal">PayPal</mat-option>
+                  <mat-option value="bank-transfer">Banki utalás</mat-option>
+                  <mat-option value="cod">Utánvét</mat-option>
+                </mat-select>
+                <mat-error *ngIf="checkoutForm.get('paymentMethod')?.hasError('required')">
+                  A fizetési mód kiválasztása kötelező
+                </mat-error>
+              </mat-form-field>
             </div>
 
             <!-- Cart Summary -->
@@ -606,6 +626,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   submittedSubTotal = 0;
   submittedShippingCost = 0;
   submittedGrandTotal = 0;
+  submittedPaymentMethod: PaymentMethod = 'card';
 
   private destroy$ = new Subject<void>();
 
@@ -659,6 +680,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       notificationCity: [savedNotificationAddress.city || ''],
       notificationZipCode: [savedNotificationAddress.zipCode || ''],
       notificationCountry: [savedNotificationAddress.country || 'Magyarország'],
+      paymentMethod: ['card', Validators.required],
       saveToProfile: [false]
     });
   }
@@ -727,6 +749,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           zipCode: this.checkoutForm.get('notificationZipCode')?.value,
           country: this.checkoutForm.get('notificationCountry')?.value
         };
+    const paymentMethod = this.checkoutForm.get('paymentMethod')?.value as PaymentMethod;
 
     // Save to profile if selected
     if (this.checkoutForm.get('saveToProfile')?.value) {
@@ -738,15 +761,20 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
 
     // Create order
-    this.createOrder(currentUser.id, shippingAddress, notificationAddress);
+    this.createOrder(currentUser.id, shippingAddress, notificationAddress, paymentMethod);
   }
 
-  private createOrder(userId: number, shippingAddress: Address, notificationAddress: Address) {
+  private createOrder(
+    userId: number,
+    shippingAddress: Address,
+    notificationAddress: Address,
+    paymentMethod: PaymentMethod
+  ) {
     const submittedItems = this.cartItems.map(item => ({ ...item }));
     const submittedSubTotal = this.subTotal;
     const submittedShippingCost = this.shippingCost;
 
-    this.orderService.createOrder(userId, this.cartItems, shippingAddress, notificationAddress)
+    this.orderService.createOrder(userId, this.cartItems, shippingAddress, notificationAddress, paymentMethod)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (order) => {
@@ -756,6 +784,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           this.submittedSubTotal = submittedSubTotal;
           this.submittedShippingCost = submittedShippingCost;
           this.submittedGrandTotal = submittedSubTotal + submittedShippingCost;
+          this.submittedPaymentMethod = paymentMethod;
           this.successScreen = true;
 
           // Clear cart
@@ -811,5 +840,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
       firstInvalid.focus?.();
     });
+  }
+
+  getPaymentMethodLabel(method: PaymentMethod): string {
+    const labels: Record<PaymentMethod, string> = {
+      card: 'Bankkártya',
+      paypal: 'PayPal',
+      'bank-transfer': 'Banki utalás',
+      cod: 'Utánvét'
+    };
+
+    return labels[method] ?? method;
   }
 }

@@ -94,8 +94,8 @@
   - [x] Update all address forms (profile, checkout, admin-save flow)
   - [x] Update order display to show both fields
 
-### 9. ❌ Payment Methods
-- **Status**: Not started
+### 9. ✅ Payment Methods
+- **Status**: Completed (2026-03-26)
 - **Description**: Need multiple payment method options (PayPal, bank transfer, C.O.D., etc.)
 - **Affected Files**: 
   - `shared/models/index.ts` (Order model)
@@ -103,9 +103,9 @@
   - `features/orders/order-detail.component.ts`
 - **Priority**: MEDIUM (Feature enhancement)
 - **Changes Needed**:
-  - Add paymentMethod enum to Order model
-  - Add payment method selector to checkout form
-  - Display selected payment method in order summary
+  - [x] Add `paymentMethod` type to Order model
+  - [x] Add payment method selector to checkout form (card, PayPal, bank transfer, COD)
+  - [x] Display selected payment method in success summary and order details (user + admin)
 
 ### 10. ✅ Free Shipping Threshold Not Working
 - **Status**: Completed (2026-03-26)
