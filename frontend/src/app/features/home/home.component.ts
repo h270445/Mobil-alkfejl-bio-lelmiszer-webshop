@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { CartFeedbackService } from '../../core/services/cart-feedback.service';
 import { CartService } from '../../core/services/cart.service';
 import { ProductService } from '../../core/services/product.service';
@@ -17,7 +16,6 @@ import { Product } from '../../shared/models';
     CommonModule,
     RouterLink,
     MatButtonModule,
-    MatIconModule,
     ProductCardComponent,
     LoadingSpinnerComponent
   ],
@@ -66,17 +64,17 @@ import { Product } from '../../shared/models';
         <h2>Miért válaszd a BioMarketot?</h2>
         <div class="info-grid">
           <div class="info-card">
-            <mat-icon>eco</mat-icon>
+            <img src="assets/images/why-bio-icon.svg" alt="Bio minőség" title="Bio minőség" class="info-card-icon" />
             <h3>100% Bio</h3>
             <p>Csak minősített bio termékek</p>
           </div>
           <div class="info-card">
-            <mat-icon>local_shipping</mat-icon>
+            <img src="assets/images/why-shipping-icon.svg" alt="Gyors szállítás" title="Gyors szállítás" class="info-card-icon" />
             <h3>Gyors Szállítás</h3>
             <p>1-2 nap alatt a pultodra</p>
           </div>
           <div class="info-card">
-            <mat-icon>verified</mat-icon>
+            <img src="assets/images/why-quality-icon.svg" alt="Minőség garantált" title="Minőség garantált" class="info-card-icon" />
             <h3>Minőség Garantált</h3>
             <p>Teljes visszavásárlási garancia</p>
           </div>
@@ -189,12 +187,11 @@ import { Product } from '../../shared/models';
       border-left: 4px solid var(--color-primary);
     }
 
-    .info-card mat-icon {
-      font-size: 48px;
+    .info-card-icon {
       width: 48px;
       height: 48px;
-      color: var(--color-primary);
-      margin-bottom: 16px;
+      display: block;
+      margin: 0 auto 16px;
     }
 
     .info-card h3 {

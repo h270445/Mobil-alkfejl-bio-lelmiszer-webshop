@@ -405,3 +405,39 @@ fix(footer): Back-to-top scroll handler, internal container support
 **Acceptance**: Main branch updated, submission delivered
 
 **Expected Friday**: March 29 submission deadline (3 days buffer)
+
+---
+
+## UPDATE 2026.03.26 - Smoke Test Issues Identified
+
+After comprehensive smoke testing and user testing, 12 issues were identified requiring fixes before M1 submission.
+
+### New Timeline (Rescheduled)
+
+- **March 26 (TODAY)**: Phase 1 fixes (4 critical issues)
+- **March 27 (TOMORROW)**: Phase 2-4 fixes (8 remaining issues) + Final testing + Main merge
+- **March 29**: M1 Submission deadline (2 days buffer)
+
+### Issue Tracking
+
+See **SMOKE_TEST_ISSUES.md** for complete documentation of all 12 issues.
+
+### Phase 1 (March 26) - Critical Fixes
+
+- [ ] #1: Order summary detail + typo fix
+- [ ] #4: Scroll position reset on navigation  
+- [ ] #5: Cart deletion notification typo
+- [ ] #10: Free shipping at 3500 Ft threshold
+
+### Phase 2-4 (March 27) - Remaining Issues
+
+- [ ] #2: Notification address in profile/orders
+- [ ] #3: Registration form enhancements
+- [ ] #6: Comments feature implementation
+- [ ] #7: Footer typo + Twitter to X update
+- [ ] #8: Address field separation
+- [ ] #9: Payment method selector
+- [ ] #11: Admin users mobile interface
+- [ ] #12: Select dropdown styling
+
+---

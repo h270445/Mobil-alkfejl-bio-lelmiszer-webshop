@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Minoseg garantalt ikon</title>
+  <g fill="none" stroke="#4caf50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 8l18 7v14c0 12-7 22-18 27-11-5-18-15-18-27V15z" fill="#e8f5e9"/>
+    <path d="M23 33l6 6 12-12"/>
+    <circle cx="32" cy="24" r="2" fill="#4caf50" stroke="none"/>
+  </g>
+</svg>

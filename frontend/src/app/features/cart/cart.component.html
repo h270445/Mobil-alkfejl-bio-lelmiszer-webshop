@@ -23,7 +23,7 @@
       <div class="cart-item" *ngFor="let item of (cartItems$ | async)" [class.out-of-stock]="isOutOfStock(item.product.id)">
         <!-- Product Image -->
         <div class="item-image">
-          <img [src]="item.product.imageUrl" [alt]="item.product.name" title="{ item.product.name }"/>
+          <img [src]="item.product.imageUrl" [alt]="item.product.name" title="{{ item.product.name }}"/>
           <span class="out-of-stock-badge" *ngIf="isOutOfStock(item.product.id)">Elfogyott</span>
         </div>
 
@@ -137,7 +137,7 @@
         <h3>Javasolt termékek</h3>
         <div class="recommended-grid">
           <div class="recommended-card" *ngFor="let product of recommendedProducts">
-            <img [src]="product.imageUrl" [alt]="product.name" title="product.name"/>
+            <img [src]="product.imageUrl" [alt]="product.name" title="{{ product.name }}"/>
             <h4>{{ product.name }}</h4>
             <p class="price">{{ product.price | currency: 'HUF' : 'symbol' : '0.0' }}</p>
             <button 

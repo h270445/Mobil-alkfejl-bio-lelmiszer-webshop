@@ -19,7 +19,7 @@
 
   <article *ngIf="!loading && product" class="product-layout">
     <div class="image-panel">
-      <img [src]="product.imageUrl" [alt]="product.name" [title]="product.name" title="product.name" />
+      <img [src]="product.imageUrl" [alt]="product.name" title="{{ product.name }}" />
     </div>
 
     <div class="info-panel">
