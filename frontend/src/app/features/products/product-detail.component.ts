@@ -10,8 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { CartFeedbackService } from '../../core/services/cart-feedback.service';
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
+import { CommentService } from '../../core/services/comment.service';
+import { AuthService } from '../../core/services/auth.service';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
-import { Product } from '../../shared/models';
+import { Product, Comment, User } from '../../shared/models';
 
 @Component({
   selector: 'app-product-detail',
@@ -34,15 +36,33 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   notFound = false;
   selectedQuantity = 1;
 
+  // Comments
+  comments: Comment[] = [];
+  filteredComments: Comment[] = [];
+  selectedRatingFilter: number | null = null;
+  newCommentText = '';
+  newCommentRating: 1 | 2 | 3 | 4 | 5 = 5;
+  currentUser: User | null = null;
+  submittingComment = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private cartFeedbackService: CartFeedbackService,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private commentService: CommentService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    // Get current user
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.currentUser = user;
+      });
+
     this.route.paramMap
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
@@ -55,6 +75,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         }
 
         this.loadProduct(productId);
+        this.loadComments(productId);
       });
   }
 
@@ -194,5 +215,76 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.product = null;
     this.notFound = true;
     this.loading = false;
+  }
+
+  // --- Comments ---
+
+  private loadComments(productId: number): void {
+    this.commentService.getCommentsByProductId(productId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(comments => {
+        this.comments = comments.sort((a, b) => 
+          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        );
+        this.applyRatingFilter();
+      });
+  }
+
+  onRatingFilterChange(rating: number | null): void {
+    this.selectedRatingFilter = rating;
+    this.applyRatingFilter();
+  }
+
+  onSetCommentRating(rating: number): void {
+    if (rating >= 1 && rating <= 5) {
+      this.newCommentRating = rating as (1 | 2 | 3 | 4 | 5);
+    }
+  }
+
+  private applyRatingFilter(): void {
+    if (this.selectedRatingFilter === null) {
+      this.filteredComments = [...this.comments];
+    } else {
+      this.filteredComments = this.comments.filter(c => c.rating === this.selectedRatingFilter);
+    }
+  }
+
+  onAddComment(): void {
+    if (!this.currentUser || !this.product || !this.newCommentText.trim()) {
+      return;
+    }
+
+    this.submittingComment = true;
+
+    const newComment: Omit<Comment, 'id' | 'timestamp'> = {
+      productId: this.product.id,
+      userId: this.currentUser.id,
+      userName: `${this.currentUser.firstName} ${this.currentUser.lastName}`,
+      text: this.newCommentText.trim(),
+      rating: this.newCommentRating
+    };
+
+    this.commentService.addComment(newComment)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (comment) => {
+          this.comments.unshift(comment);
+          this.applyRatingFilter();
+          this.newCommentText = '';
+          this.newCommentRating = 5;
+          this.submittingComment = false;
+        },
+        error: () => {
+          this.submittingComment = false;
+        }
+      });
+  }
+
+  getRatingStars(rating: number): string {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  }
+
+  getCommentCountByRating(rating: number): number {
+    return this.comments.filter(c => c.rating === rating).length;
   }
 }

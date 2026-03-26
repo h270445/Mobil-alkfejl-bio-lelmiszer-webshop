@@ -94,3 +94,14 @@ export interface AuthResponse {
   user: User;
   message?: string;
 }
+
+// Comment/Review model
+export interface Comment {
+  id: number;
+  productId: number;
+  userId: number;
+  userName: string;
+  text: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  timestamp: Date;
+}

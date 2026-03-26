@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 
@@ -11,7 +12,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     <div class="app-container">
       <app-header></app-header>
       
-      <main class="main-content">
+      <main class="main-content" #mainContent>
         <router-outlet></router-outlet>
       </main>
       
@@ -62,10 +63,38 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     }
   `]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  @ViewChild('mainContent') mainContent!: ElementRef<HTMLElement>;
+
   constructor(private router: Router) {}
 
   title = 'BioMarket';
+
+  ngOnInit(): void {
+    // Scroll to top on every route change
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.scrollToTop();
+      });
+  }
+
+  private scrollToTop(): void {
+    // Use multiple methods to ensure scroll works across all browsers
+    setTimeout(() => {
+      // Method 1: Scroll main content container
+      if (this.mainContent?.nativeElement) {
+        this.mainContent.nativeElement.scrollTop = 0;
+      }
+      
+      // Method 2: Scroll window
+      window.scrollTo(0, 0);
+      
+      // Method 3: Scroll document element and body
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
+  }
 
   get isAdminRoute(): boolean {
     return this.router.url.startsWith('/admin');

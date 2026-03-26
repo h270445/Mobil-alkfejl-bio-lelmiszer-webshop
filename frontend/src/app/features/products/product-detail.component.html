@@ -86,4 +86,95 @@
       </div>
     </div>
   </article>
+
+  <!-- Comments Section -->
+  <section *ngIf="!loading && product" class="comments-section">
+    <h2>Értékelések és hozzászólások</h2>
+
+    <!-- Comment Form -->
+    <div *ngIf="currentUser" class="comment-form">
+      <h3>Te is értékelheted ezt a terméket</h3>
+      <div class="form-group">
+        <label for="comment-text">Hozzászólás</label>
+        <textarea
+          id="comment-text"
+          [(ngModel)]="newCommentText"
+          placeholder="Mit gondolsz erről a termékről?"
+          rows="4"
+          class="comment-textarea"
+        ></textarea>
+      </div>
+
+      <div class="form-group rating-selector">
+        <label>Értékelés</label>
+        <div class="rating-buttons">
+          <button
+            *ngFor="let r of [1, 2, 3, 4, 5]"
+            [class.selected]="newCommentRating === r"
+            (click)="onSetCommentRating(r)"
+            type="button"
+            class="rating-button"
+            [title]="r + ' csillag'"
+          >
+            {{ getRatingStars(r) }}
+          </button>
+        </div>
+      </div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onAddComment()"
+        [disabled]="!newCommentText.trim() || submittingComment"
+        class="submit-comment-btn"
+      >
+        {{ submittingComment ? 'Küldés...' : 'Hozzászólás küldése' }}
+      </button>
+    </div>
+
+    <div *ngIf="!currentUser" class="login-prompt">
+      <p>Bejelentkezz az értékeléshez!</p>
+    </div>
+
+    <!-- Rating Filter -->
+    <div class="filter-section">
+      <h3>Szűrés értékelés alapján</h3>
+      <div class="filter-buttons">
+        <button
+          [class.active]="selectedRatingFilter === null"
+          (click)="onRatingFilterChange(null)"
+          class="filter-button"
+        >
+          Összes ({{ comments.length }})
+        </button>
+        <button
+          *ngFor="let r of [5, 4, 3, 2, 1]"
+          [class.active]="selectedRatingFilter === r"
+          (click)="onRatingFilterChange(r)"
+          class="filter-button"
+          [title]="r + ' csillag'"
+        >
+          {{ getRatingStars(r) }} ({{ getCommentCountByRating(r) }})
+        </button>
+      </div>
+    </div>
+
+    <!-- Comments List -->
+    <div class="comments-list">
+      <div *ngIf="filteredComments.length === 0" class="no-comments">
+        <p>Nincsenek olyan értékelések, amit kerestel.</p>
+      </div>
+
+      <div *ngFor="let comment of filteredComments" class="comment-item">
+        <div class="comment-header">
+          <div class="comment-meta">
+            <strong>{{ comment.userName }}</strong>
+            <span class="rating-display">{{ getRatingStars(comment.rating) }}</span>
+          </div>
+          <span class="comment-date">{{ comment.timestamp | date:'yyyy.MM.dd' }}</span>
+        </div>
+        <p class="comment-text">{{ comment.text }}</p>
+      </div>
+    </div>
+  </section>
 </section>

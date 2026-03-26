@@ -171,3 +171,234 @@
     font-size: 24px;
   }
 }
+
+// Comments Section
+.comments-section {
+  margin-top: 40px;
+  padding: 24px;
+  background-color: var(--color-surface);
+  border-radius: 8px;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 24px;
+    color: var(--color-text-primary);
+  }
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: var(--color-text-primary);
+  }
+}
+
+.comment-form {
+  margin-bottom: 32px;
+  padding: 16px;
+  background-color: var(--color-background);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+
+  .form-group {
+    margin-bottom: 16px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+  }
+
+  .comment-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    background-color: white;
+    resize: vertical;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+    }
+  }
+
+  .rating-selector {
+    .rating-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .rating-button {
+      padding: 8px 12px;
+      border: 2px solid rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+      background-color: white;
+      color: var(--color-text-primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 18px;
+      letter-spacing: 2px;
+
+      &:hover {
+        border-color: var(--color-primary);
+        background-color: rgba(76, 175, 80, 0.05);
+      }
+
+      &.selected {
+        background-color: var(--color-primary);
+        color: white;
+        border-color: var(--color-primary);
+      }
+    }
+  }
+
+  .submit-comment-btn {
+    width: 100%;
+  }
+}
+
+.login-prompt {
+  padding: 16px;
+  background-color: rgba(76, 175, 80, 0.08);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 4px;
+  margin-bottom: 32px;
+
+  p {
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+}
+
+.filter-section {
+  margin-bottom: 32px;
+
+  .filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-button {
+    padding: 8px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 20px;
+    background-color: white;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 13px;
+
+    &:hover {
+      border-color: var(--color-primary);
+      background-color: rgba(76, 175, 80, 0.05);
+    }
+
+    &.active {
+      background-color: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+.comments-list {
+  .no-comments {
+    text-align: center;
+    padding: 24px;
+    color: var(--color-text-secondary);
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .comment-item {
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: var(--color-background);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+
+    .comment-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      strong {
+        color: var(--color-text-primary);
+      }
+    }
+
+    .rating-display {
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: #ffb800;
+    }
+
+    .comment-date {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .comment-text {
+      margin: 0;
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .comments-section {
+    padding: 16px;
+  }
+
+  .comment-form .rating-selector .rating-buttons {
+    gap: 4px;
+
+    .rating-button {
+      padding: 6px 8px;
+      font-size: 16px;
+    }
+  }
+
+  .filter-section .filter-buttons {
+    gap: 4px;
+
+    .filter-button {
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+  }
+
+  .comments-list .comment-item {
+    padding: 12px;
+
+    .comment-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .comment-date {
+      align-self: flex-end;
+      margin-top: -24px;
+    }
+  }
+}
