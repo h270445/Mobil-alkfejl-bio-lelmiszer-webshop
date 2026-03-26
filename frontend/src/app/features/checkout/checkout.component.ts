@@ -41,13 +41,31 @@ import { CartItem, Address } from '../../shared/models';
           <div class="success-icon">✓</div>
           <h2>Rendelés Sikeresen Leadva!</h2>
           <p>Rendelés szám: <strong>#{{ createdOrderId }}</strong></p>
-          <p>Szállítási költség: <strong>{{ shippingCost }} Ft</strong></p>
+          <div class="success-summary" *ngIf="submittedItems.length > 0">
+            <h3>Rendelés részletei</h3>
+            <div class="success-summary-item" *ngFor="let item of submittedItems">
+              <span>{{ item.product.name }} ({{ item.quantity }} db)</span>
+              <strong>{{ (item.product.price * item.quantity) | number:'1.0-0' }} Ft</strong>
+            </div>
+            <div class="success-summary-total">
+              <span>Termékek összesen:</span>
+              <strong>{{ submittedSubTotal | number:'1.0-0' }} Ft</strong>
+            </div>
+            <div class="success-summary-total">
+              <span>Szállítási költség:</span>
+              <strong>{{ submittedShippingCost === 0 ? 'Ingyenes' : ((submittedShippingCost | number:'1.0-0') + ' Ft') }}</strong>
+            </div>
+            <div class="success-summary-total grand">
+              <span>Végösszeg:</span>
+              <strong>{{ submittedGrandTotal | number:'1.0-0' }} Ft</strong>
+            </div>
+          </div>
           <p class="success-message">Köszönjük a vásárlást!</p>
           <button mat-raised-button color="primary" (click)="goToOrders()">
             Rendelések Megtekintése
           </button>
           <button mat-stroked-button (click)="continueShopping()">
-            Továbbá Vásárlás
+            További vásárlás
           </button>
         </div>
 
@@ -390,6 +408,48 @@ import { CartItem, Address } from '../../shared/models';
       margin: 0;
     }
 
+    .success-summary {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 16px;
+      background: #f7f9f7;
+      border: 1px solid #e2eee3;
+      border-radius: 8px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .success-summary h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--text-dark, #333);
+    }
+
+    .success-summary-item,
+    .success-summary-total {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-dark, #333);
+    }
+
+    .success-summary-total {
+      padding-top: 6px;
+      border-top: 1px solid #e6ece6;
+    }
+
+    .success-summary-total.grand {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary-color, #4caf50);
+      border-top: 2px solid var(--primary-color, #4caf50);
+      padding-top: 8px;
+    }
+
     .success-message {
       font-weight: 500;
       color: var(--primary-color, #4caf50);
@@ -495,6 +555,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   successScreen = false;
   createdOrderId: number | null = null;
   addressPrefilled = false;
+  submittedItems: CartItem[] = [];
+  submittedSubTotal = 0;
+  submittedShippingCost = 0;
+  submittedGrandTotal = 0;
 
   private destroy$ = new Subject<void>();
 
@@ -603,20 +667,32 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   private createOrder(userId: number, shippingAddress: Address) {
+    const submittedItems = this.cartItems.map(item => ({ ...item }));
+    const submittedSubTotal = this.subTotal;
+    const submittedShippingCost = this.shippingCost;
+
     this.orderService.createOrder(userId, this.cartItems, shippingAddress)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (order) => {
           this.isSubmitting = false;
           this.createdOrderId = order.id;
+          this.submittedItems = submittedItems;
+          this.submittedSubTotal = submittedSubTotal;
+          this.submittedShippingCost = submittedShippingCost;
+          this.submittedGrandTotal = submittedSubTotal + submittedShippingCost;
           this.successScreen = true;
 
           // Clear cart
           this.cartService.clearCart();
-          this.snackBar.open(`Rendelés leadva! Szállítás: ${this.shippingCost} Ft`, 'Bezárás', {
+          this.snackBar.open(
+            `Rendelés leadva! Szállítás: ${submittedShippingCost === 0 ? 'Ingyenes' : submittedShippingCost + ' Ft'}`,
+            'Bezárás',
+            {
             duration: 4000,
             panelClass: ['success-snackbar']
-          });
+            }
+          );
         },
         error: (err: any) => {
           this.isSubmitting = false;

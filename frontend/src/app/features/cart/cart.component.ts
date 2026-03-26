@@ -147,7 +147,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.removeFromCart(productId);
 
     const snackRef = this.snackBar.open(
-      `${productName} eltávolítva a kosárból`,
+      `${productName} termék eltávolítva a kosárból.`,
       'Visszavonás',
       { duration: 5000 }
     );
@@ -185,7 +185,7 @@ export class CartComponent implements OnInit, OnDestroy {
    * Clear entire cart with confirmation
    */
   clearCart(): void {
-    if (confirm('Biztosan ürítsd az egész kosarat?')) {
+    if (confirm('Biztosan üríted az egész kosarat?')) {
       this.cartService.clearCart();
       this.snackBar.open('Kosár ürítve', 'Bezár', { duration: 2000 });
     }

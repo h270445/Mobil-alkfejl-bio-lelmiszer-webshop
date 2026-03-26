@@ -5,14 +5,14 @@
 
 ## Issue Tracking
 
-### 1. ❌ Order Summary After Checkout
-- **Status**: Not started
+### 1. ✅ Order Summary After Checkout
+- **Status**: Completed (2026-03-26)
 - **Description**: After order submission, the summary page has a typo and missing detailed summary information
-- **Affected Files**: `features/checkout/checkout.component.ts`, `features/checkout/checkout.component.html`
+- **Affected Files**: `features/checkout/checkout.component.ts`
 - **Priority**: HIGH (User-facing, critical feature)
 - **Changes Needed**: 
-  - Fix typo in success message
-  - Add detailed order summary with items, quantities, prices, shipping cost
+  - [x] Fix typo in success message (`Továbbá Vásárlás` -> `További vásárlás`)
+  - [x] Add detailed order summary with items, quantities, prices, shipping cost
 
 ### 2. ❌ Missing Notification Address
 - **Status**: Not started
@@ -35,22 +35,23 @@
   - Add automatic capitalization to firstName/lastName inputs
   - Add show/hide password toggle icon
 
-### 4. ❌ Page Scroll Position on Navigation
-- **Status**: Not started
+### 4. ✅ Page Scroll Position on Navigation
+- **Status**: Completed (2026-03-26)
 - **Description**: When navigating between pages, often start at bottom instead of top
-- **Affected Files**: `app.component.ts` (or routing logic)
+- **Affected Files**: `main.ts` (router provider configuration)
 - **Priority**: HIGH (Core UX)
 - **Changes Needed**:
-  - Add scroll-to-top on route change globally
-  - Ensure all navigations reset scroll position
+  - [x] Add scroll-to-top on route change globally (`withInMemoryScrolling`)
+  - [x] Ensure all navigations reset scroll position (`scrollPositionRestoration: 'top'`)
 
-### 5. ❌ Cart Deletion Notification Typo
-- **Status**: Not started
+### 5. ✅ Cart Deletion Notification Typo
+- **Status**: Completed (2026-03-26)
 - **Description**: Typo in cart removal/deletion notification message
 - **Affected Files**: `features/cart/cart.component.html`, `features/cart/cart.component.ts`
 - **Priority**: LOW (Minor UX)
 - **Changes Needed**:
-  - Correct the typo in deletion confirmation message
+  - [x] Correct removal notification message text
+  - [x] Improve clear-cart confirmation text
 
 ### 6. ❌ Comments Feature Missing
 - **Status**: Not started
@@ -106,16 +107,16 @@
   - Add payment method selector to checkout form
   - Display selected payment method in order summary
 
-### 10. ❌ Free Shipping Threshold Not Working
-- **Status**: Not started
+### 10. ✅ Free Shipping Threshold Not Working
+- **Status**: Completed (2026-03-26)
 - **Description**: Shipping should be free for orders over 3500 Ft (currently not functioning)
-- **Affected Files**: `features/checkout/checkout.component.ts`, `core/services/`.ts`, `features/cart/cart.component.ts`
+- **Affected Files**: `features/checkout/checkout.component.ts`
 - **Priority**: HIGH (Business logic, critical)
 - **Changes Needed**:
-  - Debug shipping cost calculation logic
-  - Ensure cart total ≥ 3500 Ft triggers free shipping
-  - Update checkout summary display
-  - Verify cart subtotal includes all items correctly
+  - [x] Debug shipping cost calculation logic
+  - [x] Preserve submitted shipping values on success screen after cart clear
+  - [x] Update checkout summary display to use submitted totals
+  - [x] Verify threshold logic remains `>= 3500` => free shipping
 
 ### 11. ❌ Admin Users Page Mobile Collapse & Delete
 - **Status**: Not started
