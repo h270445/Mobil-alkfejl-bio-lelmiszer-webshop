@@ -34,6 +34,18 @@ mat-card {
   &:hover img.product-image {
     transform: scale(1.08);
   }
+
+  .product-image-link {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: 8px 8px 0 0;
+    outline: none;
+
+    &:focus-visible {
+      box-shadow: inset 0 0 0 3px rgba(76, 175, 80, 0.45);
+    }
+  }
 }
 
 // Discount Badge
@@ -69,15 +81,24 @@ mat-card {
     width: 24px;
     height: 24px;
     display: block;
+    filter: brightness(0) saturate(100%) invert(46%) sepia(5%) saturate(164%) hue-rotate(314deg) brightness(92%) contrast(88%);
   }
 
   &:hover {
     background-color: white;
-    color: var(--color-accent);
+    color: #d32f2f;
+
+    .favorite-icon {
+      filter: brightness(0) saturate(100%) invert(23%) sepia(90%) saturate(2302%) hue-rotate(344deg) brightness(90%) contrast(91%);
+    }
   }
 
   &.favorited {
-    color: var(--color-accent);
+    color: #d32f2f;
+
+    .favorite-icon {
+      filter: brightness(0) saturate(100%) invert(23%) sepia(90%) saturate(2302%) hue-rotate(344deg) brightness(90%) contrast(91%);
+    }
   }
 }
 

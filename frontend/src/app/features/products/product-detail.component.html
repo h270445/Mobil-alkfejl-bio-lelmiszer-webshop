@@ -33,7 +33,7 @@
 
       <div class="price-row">
         <span class="price">{{ product.price }} Ft</span>
-        <span *ngIf="product.originalPrice" class="original-price">{{ product.originalPrice }} Ft</span>
+        <span *ngIf="product.originalPrice && product.originalPrice > product.price" class="original-price">{{ product.originalPrice }} Ft</span>
       </div>
 
       <p class="stock" [class.out-of-stock]="!product.inStock">
@@ -169,10 +169,15 @@
         <div class="comment-header">
           <div class="comment-meta">
             <strong>{{ comment.userName }}</strong>
+            <span *ngIf="comment.isPinned" class="pinned-badge">Kitűzött</span>
             <span class="rating-display">{{ getRatingStars(comment.rating) }}</span>
           </div>
+        </div>
+
+        <div class="comment-info-row">
           <span class="comment-date">{{ comment.timestamp | date:'yyyy.MM.dd' }}</span>
         </div>
+
         <p class="comment-text">{{ comment.text }}</p>
       </div>
     </div>

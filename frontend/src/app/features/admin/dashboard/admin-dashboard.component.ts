@@ -79,6 +79,13 @@ import { MOCK_USERS } from '../../../shared/mock-data';
           <p>Profil adatok és jogosultságok adminisztrációja</p>
           <button mat-raised-button color="primary">Megnyitás</button>
         </mat-card>
+
+        <mat-card class="nav-card" routerLink="/admin/reviews">
+          <img src="assets/images/star-filled.svg" class="nav-icon" alt="Review-k" />
+          <h3>Review kezelés</h3>
+          <p>Termékértékelések listázása, szűrése és moderálása</p>
+          <button mat-raised-button color="primary">Megnyitás</button>
+        </mat-card>
       </div>
 
       <mat-divider></mat-divider>

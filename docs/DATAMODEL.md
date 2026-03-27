@@ -226,6 +226,7 @@ Felhasználói értékelések és vélemények termékekről.
 │     title: VARCHAR(255)                  │
 │     comment: TEXT                        │
 │     helpful: INT DEFAULT 0               │
+│     isPinned: BOOLEAN DEFAULT FALSE      │
 │     createdAt: TIMESTAMP DEFAULT NOW()   │
 │     updatedAt: TIMESTAMP                 │
 ├──────────────────────────────────────────┤
@@ -243,10 +244,13 @@ Felhasználói értékelések és vélemények termékekről.
 | **title** | VARCHAR(255) | OPTIONAL | Értékelés címe |
 | **comment** | TEXT | OPTIONAL | Részletes vélemény |
 | **helpful** | INT | DEFAULT 0 | "Hasznos" szavazatok száma |
+| **isPinned** | BOOLEAN | DEFAULT FALSE | Admin által kiemelt (kitűzött) értékelés |
 | **createdAt** | TIMESTAMP | DEFAULT NOW() | Értékelés dátuma |
 | **updatedAt** | TIMESTAMP | OPTIONAL | Utolsó módosítás |
 
 **Unique Constraint**: (userId, productId) - egy felhasználó csak egyszer értékelheti ugyanazt a terméket
+
+**Moderációs szabály (UI/Service szint)**: termékenként legfeljebb 1 darab `isPinned = true` review lehet; új kitűzés esetén az adott termék korábbi kitűzése automatikusan megszűnik.
 
 **Validáció**:
 - Rating: 1-5

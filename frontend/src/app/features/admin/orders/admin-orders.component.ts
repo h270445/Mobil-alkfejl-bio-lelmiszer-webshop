@@ -21,6 +21,11 @@ import { Order } from '../../../shared/models';
   ],
   template: `
     <div class="orders-container">
+      <button mat-button routerLink="/admin" class="back-to-admin-btn">
+        <img src="assets/images/arrow-back-icon.svg" class="btn-icon" alt="Vissza" />
+        Vissza az admin főfelületre
+      </button>
+
       <div class="page-header">
         <h1>Rendeléskezelés</h1>
         <mat-form-field appearance="outline" class="status-filter">
@@ -85,10 +90,52 @@ import { Order } from '../../../shared/models';
           Nincs rendelés a kiválasztott feltételeknek megfelelően.
         </p>
       </div>
+
+      <div class="mobile-orders" *ngIf="filtered.length > 0">
+        <article class="order-card" *ngFor="let o of filtered">
+          <button
+            type="button"
+            class="mobile-card-header"
+            (click)="toggleExpanded(o.id)"
+            [attr.aria-expanded]="isExpanded(o.id)"
+          >
+            <div>
+              <p class="mobile-order-id">Rendelés #{{ o.id }}</p>
+              <p class="mobile-order-meta">{{ getUserName(o.userId) }}</p>
+            </div>
+            <span class="status-badge" [ngClass]="getStatusClass(o.status)">
+              {{ getStatusLabel(o.status) }}
+            </span>
+          </button>
+
+          <div class="mobile-card-body" *ngIf="isExpanded(o.id)">
+            <p><strong>Dátum:</strong> {{ o.createdAt | date:'yyyy.MM.dd' }}</p>
+            <p><strong>Összeg:</strong> {{ o.totalPrice | number }} Ft</p>
+            <p><strong>Tétel:</strong> {{ o.items.length }} db</p>
+
+            <div class="mobile-actions">
+              <button mat-stroked-button color="primary" [routerLink]="['/admin/orders', o.id]">
+                Részletek
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   `,
   styles: [`
     .orders-container { max-width: 1000px; margin: 0 auto; }
+
+    .back-to-admin-btn {
+      margin-bottom: 8px;
+    }
+
+    .btn-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
 
     .page-header {
       display: flex;
@@ -104,6 +151,62 @@ import { Order } from '../../../shared/models';
     .table-wrapper { overflow-x: auto; }
     .orders-table { width: 100%; }
 
+    .mobile-orders {
+      display: none;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .order-card {
+      border: 1px solid #ececec;
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .mobile-card-header {
+      width: 100%;
+      text-align: left;
+      border: 0;
+      background: #fff;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .mobile-order-id {
+      margin: 0;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .mobile-order-meta {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    .mobile-card-body {
+      padding: 0 12px 12px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .mobile-card-body p {
+      margin: 10px 0 0;
+      color: var(--color-text-primary);
+      font-size: 14px;
+    }
+
+    .mobile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
     .status-badge {
       padding: 3px 10px;
       border-radius: 12px;
@@ -118,6 +221,26 @@ import { Order } from '../../../shared/models';
     .status-cancelled{ background: #fafafa; color: #757575; }
 
     .no-results { text-align: center; color: var(--color-text-secondary); padding: 32px; }
+
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .status-filter {
+        width: 100%;
+      }
+
+      .table-wrapper {
+        display: none;
+      }
+
+      .mobile-orders {
+        display: grid;
+      }
+    }
   `]
 })
 export class AdminOrdersComponent implements OnInit, OnDestroy {
@@ -126,6 +249,7 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
   allOrders: Order[] = [];
   filtered: Order[] = [];
   statusFilter = '';
+  expandedOrderId: number | null = null;
   displayedColumns = ['id', 'userName', 'date', 'total', 'status', 'actions'];
 
   constructor(private orderService: OrderService) {}
@@ -168,5 +292,13 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
 
   getStatusClass(status: Order['status']): string {
     return `status-${status}`;
+  }
+
+  toggleExpanded(orderId: number): void {
+    this.expandedOrderId = this.expandedOrderId === orderId ? null : orderId;
+  }
+
+  isExpanded(orderId: number): boolean {
+    return this.expandedOrderId === orderId;
   }
 }

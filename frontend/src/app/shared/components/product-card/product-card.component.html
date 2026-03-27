@@ -1,13 +1,19 @@
 <mat-card class="product-card bio-card">
   <!-- Image Container -->
   <div class="product-image-container">
-    <img
-      [src]="product.imageUrl"
-      [alt]="product.name"
-      title="{{ product.name }}"
-      (error)="onImageError($event)"
-      class="product-image"
-    />
+    <a
+      class="product-image-link"
+      [routerLink]="['/products', product.id]"
+      aria-label="Termék részleteinek megnyitása"
+    >
+      <img
+        [src]="product.imageUrl"
+        [alt]="product.name"
+        title="{{ product.name }}"
+        (error)="onImageError($event)"
+        class="product-image"
+      />
+    </a>
 
     <!-- Discount Badge -->
     <div *ngIf="discount" class="discount-badge">
@@ -70,7 +76,7 @@
     <div class="product-price-section">
       <div class="price-container">
         <span class="price">{{ product.price }} Ft</span>
-        <span *ngIf="product.originalPrice" class="original-price">
+        <span *ngIf="product.originalPrice && product.originalPrice > product.price" class="original-price">
           {{ product.originalPrice }} Ft
         </span>
       </div>

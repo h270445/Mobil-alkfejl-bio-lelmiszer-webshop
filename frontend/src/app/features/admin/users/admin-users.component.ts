@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +24,7 @@ interface EditableUserRow {
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     FormsModule,
     MatTableModule,
     MatButtonModule,
@@ -32,6 +34,11 @@ interface EditableUserRow {
   ],
   template: `
     <div class="users-container">
+      <button mat-button routerLink="/admin" class="back-to-admin-btn">
+        <img src="assets/images/arrow-back-icon.svg" class="btn-icon" alt="Vissza" />
+        Vissza az admin főfelületre
+      </button>
+
       <div class="page-header">
         <h1>Felhasználókezelés</h1>
         <span class="user-count">{{ filteredUsers.length }} felhasználó</span>
@@ -216,6 +223,17 @@ interface EditableUserRow {
     .users-container {
       max-width: 1100px;
       margin: 0 auto;
+    }
+
+    .back-to-admin-btn {
+      margin-bottom: 8px;
+    }
+
+    .btn-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 4px;
     }
 
     .page-header {

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CartFeedbackService } from '../../core/services/cart-feedback.service';
 import { ProductService } from '../../core/services/product.service';
@@ -23,6 +24,7 @@ import { Product, Comment, User } from '../../shared/models';
     FormsModule,
     MatButtonModule,
     MatIconModule,
+    MatSnackBarModule,
     LoadingSpinnerComponent
   ],
   templateUrl: './product-detail.component.html',
@@ -52,7 +54,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private cartService: CartService,
     private commentService: CommentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -129,7 +132,20 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
         const addResult = this.cartService.addToCart(latestProduct, requestedQuantity);
         if (addResult.addedQuantity > 0) {
-          this.cartFeedbackService.showAddToCartStatus(latestProduct, addResult);
+          const quantityText = addResult.addedQuantity > 1 ? `${addResult.addedQuantity} db` : '1 db';
+          const previousQuantity = Math.max(0, addResult.finalQuantity - addResult.addedQuantity);
+          const snackRef = this.snackBar.open(
+            `${quantityText} ${latestProduct.name} a kosárba került.`,
+            'Visszavonás',
+            { duration: 5000, verticalPosition: 'bottom' }
+          );
+
+          snackRef.onAction()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+              this.cartService.updateQuantity(latestProduct.id, previousQuantity);
+              this.syncSelectedQuantity();
+            });
         } else {
           this.cartFeedbackService.showPurchaseFailedStatus(
             'A kiválasztott mennyiség már nem rendelhető, ezért a vásárlás nem sikerült.'
@@ -223,11 +239,22 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.commentService.getCommentsByProductId(productId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(comments => {
-        this.comments = comments.sort((a, b) => 
-          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-        );
+        this.comments = this.sortComments(comments);
         this.applyRatingFilter();
       });
+  }
+
+  private sortComments(comments: Comment[]): Comment[] {
+    return [...comments].sort((a, b) => {
+      const aPinned = !!a.isPinned;
+      const bPinned = !!b.isPinned;
+
+      if (aPinned !== bPinned) {
+        return aPinned ? -1 : 1;
+      }
+
+      return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+    });
   }
 
   onRatingFilterChange(rating: number | null): void {
@@ -268,7 +295,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (comment) => {
-          this.comments.unshift(comment);
+          this.comments = this.sortComments([...this.comments, comment]);
           this.applyRatingFilter();
           this.newCommentText = '';
           this.newCommentRating = 5;

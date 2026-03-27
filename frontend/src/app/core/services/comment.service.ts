@@ -159,6 +159,7 @@ export class CommentService {
   private normalizeIds(comments: Comment[]): Comment[] {
     return comments.map((comment, index) => ({
       ...comment,
+      isPinned: !!comment.isPinned,
       id: index + 1
     }));
   }
@@ -186,6 +187,7 @@ export class CommentService {
           // Convert ISO strings back to Date objects
           const hydrated = parsed.map(c => ({
             ...c,
+            isPinned: !!c.isPinned,
             timestamp: new Date(c.timestamp as any)
           }));
 
@@ -249,6 +251,7 @@ export class CommentService {
     const newId = current.length > 0 ? Math.max(...current.map(c => c.id)) + 1 : 1;
     const newComment: Comment = {
       ...comment,
+      isPinned: false,
       id: newId,
       timestamp: new Date()
     };
@@ -282,6 +285,30 @@ export class CommentService {
     }
 
     this.emit(filtered);
+    return of(true).pipe(delay(300));
+  }
+
+  setPinnedComment(commentId: number, isPinned: boolean): Observable<boolean> {
+    const current = this.commentsSubject.value;
+    const target = current.find(c => c.id === commentId);
+
+    if (!target) {
+      return of(false).pipe(delay(300));
+    }
+
+    const updated = current.map(comment => {
+      if (comment.id === commentId) {
+        return { ...comment, isPinned };
+      }
+
+      if (isPinned && comment.productId === target.productId && comment.isPinned) {
+        return { ...comment, isPinned: false };
+      }
+
+      return comment;
+    });
+
+    this.emit(updated);
     return of(true).pipe(delay(300));
   }
 

@@ -5,6 +5,7 @@ import { AdminProductFormComponent } from './products/admin-product-form.compone
 import { AdminOrdersComponent } from './orders/admin-orders.component';
 import { AdminOrderDetailComponent } from './orders/admin-order-detail.component';
 import { AdminUsersComponent } from './users/admin-users.component';
+import { AdminReviewsComponent } from './reviews/admin-reviews.component';
 
 export const ADMIN_ROUTES: Routes = [
   {
@@ -29,5 +30,9 @@ export const ADMIN_ROUTES: Routes = [
   {
     path: 'users',
     component: AdminUsersComponent
+  },
+  {
+    path: 'reviews',
+    component: AdminReviewsComponent
   }
 ];

@@ -103,6 +103,7 @@ $biomarket-theme: mat.define-light-theme((
 @include mat.divider-theme($biomarket-theme);
 @include mat.badge-theme($biomarket-theme);
 @include mat.icon-theme($biomarket-theme);
+@include mat.slide-toggle-theme($biomarket-theme);
 
 // Custom CSS Variables (DM-inspired design)
 :root {

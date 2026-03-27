@@ -25,6 +25,11 @@ import { Product } from '../../../shared/models';
   ],
   template: `
     <div class="products-container">
+      <button mat-button routerLink="/admin" class="back-to-admin-btn">
+        <img src="assets/images/arrow-back-icon.svg" class="btn-icon" alt="Vissza" />
+        Vissza az admin főfelületre
+      </button>
+
       <div class="page-header">
         <h1>Termékkezelés</h1>
         <button mat-raised-button color="primary" routerLink="/admin/products/new" class="desktop-add-btn">
@@ -101,6 +106,40 @@ import { Product } from '../../../shared/models';
         </p>
       </div>
 
+      <div class="mobile-products" *ngIf="filtered.length > 0">
+        <article class="product-card" *ngFor="let p of filtered">
+          <button
+            type="button"
+            class="mobile-card-header"
+            (click)="toggleExpanded(p.id)"
+            [attr.aria-expanded]="isExpanded(p.id)"
+          >
+            <div>
+              <p class="mobile-product-name">{{ p.name }}</p>
+              <p class="mobile-product-meta">SKU: {{ p.sku }}</p>
+            </div>
+            <span class="active-badge" [class.inactive]="!p.isActive">
+              {{ p.isActive ? 'Aktív' : 'Inaktív' }}
+            </span>
+          </button>
+
+          <div class="mobile-card-body" *ngIf="isExpanded(p.id)">
+            <p><strong>Kategória:</strong> {{ p.category }}</p>
+            <p><strong>Ár:</strong> {{ p.price | number }} Ft</p>
+            <p><strong>Készlet:</strong> <span [class.out-of-stock]="p.stockQuantity === 0">{{ p.stockQuantity }}</span></p>
+
+            <div class="mobile-actions">
+              <button mat-stroked-button color="primary" [routerLink]="['/admin/products', p.id, 'edit']">
+                Szerkesztés
+              </button>
+              <button mat-stroked-button color="warn" (click)="onDelete(p)">
+                Törlés
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
       <button
         mat-fab
         color="primary"
@@ -114,6 +153,17 @@ import { Product } from '../../../shared/models';
   `,
   styles: [`
     .products-container { max-width: 1100px; margin: 0 auto; }
+
+    .back-to-admin-btn {
+      margin-bottom: 8px;
+    }
+
+    .btn-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
 
     .page-header {
       display: flex;
@@ -146,6 +196,62 @@ import { Product } from '../../../shared/models';
 
     .table-wrapper { overflow-x: auto; }
     .products-table { width: 100%; }
+
+    .mobile-products {
+      display: none;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .product-card {
+      border: 1px solid #ececec;
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .mobile-card-header {
+      width: 100%;
+      text-align: left;
+      border: 0;
+      background: #fff;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .mobile-product-name {
+      margin: 0;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .mobile-product-meta {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    .mobile-card-body {
+      padding: 0 12px 12px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .mobile-card-body p {
+      margin: 10px 0 0;
+      color: var(--color-text-primary);
+      font-size: 14px;
+    }
+
+    .mobile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
 
     .price-cell {
       white-space: nowrap;
@@ -200,31 +306,12 @@ import { Product } from '../../../shared/models';
         margin-bottom: 12px;
       }
 
-      .products-table {
-        width: 100%;
-      }
-
-      /* Hide columns on mobile to prevent horizontal scroll */
-      .mat-column-category,
-      .mat-column-price,
-      .mat-column-stockQuantity,
-      .mat-column-isActive {
+      .table-wrapper {
         display: none;
       }
 
-      .mat-column-sku {
-        flex: 0 0 70px;
-        min-width: 70px;
-      }
-
-      .mat-column-name {
-        flex: 1;
-        min-width: auto;
-      }
-
-      .mat-column-actions {
-        flex: 0 0 70px;
-        min-width: 70px;
+      .mobile-products {
+        display: grid;
       }
     }
   `]
@@ -235,6 +322,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   allProducts: Product[] = [];
   filtered: Product[] = [];
   filterText = '';
+  expandedProductId: number | null = null;
   displayedColumns = ['sku', 'name', 'category', 'price', 'stockQuantity', 'isActive', 'actions'];
 
   constructor(
@@ -283,8 +371,19 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         this.productService.deleteProduct(product.id)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
+            if (this.expandedProductId === product.id) {
+              this.expandedProductId = null;
+            }
             this.snackBar.open('Termék törölve.', 'OK', { duration: 3000 });
           });
       });
+  }
+
+  toggleExpanded(productId: number): void {
+    this.expandedProductId = this.expandedProductId === productId ? null : productId;
+  }
+
+  isExpanded(productId: number): boolean {
+    return this.expandedProductId === productId;
   }
 }

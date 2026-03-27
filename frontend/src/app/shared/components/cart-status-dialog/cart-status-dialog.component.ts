@@ -68,7 +68,7 @@ export interface CartStatusDialogResult {
       </label>
     </div>
     <div mat-dialog-actions align="end" class="dialog-actions">
-      <button mat-button class="action-button" (click)="onContinue()">
+      <button mat-raised-button color="accent" class="action-button continue-button" (click)="onContinue()">
         {{ data.continueLabel || 'Vásárlás folytatása' }}
       </button>
       <button mat-raised-button color="primary" class="action-button" (click)="onViewCart()">
@@ -147,6 +147,10 @@ export interface CartStatusDialogResult {
     .dialog-actions {
       display: flex;
       gap: 10px;
+    }
+
+    .continue-button {
+      font-weight: 500;
     }
 
     .dialog-actions .mat-mdc-button-base + .mat-mdc-button-base {
